@@ -1,7 +1,7 @@
-package main.core;
+package core;
 
-import main.datatypes.Date;
-import main.datatypes.Location;
+import datatypes.Date;
+import datatypes.Location;
 
 public class Member implements Comparable<Member>{
     public static CompareMode CompareMode = Member.CompareMode.None;

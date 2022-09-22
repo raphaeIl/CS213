@@ -1,6 +1,6 @@
-package main.datatypes;
+package datatypes;
 
-import main.utils.Utils;
+import utils.Utils;
 
 import java.util.Calendar;
 
@@ -28,7 +28,7 @@ public class Date implements Comparable<Date> { // TODO: test class methods usin
         this.year = Calendar.getInstance().get(Calendar.YEAR);
     }
 
-    public Date(String date) { //take “mm/dd/yyyy” and create a Date object
+    public Date(String date) { //take "mm/dd/yyyy" and create a Date object
         String[] dateArray = date.split("/");
 
         this.month = Integer.parseInt(dateArray[0]);
@@ -47,7 +47,7 @@ public class Date implements Comparable<Date> { // TODO: test class methods usin
         int months = Integer.compare(this.month, date.month);
         int days = Integer.compare(this.day, date.day);
 
-        return years == 0 ? months == 0 ? days : months : years; // 这里用ternary operator写的，特别不清楚但是短，可以换成 if else
+        return years == 0 ? months == 0 ? days : months : years; // using ternary operator here, can change to if else
     }
 
     public boolean isValid() { // check if a date is a valid calendar date

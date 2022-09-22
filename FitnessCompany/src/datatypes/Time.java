@@ -1,4 +1,4 @@
-package main.datatypes;
+package datatypes;
 
 public enum Time { // enum names are based on classname_in
     Pilates_Jennifer(9, 30),

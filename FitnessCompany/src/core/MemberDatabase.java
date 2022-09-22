@@ -1,6 +1,8 @@
-package main.core;
+package core;
 
-import main.utils.Utils;
+import utils.Utils;
+
+import java.util.Arrays;
 
 public class MemberDatabase {
 
@@ -78,5 +80,8 @@ public class MemberDatabase {
         print();
     }
 
-
+    @Override
+    public String toString() {
+        return Arrays.toString(mlist); // TODO: replace with custom Utils.toString
+    }
 }

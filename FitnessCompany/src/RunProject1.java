@@ -1,6 +1,4 @@
-package main;
-
-import main.client.GymManager;
+import client.GymManager;
 
 public class RunProject1 {
     public static void main(String[] args) {

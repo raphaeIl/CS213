@@ -1,6 +1,8 @@
-package main.utils;
+package utils;
 
-import main.core.Member;
+import core.Member;
+import datatypes.FitnessClass;
+import datatypes.FitnessClassType;
 
 public class Utils {
 
@@ -10,6 +12,14 @@ public class Utils {
                 return true;
 
         return false;
+    }
+
+    public static FitnessClassType strToClassType(String fitnessClassType) {
+        for (FitnessClassType type: FitnessClassType.values())
+            if (type.toString().equals(fitnessClassType))
+                return type;
+
+        return null;
     }
 
     // sorting helper

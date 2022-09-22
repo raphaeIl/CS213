@@ -1,4 +1,4 @@
-package main.datatypes;
+package datatypes;
 
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset County"),

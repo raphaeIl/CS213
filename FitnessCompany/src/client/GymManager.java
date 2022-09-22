@@ -1,12 +1,67 @@
-package main.client;
+package client;
 
-import main.core.Member;
-import main.core.MemberDatabase;
-import main.datatypes.Date;
-import main.datatypes.Location;
+import core.ClassDatabase;
+import core.Member;
+import core.MemberDatabase;
+import datatypes.Date;
+import datatypes.FitnessClassType;
+import datatypes.Location;
+import utils.Utils;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class GymManager {
-    public void run() {
+
+    private MemberDatabase memberDatabase;
+    private ClassDatabase classDatabase;
+
+    public GymManager() {
+        memberDatabase = new MemberDatabase();
+        classDatabase = new ClassDatabase();
+    }
+
+    public int executeCommand(String[] args) {
+        switch (args[0]) {
+            case "R":
+                Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
+
+                memberDatabase.remove(target);
+                break;
+            case "P":
+                memberDatabase.print();
+                break;
+            case "PC":
+                memberDatabase.printByCounty();
+                break;
+            case "PN":
+                memberDatabase.printByName();
+                break;
+            case "PD":
+                memberDatabase.printByExpirationDate();
+                break;
+            case "S":
+                classDatabase.displaySchedule();
+                break;
+            case "C":
+                target = new Member(args[1], args[2], new Date(args[3]), null, null);
+
+                classDatabase.checkIn(Utils.strToClassType(args[0]), target);
+                break;
+            case "D":
+                target = new Member(args[1], args[2], new Date(args[3]), null, null);
+
+                classDatabase.drop(Utils.strToClassType(args[0]), target);
+            case "Q":
+                return -1;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+
+    public void dbInitTest() { // <- test method delete later
         MemberDatabase mdb = new MemberDatabase();
         mdb.add(new Member("Tyriq", "Turnbull", Date.random(), Date.random(), Location.Bridgewater));
         mdb.add(new Member("Aiesha", "Lozano", Date.random(), Date.random(), Location.Bridgewater));
@@ -37,5 +92,20 @@ public class GymManager {
 
 
         mdb.printByExpirationDate();
+    }
+
+    public void run() {
+        System.out.println("Gym Manager running...");
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNext()) {
+            int result = executeCommand(scanner.nextLine().split(" "));
+
+            if (result != 0)
+                break;
+        }
+
+        System.out.println("Gym Manager terminated.");
     }
 }
