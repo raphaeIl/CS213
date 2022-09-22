@@ -4,7 +4,7 @@ import utils.Utils;
 
 import java.util.Calendar;
 
-public class Date implements Comparable<Date> { // TODO: test class methods using test cases
+public class Date implements Comparable<Date> {
 
     public static final int MONTHS_IN_YEAR = 12;
     public static final int SHORT_MONTH_DAYS = 30;
@@ -48,6 +48,12 @@ public class Date implements Comparable<Date> { // TODO: test class methods usin
         int days = Integer.compare(this.day, date.day);
 
         return years == 0 ? months == 0 ? days : months : years; // using ternary operator here, can change to if else
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Date other &&
+                this.compareTo(other) == 0;
     }
 
     public boolean isValid() { // check if a date is a valid calendar date

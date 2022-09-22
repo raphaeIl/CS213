@@ -6,14 +6,16 @@ import datatypes.Time;
 
 public class ClassDatabase {
 
-    private static final FitnessClass Pilates = new FitnessClass("Pilates", "Jennifer", Time.Pilates_Jennifer);
-    private static final FitnessClass Spinning = new FitnessClass("Spinning", "Denise", Time.Spinning_Denise);
-    private static final FitnessClass Cardio = new FitnessClass("Cardio", "Kim", Time.Cardio_Kim);
+    private static final FitnessClass Pilates = new FitnessClass("Pilates", "Jennifer", Time.Morning);
+    private static final FitnessClass Spinning = new FitnessClass("Spinning", "Denise", Time.Afternoon);
+    private static final FitnessClass Cardio = new FitnessClass("Cardio", "Kim", Time.Afternoon);
 
     public static FitnessClass[] classSchedule;
 
     public ClassDatabase() {
         classSchedule = new FitnessClass[] { Pilates, Spinning, Cardio };
+
+        displaySchedule();
     }
 
     public void displaySchedule() {
@@ -22,10 +24,16 @@ public class ClassDatabase {
     }
 
     public void checkIn(FitnessClassType classType, Member target) {
+        if (classType == null || target == null)
+            return;
+
         classSchedule[classType.ordinal()].checkIn(target);
     }
 
     public void drop(FitnessClassType classType, Member target) {
+        if (classType == null || target == null)
+            return;
+
         classSchedule[classType.ordinal()].drop(target);
     }
 }

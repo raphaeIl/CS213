@@ -10,9 +10,9 @@ public class Utils {
         String toString = "[";
 
         for (Object obj: array)
-            toString += obj + ",";
+            toString += obj + ", ";
 
-        toString = toString.substring(0, toString.length() - 1);
+        toString = toString.substring(0, toString.length() - 2);
         toString += ']';
 
         return toString;

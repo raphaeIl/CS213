@@ -55,6 +55,17 @@ public class MemberDatabase {
         return true;
     }
 
+    public int indexOf(Member member) { // why is find even private
+        return find(member);
+    }
+
+    public Member get(int index) {
+        if (index == -1)
+            return null;
+
+        return mlist[index];
+    }
+
     public void print() { //print the array contents as is
         for (Member m: mlist)
             System.out.println(m);
@@ -80,6 +91,6 @@ public class MemberDatabase {
 
     @Override
     public String toString() {
-        return Utils.arrayToString(mlist); // TODO: replace with custom Utils.toString
+        return Utils.arrayToString(mlist);
     }
 }

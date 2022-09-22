@@ -26,6 +26,7 @@ public class GymManager {
                 Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
 
                 memberDatabase.add(newMember);
+                break;
             case "R":
                 Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
@@ -47,14 +48,17 @@ public class GymManager {
                 classDatabase.displaySchedule();
                 break;
             case "C":
-                target = new Member(args[1], args[2], new Date(args[3]), null, null);
+                int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
+                target = memberDatabase.get(targetIndex);
 
-                classDatabase.checkIn(FitnessClassType.fromString(args[0]), target);
+                classDatabase.checkIn(FitnessClassType.fromString(args[1]), target);
                 break;
             case "D":
-                target = new Member(args[1], args[2], new Date(args[3]), null, null);
+                targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
+                target = memberDatabase.get(targetIndex);
 
-                classDatabase.drop(FitnessClassType.fromString(args[0]), target);
+                classDatabase.drop(FitnessClassType.fromString(args[1]), target);
+                break;
             case "Q":
                 return -1;
             default:
@@ -91,8 +95,6 @@ public class GymManager {
         mdb.add(new Member("B", "Sierra", Date.random(), Date.random(), Location.Franklin));
         mdb.add(new Member("CDE", "Sierra", Date.random(), Date.random(), Location.Franklin));
         mdb.add(new Member("Ab", "Sierra", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("Az", "Sierra", Date.random(), Date.random(), Location.Franklin));
-
 
 //        mdb.printByExpirationDate();
         System.out.println(mdb);

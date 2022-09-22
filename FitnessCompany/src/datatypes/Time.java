@@ -1,9 +1,8 @@
 package datatypes;
 
 public enum Time { // enum names are based on classname_instructor
-    Pilates_Jennifer(9, 30),
-    Spinning_Denise(14, 0),
-    Cardio_Kim(14, 0);
+    Morning(9, 30),
+    Afternoon(14, 0);
 
     private final int hour;
     private final int minute;
