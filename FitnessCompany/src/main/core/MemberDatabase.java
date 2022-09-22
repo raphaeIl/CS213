@@ -1,4 +1,6 @@
-package fitness;
+package main.core;
+
+import main.utils.Utils;
 
 public class MemberDatabase {
 
@@ -58,36 +60,23 @@ public class MemberDatabase {
             System.out.println(m);
     }
     public void printByCounty() { //sort by county and then zipcode
+        Member.CompareMode = Member.CompareMode.County;
+        Utils.insertionSort(mlist, size);
 
+        print();
     }
     public void printByExpirationDate() { //sort by the expiration date
+        Member.CompareMode = Member.CompareMode.ExpirationDate;
+        Utils.insertionSort(mlist, size);
 
+        print();
     }
     public void printByName() { //sort by last name and then first name
-        Member[] clone = mlist.clone();
+        Member.CompareMode = Member.CompareMode.Name;
+        Utils.insertionSort(mlist, size);
 
-        Utils.insertionSort(clone, (m1, m2) -> {
-
-            if (m2 == null)
-                return 1;
-
-            int primaryComparison = m1.getLname().compareTo(m2.getLname());
-            int secondaryComparison = m1.getFname().compareTo(m2.getFname());
-
-            if (primaryComparison > 0)
-                return 1;
-            else if (primaryComparison < 0)
-                return -1;
-            else {
-                if (secondaryComparison > 0)
-                    return 1;
-                else if (secondaryComparison < 0)
-                    return -1;
-                else return 0;
-            }
-        });
-
-        for (Member m: clone)
-            System.out.println(m);
+        print();
     }
+
+
 }

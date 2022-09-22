@@ -1,4 +1,4 @@
-package fitness;
+package main.datatypes;
 
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset County"),
@@ -9,12 +9,12 @@ public enum Location {
 
     private final String city;
     private final String zipCode;
-    private final String country;
+    private final String county;
 
     Location(String city, String zipCode, String county) {
         this.city = city;
         this.zipCode = zipCode;
-        this.country = county;
+        this.county = county;
     }
 
     public String getCity() {
@@ -25,7 +25,12 @@ public enum Location {
         return zipCode;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCounty() {
+        return county;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s, %s", city, county, zipCode);
     }
 }
