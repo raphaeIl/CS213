@@ -3,8 +3,20 @@ package utils;
 import core.Member;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
-
+//s
 public class Utils {
+
+    public static String arrayToString(Object[] array) {
+        String toString = "[";
+
+        for (Object obj: array)
+            toString += obj + ",";
+
+        toString = toString.substring(0, toString.length() - 1);
+        toString += ']';
+
+        return toString;
+    }
 
     public static boolean arrayContains(int[] array, int element) {
         for (int e: array)
@@ -12,14 +24,6 @@ public class Utils {
                 return true;
 
         return false;
-    }
-
-    public static FitnessClassType strToClassType(String fitnessClassType) {
-        for (FitnessClassType type: FitnessClassType.values())
-            if (type.toString().equals(fitnessClassType))
-                return type;
-
-        return null;
     }
 
     // sorting helper

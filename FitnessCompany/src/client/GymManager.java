@@ -8,7 +8,6 @@ import datatypes.FitnessClassType;
 import datatypes.Location;
 import utils.Utils;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GymManager {
@@ -23,6 +22,10 @@ public class GymManager {
 
     public int executeCommand(String[] args) {
         switch (args[0]) {
+            case "A":
+                Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
+
+                memberDatabase.add(newMember);
             case "R":
                 Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
@@ -46,12 +49,12 @@ public class GymManager {
             case "C":
                 target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
-                classDatabase.checkIn(Utils.strToClassType(args[0]), target);
+                classDatabase.checkIn(FitnessClassType.fromString(args[0]), target);
                 break;
             case "D":
                 target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
-                classDatabase.drop(Utils.strToClassType(args[0]), target);
+                classDatabase.drop(FitnessClassType.fromString(args[0]), target);
             case "Q":
                 return -1;
             default:
@@ -91,7 +94,8 @@ public class GymManager {
         mdb.add(new Member("Az", "Sierra", Date.random(), Date.random(), Location.Franklin));
 
 
-        mdb.printByExpirationDate();
+//        mdb.printByExpirationDate();
+        System.out.println(mdb);
     }
 
     public void run() {

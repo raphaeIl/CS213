@@ -33,4 +33,22 @@ public enum Location {
     public String toString() {
         return String.format("%s, %s, %s", city, county, zipCode);
     }
+
+    public static Location fromString(String location) {
+
+        switch (location.toLowerCase()) {
+            case "bridgewater":
+                return Bridgewater;
+            case "edison":
+                return Edison;
+            case "franklin":
+                return Franklin;
+            case "piscataway":
+                return Piscataway;
+            case "somerville":
+                return Somerville;
+            default:
+                return null;
+        }
+    }
 }

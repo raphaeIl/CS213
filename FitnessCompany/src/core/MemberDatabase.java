@@ -2,8 +2,6 @@ package core;
 
 import utils.Utils;
 
-import java.util.Arrays;
-
 public class MemberDatabase {
 
     private static final int NOT_FOUND = -1;
@@ -82,6 +80,6 @@ public class MemberDatabase {
 
     @Override
     public String toString() {
-        return Arrays.toString(mlist); // TODO: replace with custom Utils.toString
+        return Utils.arrayToString(mlist); // TODO: replace with custom Utils.toString
     }
 }
