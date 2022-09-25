@@ -77,6 +77,10 @@ public class MemberDatabase {
         return mlist[index];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public void print() { //print the array contents as is
         for (int i = 0; i < size; i++)
             System.out.println(mlist[i]);
@@ -87,7 +91,7 @@ public class MemberDatabase {
 
         print();
     }
-    public void printByExpirationDate() { //sort by the expiration date
+    public void printByExpirationDate() { //sort by the expiration date TODO: case where expiration dates are the same
         Member.CompareMode = Member.CompareMode.ExpirationDate;
         Utils.insertionSort(mlist, size);
 

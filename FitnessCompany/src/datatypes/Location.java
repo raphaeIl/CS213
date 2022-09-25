@@ -2,7 +2,7 @@ package datatypes;
 
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset"),
-    Edison      ("Edison",      "08837", "Middlexsex"),
+    Edison      ("Edison",      "08837", "Middlesex"),
     Franklin    ("Franklin",    "08873", "Somerset"),
     Piscataway  ("Piscataway",  "08854", "Middlesex"),
     Somerville  ("Somerville",  "08876", "Somerset");

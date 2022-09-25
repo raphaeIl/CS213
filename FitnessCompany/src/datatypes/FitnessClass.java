@@ -48,6 +48,6 @@ public class FitnessClass {
 
     @Override
     public String toString() {
-        return String.format("%s class taught by %s at %s with members:\n %s", className, classInstructor, classTime, currentMembers);
+        return String.format("%s class taught by %s at %s with members:\n%s", className, classInstructor, classTime, currentMembers);
     }
 }

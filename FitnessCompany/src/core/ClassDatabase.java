@@ -43,7 +43,6 @@ public class ClassDatabase {
                 return;
 
         currentClass.checkIn(target);
-        System.out.println("successfully checked in: " + target);
     }
 
     public void drop(FitnessClassType classType, Member target) {

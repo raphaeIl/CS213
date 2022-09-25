@@ -24,6 +24,9 @@ public class GymManager {
     }
 
     public int executeCommand(String[] args) {
+        if (args[0].isEmpty() || args[0].isBlank())
+            return 1;
+
         switch (args[0]) {
             case "A":
                 Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
@@ -36,24 +39,44 @@ public class GymManager {
                 memberDatabase.remove(target);
                 break;
             case "P":
+                if (memberDatabase.getSize() <= 0) {
+                    System.out.println("Member database is empty!");
+                    break;
+                }
+
                 System.out.println("-list of members-");
                 memberDatabase.print();
                 System.out.println("-end of list-");
 
                 break;
             case "PC":
+                if (memberDatabase.getSize() <= 0) {
+                    System.out.println("Member database is empty!");
+                    break;
+                }
+
                 System.out.println("-list of members sorted by county and zipcode-");
                 memberDatabase.printByCounty();
                 System.out.println("-end of list-");
 
                 break;
             case "PN":
+                if (memberDatabase.getSize() <= 0) {
+                    System.out.println("Member database is empty!");
+                    break;
+                }
+
                 System.out.println("-list of members sorted by last name, and first name-");
                 memberDatabase.printByName();
                 System.out.println("-end of list-");
 
                 break;
             case "PD":
+                if (memberDatabase.getSize() <= 0) {
+                    System.out.println("Member database is empty!");
+                    break;
+                }
+
                 System.out.println("-list of members sorted by membership expiration date-");
                 memberDatabase.printByExpirationDate();
                 System.out.println("-end of list-");
@@ -77,6 +100,7 @@ public class GymManager {
             case "Q":
                 return -1;
             default:
+                System.out.println(args[0] + " is an invalid command!");
                 break;
         }
 
@@ -123,7 +147,7 @@ public class GymManager {
         while (scanner.hasNext()) {
             int result = executeCommand(scanner.nextLine().split(" "));
 
-            if (result != 0)
+            if (result == -1)
                 break;
         }
 
