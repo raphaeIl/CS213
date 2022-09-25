@@ -36,16 +36,28 @@ public class GymManager {
                 memberDatabase.remove(target);
                 break;
             case "P":
+                System.out.println("-list of members-");
                 memberDatabase.print();
+                System.out.println("-end of list-");
+
                 break;
             case "PC":
+                System.out.println("-list of members sorted by county and zipcode-");
                 memberDatabase.printByCounty();
+                System.out.println("-end of list-");
+
                 break;
             case "PN":
+                System.out.println("-list of members sorted by last name, and first name-");
                 memberDatabase.printByName();
+                System.out.println("-end of list-");
+
                 break;
             case "PD":
+                System.out.println("-list of members sorted by membership expiration date-");
                 memberDatabase.printByExpirationDate();
+                System.out.println("-end of list-");
+
                 break;
             case "S":
                 classDatabase.displaySchedule();
