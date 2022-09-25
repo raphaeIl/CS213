@@ -1,5 +1,6 @@
 package core;
 
+import datatypes.Date;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
 import datatypes.Time;
@@ -14,8 +15,6 @@ public class ClassDatabase {
 
     public ClassDatabase() {
         classSchedule = new FitnessClass[] { Pilates, Spinning, Cardio };
-
-        displaySchedule();
     }
 
     public void displaySchedule() {
@@ -24,10 +23,27 @@ public class ClassDatabase {
     }
 
     public void checkIn(FitnessClassType classType, Member target) {
-        if (classType == null || target == null)
+        // member info validation
+        if (classType == null || target == null) // class/member does not exist
             return;
 
-        classSchedule[classType.ordinal()].checkIn(target);
+        if (target.getExpire().compareTo(new Date()) < 0 || // membership expired
+                !target.getDob().isValid()) // invalid dob
+            return;
+
+        FitnessClass currentClass = classSchedule[classType.ordinal()];
+
+        if (currentClass.containsMember(target)) // member already checked in
+            return;
+
+        for (FitnessClass fitnessClass: classSchedule) // time conflict with other fitness class
+            if (!fitnessClass.getClassName().equals(currentClass.getClassName()) &&
+                    fitnessClass.containsMember(target) &&
+                        fitnessClass.getClassTime() == currentClass.getClassTime())
+                return;
+
+        currentClass.checkIn(target);
+        System.out.println("successfully checked in: " + target);
     }
 
     public void drop(FitnessClassType classType, Member target) {

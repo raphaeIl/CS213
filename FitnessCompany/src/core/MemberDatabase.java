@@ -1,10 +1,11 @@
 package core;
 
+import datatypes.Date;
 import utils.Utils;
 
 public class MemberDatabase {
 
-    private static final int NOT_FOUND = -1;
+    public static final int NOT_FOUND = -1;
     private static final int EXPANSION_SIZE = 4;
 
     private Member[] mlist;
@@ -31,7 +32,17 @@ public class MemberDatabase {
         mlist = grew;
     }
     public boolean add(Member member) {
-        if (find(member) != NOT_FOUND) // checking if member is already in database not sure if this is correct
+        if (find(member) != NOT_FOUND) // checking if member is already in database
+            return false;
+
+        if (!member.getDob().isValid() || !member.getExpire().isValid() || // invalid dob or expiration date
+                member.getDob().equals(new Date()) || member.getDob().compareTo(new Date()) > 0)
+            return false;
+
+        if (member.getAge() < 18) // You are not 18 years old
+            return false;
+
+        if (member.getLocation() == null) // that location does not exist
             return false;
 
         if (size == mlist.length)

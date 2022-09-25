@@ -36,6 +36,18 @@ public class Date implements Comparable<Date> {
         this.year = Integer.parseInt(dateArray[2]);
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
     @Override
     public String toString() {
         return String.format("%02d/%02d/%d", month, day, year);

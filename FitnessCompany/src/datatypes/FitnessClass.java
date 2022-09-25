@@ -8,6 +8,7 @@ public class FitnessClass {
     private String className;
     private String classInstructor;
     private Time classTime;
+
     private MemberDatabase currentMembers;
 
     public FitnessClass(String className, String classInstructor, Time classTime) {
@@ -23,6 +24,26 @@ public class FitnessClass {
 
     public boolean drop(Member member) {
         return currentMembers.remove(member);
+    }
+
+    public boolean containsMember(Member member) {
+        return currentMembers.indexOf(member) != MemberDatabase.NOT_FOUND;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getClassInstructor() {
+        return classInstructor;
+    }
+
+    public Time getClassTime() {
+        return classTime;
+    }
+
+    public MemberDatabase getCurrentMembers() {
+        return currentMembers;
     }
 
     @Override
