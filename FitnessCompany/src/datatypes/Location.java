@@ -1,11 +1,11 @@
 package datatypes;
 
 public enum Location {
-    Bridgewater ("Bridgewater", "08807", "Somerset County"),
-    Edison      ("Edison",      "08837", "Middlexsex County"),
-    Franklin    ("Franklin",    "08873", "Somerset County"),
-    Piscataway  ("Piscataway",  "08854", "Middlesex County"),
-    Somerville  ("Somerville",  "08876", "Somerset County");
+    Bridgewater ("Bridgewater", "08807", "Somerset"),
+    Edison      ("Edison",      "08837", "Middlexsex"),
+    Franklin    ("Franklin",    "08873", "Somerset"),
+    Piscataway  ("Piscataway",  "08854", "Middlesex"),
+    Somerville  ("Somerville",  "08876", "Somerset");
 
     private final String city;
     private final String zipCode;
@@ -31,7 +31,7 @@ public enum Location {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s", city, county, zipCode);
+        return String.format("%s, %s, %s", city.toUpperCase(), zipCode, county.toUpperCase());
     }
 
     public static Location fromString(String location) {

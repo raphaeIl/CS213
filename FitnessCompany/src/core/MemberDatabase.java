@@ -78,8 +78,10 @@ public class MemberDatabase {
     }
 
     public void print() { //print the array contents as is
-        for (Member m: mlist)
-            System.out.println(m);
+
+        for (int i = 0; i < size; i++)
+            System.out.println(mlist[i]);
+
     }
     public void printByCounty() { //sort by county and then zipcode
         Member.CompareMode = Member.CompareMode.County;

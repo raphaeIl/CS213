@@ -57,8 +57,8 @@ public class Member implements Comparable<Member>{
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Member other &&
-                this.fname.equals(other.fname) &&
-                this.lname.equals(other.lname) &&
+                this.fname.equalsIgnoreCase(other.fname) &&
+                this.lname.equalsIgnoreCase(other.lname) &&
                 this.dob.equals(other.dob);
     }
 

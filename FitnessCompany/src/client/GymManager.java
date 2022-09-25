@@ -10,6 +10,9 @@ import utils.Utils;
 
 import java.util.Scanner;
 
+/**
+ * @Author Michael
+ */
 public class GymManager {
 
     private MemberDatabase memberDatabase;
