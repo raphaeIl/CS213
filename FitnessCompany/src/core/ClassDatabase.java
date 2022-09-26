@@ -4,6 +4,7 @@ import datatypes.Date;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
 import datatypes.Time;
+import utils.MemberValidator;
 
 public class ClassDatabase {
 
@@ -22,27 +23,16 @@ public class ClassDatabase {
             System.out.println(fitnessClass);
     }
 
-    public void checkIn(FitnessClassType classType, Member target) {
-        // member info validation
-        if (classType == null || target == null) // class/member does not exist
+    public void checkIn(String classType, Member target) {
+        FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
+
+        if (!MemberValidator.validateClassDatabase(classSchedule, classType, target))
             return;
 
-        if (target.getExpire().compareTo(new Date()) < 0 || // membership expired
-                !target.getDob().isValid()) // invalid dob
-            return;
-
-        FitnessClass currentClass = classSchedule[classType.ordinal()];
-
-        if (currentClass.containsMember(target)) // member already checked in
-            return;
-
-        for (FitnessClass fitnessClass: classSchedule) // time conflict with other fitness class
-            if (!fitnessClass.getClassName().equals(currentClass.getClassName()) &&
-                    fitnessClass.containsMember(target) &&
-                        fitnessClass.getClassTime() == currentClass.getClassTime())
-                return;
+        FitnessClass currentClass = classSchedule[fitnessClassType.ordinal()];
 
         currentClass.checkIn(target);
+        System.out.printf("%s %s checked in Pilates.\n", target.getFname(), target.getLname(), currentClass.getClassName());
     }
 
     public void drop(FitnessClassType classType, Member target) {

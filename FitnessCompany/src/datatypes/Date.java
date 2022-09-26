@@ -50,7 +50,7 @@ public class Date implements Comparable<Date> {
 
     @Override
     public String toString() {
-        return String.format("%02d/%02d/%d", month, day, year);
+        return String.format("%d/%d/%d", month, day, year);
     }
 
     @Override

@@ -26,6 +26,13 @@ public class Utils {
         return false;
     }
 
+    public static boolean objectArrayContains(Object[] array, Object element) {
+        for (Object obj: array)
+            if (obj != null && obj.equals(element))
+                return true;
+        return false;
+    }
+
     // sorting helper
     public static void insertionSort(Member[] array, int size) {
 //        for (int i = 1; i < size; i++) {

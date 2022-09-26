@@ -89,7 +89,7 @@ public class GymManager {
                 int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
                 target = memberDatabase.get(targetIndex);
 
-                classDatabase.checkIn(FitnessClassType.fromString(args[1]), target);
+                classDatabase.checkIn(args[1], target);
                 break;
             case "D":
                 targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
