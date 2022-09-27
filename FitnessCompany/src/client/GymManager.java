@@ -6,6 +6,7 @@ import core.MemberDatabase;
 import datatypes.Date;
 import datatypes.FitnessClassType;
 import datatypes.Location;
+import utils.MemberValidator;
 import utils.Utils;
 
 import java.util.Scanner;
@@ -31,12 +32,20 @@ public class GymManager {
             case "A":
                 Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
 
-                memberDatabase.add(newMember);
+                if (!MemberValidator.validateMemberDatabase(memberDatabase, newMember, args[5]))
+                    break;
+
+                if (memberDatabase.add(newMember))
+                    System.out.printf("%s %s added.\n", newMember.getFname(), newMember.getLname());
                 break;
             case "R":
                 Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
-                memberDatabase.remove(target);
+                if (memberDatabase.remove(target))
+                    System.out.printf("%s %s added.\n", target.getFname(), target.getLname());
+                else
+                    System.out.printf("%s %s is not in the database.\n", target.getFname(), target.getLname());
+
                 break;
             case "P":
                 if (memberDatabase.getSize() <= 0) {
@@ -88,6 +97,11 @@ public class GymManager {
             case "C":
                 int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
                 target = memberDatabase.get(targetIndex);
+
+                if (target == null) { // member does not exist
+                    System.out.printf("%s %s %s is not in the database.\n", args[2], args[3], args[4]);
+                    break;
+                }
 
                 classDatabase.checkIn(args[1], target);
                 break;

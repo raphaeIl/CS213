@@ -3,22 +3,19 @@ package datatypes;
 import core.Member;
 import core.MemberDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FitnessClass {
 
     private String className;
     private String classInstructor;
     private Time classTime;
 
-    private List<Member> currentMembers;
+    private MemberDatabase currentMembers;
 
     public FitnessClass(String className, String classInstructor, Time classTime) {
         this.className = className;
         this.classInstructor = classInstructor;
         this.classTime = classTime;
-        this.currentMembers = new ArrayList<>();
+        this.currentMembers = new MemberDatabase();
     }
 
     public boolean checkIn(Member member) {
@@ -30,7 +27,7 @@ public class FitnessClass {
     }
 
     public boolean containsMember(Member member) {
-        return currentMembers.contains(member);
+        return currentMembers.indexOf(member) != -1;
     }
 
     public String getClassName() {
@@ -45,21 +42,16 @@ public class FitnessClass {
         return classTime;
     }
 
-    public List<Member> getCurrentMembers() {
-        return currentMembers;
-    }
-
     @Override
     public String toString() {
-        String toString = "-Fitness classes-\n";
+        return String.format("%s class taught by %s at %s with members:\n%s", className, classInstructor, classTime, currentMembers);
+    }
 
-        toString += String.format("%s - %s, %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
-        toString += "\t" + "** participants **\n";
+    public void displaySchedule() {
+        System.out.printf("%s - %s, %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
+        System.out.printf("\t" + "** participants **\n");
 
-        for (Member member: currentMembers)
-            toString += "\t" + member + "\n";
-
-//        return String.format("%s class taught by %s at %s with members:\n%s", className, classInstructor, classTime, currentMembers);
-        return toString;
+        for (Member member: currentMembers.getMembers())
+            System.out.printf("\t\t" + member + "\n");
     }
 }

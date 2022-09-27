@@ -19,8 +19,10 @@ public class ClassDatabase {
     }
 
     public void displaySchedule() {
+        System.out.println("-Fitness classes-");
+
         for (FitnessClass fitnessClass: classSchedule)
-            System.out.println(fitnessClass);
+            fitnessClass.displaySchedule();
     }
 
     public void checkIn(String classType, Member target) {
@@ -32,7 +34,7 @@ public class ClassDatabase {
         FitnessClass currentClass = classSchedule[fitnessClassType.ordinal()];
 
         currentClass.checkIn(target);
-        System.out.printf("%s %s checked in Pilates.\n", target.getFname(), target.getLname(), currentClass.getClassName());
+        System.out.printf("%s %s checked in %s.\n", target.getFname(), target.getLname(), currentClass.getClassName());
     }
 
     public void drop(FitnessClassType classType, Member target) {

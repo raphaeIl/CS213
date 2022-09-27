@@ -1,7 +1,5 @@
 package core;
 
-import datatypes.Date;
-import utils.MemberValidator;
 import utils.Utils;
 
 public class MemberDatabase {
@@ -33,15 +31,11 @@ public class MemberDatabase {
         mlist = grew;
     }
     public boolean add(Member member) {
-        if (!MemberValidator.validateMemberDatabase(mlist, member))
-            return false;
-
         if (size == mlist.length)
             grow();
 
         mlist[size++] = member;
 
-        System.out.printf("%s %s added.\n", member.getFname(), member.getLname());
         return true;
     }
 
@@ -72,6 +66,17 @@ public class MemberDatabase {
 
     public int getSize() {
         return size;
+    }
+
+    public Member[] getMembers() {
+        Member[] members = new Member[size];
+
+        for (int i = 0, j = 0; i < size; i++) {
+            if (mlist[i] != null)
+                members[j++] = mlist[i];
+        }
+
+        return members;
     }
 
     public void print() { //print the array contents as is

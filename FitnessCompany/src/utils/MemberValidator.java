@@ -8,10 +8,9 @@ import datatypes.FitnessClassType;
 
 public class MemberValidator {
 
-    public static boolean validateMemberDatabase(Member[] memberDatabase, Member member) {
-        if (Utils.objectArrayContains(memberDatabase, member)) { // checking if member is already in database
+    public static boolean validateMemberDatabase(MemberDatabase memberDatabase, Member member, String inputLocation) {
+        if (memberDatabase.indexOf(member) != -1) { // checking if member is already in database
             System.out.printf("%s %s is already in the database.\n", member.getFname(), member.getLname());
-
             return false;
         }
 
@@ -36,7 +35,7 @@ public class MemberValidator {
         }
 
         if (member.getLocation() == null) { // that location does not exist
-            System.out.printf("%s: invalid location!\n", member.getLocation());
+            System.out.printf("%s: invalid location!\n", inputLocation);
             return false;
         }
 
@@ -46,10 +45,6 @@ public class MemberValidator {
     public static boolean validateClassDatabase(FitnessClass[] classDatabase, String classType, Member target) {
         // member info validation
         FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
-
-        if (target == null) { // member does not exist
-            return false;
-        }
 
         if (fitnessClassType == null) { // class does not exist
             System.out.printf("%s class does not exist.\n", classType);
