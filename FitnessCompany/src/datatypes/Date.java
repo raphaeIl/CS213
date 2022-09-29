@@ -22,13 +22,13 @@ public class Date implements Comparable<Date> {
     private int month;
     private int day;
 
-    public Date() { //create an object with today’s date (see Calendar class)
+    public Date() { // create an object with today’s date (see Calendar class)
         this.month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         this.day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         this.year = Calendar.getInstance().get(Calendar.YEAR);
     }
 
-    public Date(String date) { //take "mm/dd/yyyy" and create a Date object
+    public Date(String date) { // take "mm/dd/yyyy" and create a Date object
         String[] dateArray = date.split("/");
 
         this.month = Integer.parseInt(dateArray[0]);
@@ -59,7 +59,7 @@ public class Date implements Comparable<Date> {
         int months = Integer.compare(this.month, date.month);
         int days = Integer.compare(this.day, date.day);
 
-        return years == 0 ? months == 0 ? days : months : years; // using ternary operator here, can change to if else
+        return years == 0 ? months == 0 ? days : months : years; // using ternary operator here, can change to if else for better clarity
     }
 
     @Override

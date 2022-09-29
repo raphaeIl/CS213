@@ -48,10 +48,14 @@ public class FitnessClass {
     }
 
     public void displaySchedule() {
-        System.out.printf("%s - %s, %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
-        System.out.printf("\t" + "** participants **\n");
+        Member[] participants = currentMembers.getMembers();
 
-        for (Member member: currentMembers.getMembers())
+        System.out.printf("%s - %s, %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
+
+        if (participants.length > 0)
+            System.out.printf("\t" + "** participants **\n");
+
+        for (Member member: participants)
             System.out.printf("\t\t" + member + "\n");
     }
 }

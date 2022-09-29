@@ -4,10 +4,8 @@ import core.ClassDatabase;
 import core.Member;
 import core.MemberDatabase;
 import datatypes.Date;
-import datatypes.FitnessClassType;
 import datatypes.Location;
 import utils.MemberValidator;
-import utils.Utils;
 
 import java.util.Scanner;
 
@@ -15,6 +13,10 @@ import java.util.Scanner;
  * @Author Michael
  */
 public class GymManager {
+
+    private static final int EXECUTE_SUCCESS = 0;
+    private static final int EXECUTE_EXIT = 1;
+    private static final int EXECUTE_ERROR = -1;
 
     private MemberDatabase memberDatabase;
     private ClassDatabase classDatabase;
@@ -26,7 +28,7 @@ public class GymManager {
 
     public int executeCommand(String[] args) {
         if (args[0].isEmpty() || args[0].isBlank())
-            return 1;
+            return EXECUTE_ERROR;
 
         switch (args[0]) {
             case "A":
@@ -42,7 +44,7 @@ public class GymManager {
                 Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
 
                 if (memberDatabase.remove(target))
-                    System.out.printf("%s %s added.\n", target.getFname(), target.getLname());
+                    System.out.printf("%s %s removed.\n", target.getFname(), target.getLname());
                 else
                     System.out.printf("%s %s is not in the database.\n", target.getFname(), target.getLname());
 
@@ -53,9 +55,9 @@ public class GymManager {
                     break;
                 }
 
-                System.out.println("-list of members-");
+                System.out.println("\n-list of members-");
                 memberDatabase.print();
-                System.out.println("-end of list-");
+                System.out.println("-end of list-\n");
 
                 break;
             case "PC":
@@ -64,9 +66,9 @@ public class GymManager {
                     break;
                 }
 
-                System.out.println("-list of members sorted by county and zipcode-");
+                System.out.println("\n-list of members sorted by county and zipcode-");
                 memberDatabase.printByCounty();
-                System.out.println("-end of list-");
+                System.out.println("-end of list-\n");
 
                 break;
             case "PN":
@@ -75,9 +77,9 @@ public class GymManager {
                     break;
                 }
 
-                System.out.println("-list of members sorted by last name, and first name-");
+                System.out.println("\n-list of members sorted by last name, and first name-");
                 memberDatabase.printByName();
-                System.out.println("-end of list-");
+                System.out.println("-end of list-\n");
 
                 break;
             case "PD":
@@ -86,9 +88,9 @@ public class GymManager {
                     break;
                 }
 
-                System.out.println("-list of members sorted by membership expiration date-");
+                System.out.println("\n-list of members sorted by membership expiration date-");
                 memberDatabase.printByExpirationDate();
-                System.out.println("-end of list-");
+                System.out.println("-end of list-\n");
 
                 break;
             case "S":
@@ -97,6 +99,11 @@ public class GymManager {
             case "C":
                 int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
                 target = memberDatabase.get(targetIndex);
+
+                if (!new Date(args[4]).isValid()) { // invalid dob
+                    System.out.printf("DOB %s: invalid calendar date!\n", args[4]);
+                    break;
+                }
 
                 if (target == null) { // member does not exist
                     System.out.printf("%s %s %s is not in the database.\n", args[2], args[3], args[4]);
@@ -109,48 +116,26 @@ public class GymManager {
                 targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
                 target = memberDatabase.get(targetIndex);
 
-                classDatabase.drop(FitnessClassType.fromString(args[1]), target);
+                if (!new Date(args[4]).isValid()) { // invalid dob
+                    System.out.printf("DOB %s: invalid calendar date!\n", args[4]);
+                    break;
+                }
+
+                if (target == null) { // member does not exist
+                    System.out.printf("%s %s %s is not in the database.\n", args[2], args[3], args[4]);
+                    break;
+                }
+
+                classDatabase.drop(args[1], target);
                 break;
             case "Q":
-                return -1;
+                return EXECUTE_EXIT;
             default:
                 System.out.println(args[0] + " is an invalid command!");
                 break;
         }
 
-        return 0;
-    }
-
-    public void dbInitTest() { // <- test method delete later
-        MemberDatabase mdb = new MemberDatabase();
-        mdb.add(new Member("Tyriq", "Turnbull", Date.random(), Date.random(), Location.Bridgewater));
-        mdb.add(new Member("Aiesha", "Lozano", Date.random(), Date.random(), Location.Bridgewater));
-        mdb.add(new Member("Shyla", "Ray", Date.random(), Date.random(), Location.Edison));
-        mdb.add(new Member("Avneet", "Zuniga", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("Lorena", "Huynh", Date.random(), Date.random(), Location.Piscataway));
-        mdb.add(new Member("Zidane", "Norman", Date.random(), Date.random(), Location.Somerville));
-        mdb.add(new Member("Hareem", "Mora", Date.random(), Date.random(), Location.Edison));
-        mdb.add(new Member("Bob", "Moreno", Date.random(), Date.random(), Location.Edison));
-        mdb.add(new Member("Kaden", "Black", Date.random(), Date.random(), Location.Piscataway));
-        mdb.add(new Member("Tomos", "Sullivan", Date.random(), Date.random(), Location.Somerville));
-        mdb.add(new Member("Jensen", "Perry", Date.random(), Date.random(), Location.Somerville));
-        mdb.add(new Member("Evelyn", "Bevan", Date.random(), Date.random(), Location.Bridgewater));
-        mdb.add(new Member("Elsie", "Mellor", Date.random(), Date.random(), Location.Edison));
-        mdb.add(new Member("Dan", "Downes", Date.random(), Date.random(), Location.Piscataway));
-        mdb.add(new Member("Kason", "Edwards", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("Mariam", "Lyons", Date.random(), Date.random(), Location.Piscataway));
-        mdb.add(new Member("Chante", "Holcomb", Date.random(), Date.random(), Location.Somerville));
-        mdb.add(new Member("Rosemary", "Fuentes", Date.random(), Date.random(), Location.Bridgewater));
-        mdb.add(new Member("Buster", "Mcnamara", Date.random(), Date.random(), Location.Bridgewater));
-        mdb.add(new Member("Louis", "Sierra", Date.random(), Date.random(), Location.Franklin));
-
-        mdb.add(new Member("Aaaaaaa", "Sierra", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("B", "Sierra", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("CDE", "Sierra", Date.random(), Date.random(), Location.Franklin));
-        mdb.add(new Member("Ab", "Sierra", Date.random(), Date.random(), Location.Franklin));
-
-//        mdb.printByExpirationDate();
-        System.out.println(mdb);
+        return EXECUTE_SUCCESS;
     }
 
     public void run() {
@@ -161,7 +146,7 @@ public class GymManager {
         while (scanner.hasNext()) {
             int result = executeCommand(scanner.nextLine().split(" "));
 
-            if (result == -1)
+            if (result == EXECUTE_EXIT)
                 break;
         }
 
