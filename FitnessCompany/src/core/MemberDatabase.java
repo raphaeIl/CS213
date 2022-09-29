@@ -1,7 +1,9 @@
 package core;
 
 import utils.Utils;
-
+/**
+ * @Author Michael Genfu
+ */
 public class MemberDatabase {
 
     public static final int NOT_FOUND = -1;

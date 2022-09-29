@@ -1,5 +1,7 @@
 package datatypes;
-
+/**
+ * @Author Michael Genfu
+ */
 public enum Time { // enum names are based on classname_instructor
     Morning(9, 30),
     Afternoon(14, 0);

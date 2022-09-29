@@ -1,5 +1,7 @@
 package datatypes;
-
+/**
+ * @Author Michael Genfu
+ */
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset"),
     Edison      ("Edison",      "08837", "Middlesex"),

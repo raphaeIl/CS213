@@ -1,5 +1,7 @@
 package datatypes;
-
+/**
+ * @Author Michael Genfu
+ */
 public enum FitnessClassType {
     Pilates,
     Spinning,

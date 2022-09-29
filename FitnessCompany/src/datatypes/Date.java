@@ -3,7 +3,9 @@ package datatypes;
 import utils.Utils;
 
 import java.util.Calendar;
-
+/**
+ * @Author Michael Genfu
+ */
 public class Date implements Comparable<Date> {
 
     public static final int MONTHS_IN_YEAR = 12;

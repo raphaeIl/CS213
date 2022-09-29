@@ -5,7 +5,9 @@ import core.MemberDatabase;
 import datatypes.Date;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
-
+/**
+ * @Author Michael Genfu
+ */
 public class MemberValidator {
 
     public static boolean validateMemberDatabase(MemberDatabase memberDatabase, Member member, String inputLocation) {

@@ -2,7 +2,9 @@ package core;
 
 import datatypes.Date;
 import datatypes.Location;
-
+/**
+ * @Author Michael Genfu
+ */
 public class Member implements Comparable<Member>{
     public static CompareMode CompareMode = Member.CompareMode.None;
 

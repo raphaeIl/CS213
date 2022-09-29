@@ -10,7 +10,7 @@ import utils.MemberValidator;
 import java.util.Scanner;
 
 /**
- * @Author Michael
+ * @Author Michael Genfu
  */
 public class GymManager {
 

@@ -1,11 +1,12 @@
 package core;
 
-import datatypes.Date;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
 import datatypes.Time;
 import utils.MemberValidator;
-
+/**
+ * @Author Michael Genfu
+ */
 public class ClassDatabase {
 
     private static final FitnessClass Pilates = new FitnessClass("Pilates", "Jennifer", Time.Morning);

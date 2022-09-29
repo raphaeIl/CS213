@@ -1,9 +1,11 @@
 package utils;
 
 import core.Member;
-import datatypes.FitnessClass;
-import datatypes.FitnessClassType;
-//s
+
+/**
+ * @Author Michael Genfu
+ */
+
 public class Utils {
 
     public static String arrayToString(Object[] array) {

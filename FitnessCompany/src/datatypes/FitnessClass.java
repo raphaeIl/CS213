@@ -2,7 +2,9 @@ package datatypes;
 
 import core.Member;
 import core.MemberDatabase;
-
+/**
+ * @Author Michael Genfu
+ */
 public class FitnessClass {
 
     private String className;
