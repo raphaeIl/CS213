@@ -5,13 +5,18 @@ import core.MemberDatabase;
 import datatypes.Date;
 import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
+
 /**
  * @Author Michael Genfu
  */
 public class MemberValidator {
 
-    public static boolean validateMemberDatabase(MemberDatabase memberDatabase, Member member, String inputLocation) {
-        if (memberDatabase.indexOf(member) != -1) { // checking if member is already in database
+    public static Member validateAndCreateMember() {
+        return null;
+    }
+
+    public static boolean validateDatabaseMember(MemberDatabase memberDatabase, Member member, String inputLocation) {
+        if (memberDatabase.indexOf(member) != MemberDatabase.NOT_FOUND) { // checking if member is already in database
             System.out.printf("%s %s is already in the database.\n", member.getFname(), member.getLname());
             return false;
         }
@@ -54,7 +59,7 @@ public class MemberValidator {
         }
 
         if (target.getExpire().compareTo(new Date()) < 0) { // membership expired
-            System.out.printf("%s %s %s membership expired\n", target.getFname(), target.getLname(), target.getDob());
+            System.out.printf("%s %s %s membership expired.\n", target.getFname(), target.getLname(), target.getDob());
             return false;
         }
 
@@ -66,7 +71,7 @@ public class MemberValidator {
         FitnessClass currentClass = classDatabase[fitnessClassType.ordinal()];
 
         if (currentClass.containsMember(target)) { // member already checked in
-            System.out.printf("%s %s has already checked in %s\n", target.getFname(), target.getLname(), currentClass.getClassName());
+            System.out.printf("%s %s has already checked in %s.\n", target.getFname(), target.getLname(), currentClass.getClassName());
             return false;
         }
 
@@ -74,7 +79,7 @@ public class MemberValidator {
             if (!fitnessClass.getClassName().equals(currentClass.getClassName()) &&
                     fitnessClass.containsMember(target) &&
                     fitnessClass.getClassTime() == currentClass.getClassTime()) {
-                System.out.printf("%s time conflict -- %s %s has already checked in %s\n", currentClass.getClassName(), target.getFname(), target.getLname(), fitnessClass.getClassName());
+                System.out.printf("%s time conflict -- %s %s has already checked in %s.\n", currentClass.getClassName(), target.getFname(), target.getLname(), fitnessClass.getClassName());
                 return false;
             }
 

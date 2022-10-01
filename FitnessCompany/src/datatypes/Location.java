@@ -37,7 +37,6 @@ public enum Location {
     }
 
     public static Location fromString(String location) {
-
         switch (location.toLowerCase()) {
             case "bridgewater":
                 return Bridgewater;

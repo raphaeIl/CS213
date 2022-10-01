@@ -81,27 +81,45 @@ public class MemberDatabase {
         return members;
     }
 
-    public void print() { //print the array contents as is
-        for (int i = 0; i < size; i++)
-            System.out.println(mlist[i]);
+    public void print() { // print the array contents as is
+        printDatabase("");
     }
-    public void printByCounty() { //sort by county and then zipcode
+
+    public void printByCounty() { // sort by county and then zipcode
         Member.CompareMode = Member.CompareMode.County;
         Utils.insertionSort(mlist, size);
 
-        print();
+        printDatabase(" sorted by county and zipcode");
     }
     public void printByExpirationDate() { //sort by the expiration date TODO: case where expiration dates are the same
         Member.CompareMode = Member.CompareMode.ExpirationDate;
         Utils.insertionSort(mlist, size);
 
-        print();
+        printDatabase(" sorted by membership expiration date");
     }
     public void printByName() { //sort by last name and then first name
         Member.CompareMode = Member.CompareMode.Name;
         Utils.insertionSort(mlist, size);
 
-        print();
+        printDatabase(" sorted by last name, and first name");
+    }
+
+    /**
+     * This is a helper method we added to reduce code duplication such as repeatedly checking if the database is empty in the other print methods
+     * @param displayMessage
+     */
+    private void printDatabase(String displayMessage) {
+        if (size <= 0) {
+            System.out.println("Member database is empty!");
+            return;
+        }
+
+        System.out.printf("\n-list of members%s-\n", displayMessage);
+
+        for (int i = 0; i < size; i++)
+            System.out.println(mlist[i].toString());
+
+        System.out.println("-end of list-\n");
     }
 
     @Override

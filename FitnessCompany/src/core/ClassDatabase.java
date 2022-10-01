@@ -13,7 +13,7 @@ public class ClassDatabase {
     private static final FitnessClass Spinning = new FitnessClass("Spinning", "Denise", Time.Afternoon);
     private static final FitnessClass Cardio = new FitnessClass("Cardio", "Kim", Time.Afternoon);
 
-    public static FitnessClass[] classSchedule;
+    private FitnessClass[] classSchedule;
 
     public ClassDatabase() {
         classSchedule = new FitnessClass[] { Pilates, Spinning, Cardio };

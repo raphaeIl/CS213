@@ -10,6 +10,8 @@ import utils.MemberValidator;
 import java.util.Scanner;
 
 /**
+ * Main User Interface class that process command lines entered to the IDE console and display
+ * the results on the console.
  * @Author Michael Genfu
  */
 public class GymManager {
@@ -18,7 +20,14 @@ public class GymManager {
     private static final int EXECUTE_EXIT = 1;
     private static final int EXECUTE_ERROR = -1;
 
+    /**
+     * Database used to store all members, includes operations such as  adding, removing, searching and displaying.
+     */
     private MemberDatabase memberDatabase;
+
+    /**
+     * Database used to store all classes along with their current members, includes operations such as checking in, dropping, and displaying.
+     */
     private ClassDatabase classDatabase;
 
     public GymManager() {
@@ -26,15 +35,22 @@ public class GymManager {
         classDatabase = new ClassDatabase();
     }
 
+    /**
+     * Handles all client commands
+     * @param args an array of command arguments
+     * @return the result of executing the command, either  EXECUTE_SUCCESS if the command was sucessfully executed,
+     *                                                      EXECUTE_EXIT if the client requested to exit,
+     *                                                      EXECUTE_ERROR if there was an error.
+     */
     public int executeCommand(String[] args) {
-        if (args[0].isEmpty() || args[0].isBlank())
+        if (args.length <= 0 || args[0].isEmpty() || args[0].isBlank())
             return EXECUTE_ERROR;
 
         switch (args[0]) {
             case "A":
                 Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
 
-                if (!MemberValidator.validateMemberDatabase(memberDatabase, newMember, args[5]))
+                if (!MemberValidator.validateDatabaseMember(memberDatabase, newMember, args[5]))
                     break;
 
                 if (memberDatabase.add(newMember))
@@ -50,51 +66,24 @@ public class GymManager {
 
                 break;
             case "P":
-                if (memberDatabase.getSize() <= 0) {
-                    System.out.println("Member database is empty!");
-                    break;
-                }
-
-                System.out.println("\n-list of members-");
                 memberDatabase.print();
-                System.out.println("-end of list-\n");
 
                 break;
             case "PC":
-                if (memberDatabase.getSize() <= 0) {
-                    System.out.println("Member database is empty!");
-                    break;
-                }
-
-                System.out.println("\n-list of members sorted by county and zipcode-");
                 memberDatabase.printByCounty();
-                System.out.println("-end of list-\n");
 
                 break;
             case "PN":
-                if (memberDatabase.getSize() <= 0) {
-                    System.out.println("Member database is empty!");
-                    break;
-                }
-
-                System.out.println("\n-list of members sorted by last name, and first name-");
                 memberDatabase.printByName();
-                System.out.println("-end of list-\n");
 
                 break;
             case "PD":
-                if (memberDatabase.getSize() <= 0) {
-                    System.out.println("Member database is empty!");
-                    break;
-                }
-
-                System.out.println("\n-list of members sorted by membership expiration date-");
                 memberDatabase.printByExpirationDate();
-                System.out.println("-end of list-\n");
 
                 break;
             case "S":
                 classDatabase.displaySchedule();
+
                 break;
             case "C":
                 int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));

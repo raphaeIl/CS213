@@ -6,6 +6,9 @@ import datatypes.Location;
  * @Author Michael Genfu
  */
 public class Member implements Comparable<Member>{
+    /**
+     * This field is made to mimic java's java.util.comparator class for easier and cleaner sorting code
+     */
     public static CompareMode CompareMode = Member.CompareMode.None;
 
     private String fname;
