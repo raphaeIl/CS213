@@ -6,7 +6,7 @@ import utils.Utils;
 /**
  * An array-based linear data structure that hold the list of members,
  * also provide the methods for managing the list of members
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class MemberDatabase {
 

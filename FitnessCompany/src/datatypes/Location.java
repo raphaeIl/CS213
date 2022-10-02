@@ -2,7 +2,7 @@ package datatypes;
 
 /**
  * enum class representing the Location of a member, contains info about the location
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset"),

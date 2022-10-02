@@ -5,7 +5,7 @@ import core.MemberDatabase;
 
 /**
  * Defines a fitness class the members can check in
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class FitnessClass {
 

@@ -7,7 +7,7 @@ import datatypes.Time;
 /**
  * Holds the list of fitness classes and also provides functionality
  * such as checking in, dropping, and displaying the schedule
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class ClassDatabase {
 

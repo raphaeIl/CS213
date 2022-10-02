@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Main User Interface class that process command lines entered to the IDE console and display
  * the results on the console.
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class GymManager {
 

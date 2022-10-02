@@ -2,7 +2,7 @@ package datatypes;
 
 /**
  * Represents a specific fitness class type
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public enum FitnessClassType {
     Pilates,

@@ -5,7 +5,7 @@ import datatypes.Date;
 
 /**
  * Utilities class for random helper methods
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class Utils {
 

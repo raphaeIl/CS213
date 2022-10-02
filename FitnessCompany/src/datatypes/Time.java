@@ -2,7 +2,7 @@ package datatypes;
 
 /**
  * Represents a Time in a day
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public enum Time {
     Morning(9, 30),

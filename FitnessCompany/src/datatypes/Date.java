@@ -1,12 +1,13 @@
 package datatypes;
 
+import test.Testcase;
 import utils.Utils;
 
 import java.util.Calendar;
 
 /**
  * Represents a Calendar Date
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class Date implements Comparable<Date> {
 
@@ -58,10 +59,10 @@ public class Date implements Comparable<Date> {
     }
 
     @Override
-    public int compareTo(Date date) {
-        int years = Integer.compare(this.year, date.year);
-        int months = Integer.compare(this.month, date.month);
-        int days = Integer.compare(this.day, date.day);
+    public int compareTo(Date other) {
+        int years = Integer.compare(this.year, other.year);
+        int months = Integer.compare(this.month, other.month);
+        int days = Integer.compare(this.day, other.day);
 
         return years == 0 ? months == 0 ? days : months : years; // using ternary operator here, can change to if else for better clarity
     }
@@ -100,4 +101,45 @@ public class Date implements Comparable<Date> {
     public static Date random() { // testing purposes random date
         return new Date(String.format("%d/%d/%d", (int)(Math.random() * 12 + 1), (int)(Math.random() * 31 + 1), 1800 + (int)(Math.random() * 400 + 1)));
     }
+
+    /**
+     * Testbed main for Date,
+     */
+    public static void main(String[] args) {
+        Testcase[] isValidTestcases =   {
+                                                new Testcase("An instance of Date with an invalid year, month, or day", false, null, new Date[] { new Date("10/1/-1"), new Date("-2/1/2022"), new Date("13/1/2022"), new Date("10/-1/2022"), new Date("10/32/2022") }),
+                                                new Testcase("An instance of Date with a short month (4, 6, 9, 11), but with a day >= 31", false, null, new Date("11/31/2022")),
+                                                new Testcase("An instance of Date with the month = 2, day > 28, and the year is a non-leap year", false, null, new Date("2/29/2100")),
+                                                new Testcase("An instance of Date with the month = 2, day > 28, and the year is a leap year", true, null, new Date("2/29/2020")),
+                                                new Testcase("An instance of Date with the month = 2, day = 29, and the year is a leap year", true, null, new Date("10/3/2022"))
+                                            };
+
+        Testcase[] compareToTestcases = {
+                                                new Testcase("An instance of Date with the date: 10/3/2022, and compare it to a past date", 1, null, new Date("10/2/1997")),
+                                                new Testcase("An instance of Date with the date: 10/3/2022, and compare it to another instance with the same date", 0, null, new Date("10/3/2022")),
+                                                new Testcase("An instance of Date with the date: 10/3/2022, and compare it to a future date", -1, null, new Date("11/4/2050")),
+                                            };
+
+        System.out.println("\n\n-- Now testing: Date.isValid() --");
+        for (int i = 0; i < isValidTestcases.length; i++) {
+            Testcase current = isValidTestcases[i];
+            System.out.printf("\nTest case #%d: %s:\n", i + 1, current.getDescription());
+
+            for (Object testDate: current.getTestClasses()){
+                boolean actualOutput = ((Date)testDate).isValid();
+                System.out.printf("\tCase %-10s: isValid() returns %-5s: %s\n", testDate, actualOutput, (current.getExpectedOutput()).equals(actualOutput) ? "PASS" : "FAIL");
+            }
+        }
+        System.out.println("\n\n-- Now testing: Date.compareTo(other) --");
+        for (int i = 0; i < compareToTestcases.length; i++) {
+            Testcase current = compareToTestcases[i];
+            System.out.printf("\nTest case #%d: %s:\n", i + 1, current.getDescription());
+
+            for (Object testDate: current.getTestClasses()) {
+                int actualOutput = new Date("10/3/2022").compareTo((Date)testDate);
+                System.out.printf("\tCase %-10s: compareTo() returns %-5s: %s\n", testDate, actualOutput, (current.getExpectedOutput()).equals(actualOutput) ? "PASS" : "FAIL");
+            }
+        }
+    }
+
 }

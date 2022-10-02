@@ -11,7 +11,7 @@ import datatypes.Location;
 /**
  * This class is mainly responsible for validating member info from client input,
  * also displays error messages when there is an invalid input.
- * @Author Michael Liu, Genfu Liu
+ * @author Michael Liu, Genfu Liu
  */
 public class MemberValidator {
 
