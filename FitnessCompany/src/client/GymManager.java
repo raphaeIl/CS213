@@ -5,7 +5,6 @@ import core.Member;
 import core.MemberDatabase;
 import datatypes.Date;
 import datatypes.FitnessClassType;
-import datatypes.Location;
 import utils.MemberValidator;
 
 import java.util.Scanner;
@@ -24,12 +23,12 @@ public class GymManager {
     /**
      * Database used to store all members
      */
-    private MemberDatabase memberDatabase;
+    private final MemberDatabase memberDatabase;
 
     /**
      * Database used to store all classes along with their current members
      */
-    private ClassDatabase classDatabase;
+    private final ClassDatabase classDatabase;
 
     public GymManager() {
         memberDatabase = new MemberDatabase();

@@ -14,7 +14,7 @@ public class ClassDatabase {
     /**
      * Array that holds all the available classes
      */
-    private FitnessClass[] classSchedule;
+    private final FitnessClass[] classSchedule;
 
     public ClassDatabase() {
         FitnessClass Pilates = new FitnessClass("Pilates", "Jennifer", Time.Morning);
