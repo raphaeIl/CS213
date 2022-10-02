@@ -1,8 +1,10 @@
 package datatypes;
+
 /**
- * @Author Michael Genfu
+ * Represents a Time in a day
+ * @Author Michael Liu, Genfu Liu
  */
-public enum Time { // enum names are based on classname_instructor
+public enum Time {
     Morning(9, 30),
     Afternoon(14, 0);
 

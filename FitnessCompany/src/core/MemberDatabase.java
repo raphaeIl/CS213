@@ -2,8 +2,11 @@ package core;
 
 import datatypes.Date;
 import utils.Utils;
+
 /**
- * @Author Michael Genfu
+ * An array-based linear data structure that hold the list of members,
+ * also provide the methods for managing the list of members
+ * @Author Michael Liu, Genfu Liu
  */
 public class MemberDatabase {
 
@@ -33,6 +36,7 @@ public class MemberDatabase {
 
         mlist = grew;
     }
+
     public boolean add(Member member) {
         if (size == mlist.length)
             grow();
@@ -98,7 +102,7 @@ public class MemberDatabase {
 
         printDatabase(" sorted by county and zipcode");
     }
-    public void printByExpirationDate() { //sort by the expiration date TODO: case where expiration dates are the same
+    public void printByExpirationDate() { //sort by the expiration date
         Member.CompareMode = Member.CompareMode.ExpirationDate;
         Utils.insertionSort(mlist, size);
 
@@ -113,7 +117,7 @@ public class MemberDatabase {
 
     /**
      * This is a helper method we added to reduce code duplication such as repeatedly checking if the database is empty in the other print methods
-     * @param displayMessage
+     * @param displayMessage displays this message along with the list of members currently in the database
      */
     private void printDatabase(String displayMessage) {
         if (size <= 0) {

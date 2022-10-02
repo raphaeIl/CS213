@@ -3,8 +3,10 @@ package datatypes;
 import utils.Utils;
 
 import java.util.Calendar;
+
 /**
- * @Author Michael Genfu
+ * Represents a Calendar Date
+ * @Author Michael Liu, Genfu Liu
  */
 public class Date implements Comparable<Date> {
 

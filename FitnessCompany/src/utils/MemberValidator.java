@@ -9,18 +9,21 @@ import datatypes.FitnessClassType;
 import datatypes.Location;
 
 /**
- * This class is mainly made to
- * @Author Michael Genfu
+ * This class is mainly responsible for validating member info from client input,
+ * also displays error messages when there is an invalid input.
+ * @Author Michael Liu, Genfu Liu
  */
 public class MemberValidator {
 
-    public static Member validateAndCreateMember(String fname, String lname, String dob, String expire, String location) {
-        if (!validateMember(fname, lname, dob, expire, location))
-            return null;
-
-        return new Member(fname, lname, new Date(dob), new Date(expire), Location.fromString(location));
-    }
-
+    /**
+     * Validates all the member info that the user inputs
+     * @param fname Member first name
+     * @param lname Member last name
+     * @param dob Member dob in String form
+     * @param expire Membership expiration date in String form
+     * @param location Member location in String form
+     * @return true if all the member info are valid, false and also prints out an error message if invalid
+     */
     public static boolean validateMember(String fname, String lname, String dob, String expire, String location) { // expire and location are optional params
         Date dobDate = new Date(dob);
 
@@ -56,6 +59,24 @@ public class MemberValidator {
         return true;
     }
 
+    /**
+     * Validates member info using validateMember() but additionally creates a Member if all info are valid
+     * @params all params are the Member's info
+     * @return a created Member object if all the info are valid, null if invalid
+     */
+    public static Member validateAndCreateMember(String fname, String lname, String dob, String expire, String location) {
+        if (!validateMember(fname, lname, dob, expire, location))
+            return null;
+
+        return new Member(fname, lname, new Date(dob), new Date(expire), Location.fromString(location));
+    }
+
+    /**
+     * Used specifically when adding members to the MemberDatabase to check if it's a valid operation
+     * @param memberDatabase The MemberDatabase we're attempting to insert to
+     * @param member The member we're trying to insert
+     * @return if the member can be inserted or not
+     */
     public static boolean validateMemberDatabaseInsertion(MemberDatabase memberDatabase, Member member) {
         if (memberDatabase.indexOf(member) != MemberDatabase.NOT_FOUND) { // checking if member is already in database
             System.out.printf("%s %s is already in the database.\n", member.getFname(), member.getLname());
@@ -65,6 +86,14 @@ public class MemberValidator {
         return true;
     }
 
+    /**
+     * Used specifically when checking in a member from the ClassDatabase to check if it's a valid operation
+     * @param classDatabase The ClassDatabase we're attempting to check in to
+     * @param memberDatabase The MemberDatabase containing all the registered members
+     * @param classType The class the member is trying to check in
+     * @params all other params are the Member's info
+     * @return if the member can be checked in or not
+     */
     public static boolean validateMemberCheckIn(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
         // member info validation
         FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
@@ -106,6 +135,14 @@ public class MemberValidator {
         return true;
     }
 
+    /**
+     * Used specifically when dropping a member from the ClassDatabase to check if it's a valid operation
+     * @param classDatabase The ClassDatabase we're attempting to drop from
+     * @param memberDatabase The MemberDatabase containing all the registered members
+     * @param classType The class the member is trying to drop
+     * @params all other params are the Member's info
+     * @return if the member can be dropped
+     */
     public static boolean validateMemberDrop(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
         FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
         Member target = memberDatabase.get(fname, lname, new Date(dob));

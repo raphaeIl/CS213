@@ -2,12 +2,16 @@ package core;
 
 import datatypes.Date;
 import datatypes.Location;
+
 /**
- * @Author Michael Genfu
+ * Member class that stores all member info
+ * @Author Michael Liu, Genfu Liu
  */
 public class Member implements Comparable<Member>{
+
     /**
-     * This field is made to mimic java's java.util.comparator class for easier and cleaner sorting code
+     * This field is made to mimic java's java.util.comparator class (since we can't use :( ) for easier and cleaner sorting code
+     * can be switched to different sorting modes and compareTo will compare members according to that mode
      */
     public static CompareMode CompareMode = Member.CompareMode.None;
 
@@ -58,6 +62,12 @@ public class Member implements Comparable<Member>{
                 this.dob.equals(other.dob);
     }
 
+    /**
+     * Will compare this member to another based on the current Member.CompareMode,
+     * there is a primary and secondary comparison corresponding to the project requirements
+     * @param otherMember the object to be compared.
+     * @return 0 if the members are equal, 1 if this member is greater than the other, -1 if less
+     */
     @Override
     public int compareTo(Member otherMember) {
         if (otherMember == null)
@@ -97,6 +107,9 @@ public class Member implements Comparable<Member>{
         }
     }
 
+    /**
+     * Used to toggle between different sorting modes
+     */
     public enum CompareMode {
         None,
         Name,

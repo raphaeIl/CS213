@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * Main User Interface class that process command lines entered to the IDE console and display
  * the results on the console.
- * @Author Michael Genfu
+ * @Author Michael Liu, Genfu Liu
  */
 public class GymManager {
 
@@ -22,12 +22,12 @@ public class GymManager {
     private static final int EXECUTE_ERROR = -1;
 
     /**
-     * Database used to store all members, includes operations such as  adding, removing, searching and displaying.
+     * Database used to store all members
      */
     private MemberDatabase memberDatabase;
 
     /**
-     * Database used to store all classes along with their current members, includes operations such as checking in, dropping, and displaying.
+     * Database used to store all classes along with their current members
      */
     private ClassDatabase classDatabase;
 
@@ -39,7 +39,7 @@ public class GymManager {
     /**
      * Handles all client commands
      * @param args an array of command arguments
-     * @return the result of executing the command, either  EXECUTE_SUCCESS if the command was sucessfully executed,
+     * @return the result of executing the command, either  EXECUTE_SUCCESS if the command was successfully executed,
      *                                                      EXECUTE_EXIT if the client requested to exit,
      *                                                      EXECUTE_ERROR if there was an error.
      */

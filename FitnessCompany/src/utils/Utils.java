@@ -4,9 +4,9 @@ import core.Member;
 import datatypes.Date;
 
 /**
- * @Author Michael Genfu
+ * Utilities class for random helper methods
+ * @Author Michael Liu, Genfu Liu
  */
-
 public class Utils {
 
     public static double dobToAge(Date dob) {
@@ -35,13 +35,6 @@ public class Utils {
             if (e == element)
                 return true;
 
-        return false;
-    }
-
-    public static boolean objectArrayContains(Object[] array, Object element) {
-        for (Object obj: array)
-            if (obj != null && obj.equals(element))
-                return true;
         return false;
     }
 

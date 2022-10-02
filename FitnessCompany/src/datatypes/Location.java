@@ -1,6 +1,8 @@
 package datatypes;
+
 /**
- * @Author Michael Genfu
+ * enum class representing the Location of a member, contains info about the location
+ * @Author Michael Liu, Genfu Liu
  */
 public enum Location {
     Bridgewater ("Bridgewater", "08807", "Somerset"),
@@ -36,6 +38,11 @@ public enum Location {
         return String.format("%s, %s, %s", city.toUpperCase(), zipCode, county.toUpperCase());
     }
 
+    /**
+     * Used to convert from the String representation of a location to the enum form
+     * @param location the location in String form
+     * @return the location in enum form, null if invalid location
+     */
     public static Location fromString(String location) {
         switch (location.toLowerCase()) {
             case "bridgewater":

@@ -1,5 +1,6 @@
 import client.GymManager;
 /**
+ * Driver class for the project
  * @Author Michael Genfu
  */
 
