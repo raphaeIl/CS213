@@ -4,6 +4,7 @@ import core.ClassDatabase;
 import core.Member;
 import core.MemberDatabase;
 import datatypes.Date;
+import datatypes.FitnessClassType;
 import datatypes.Location;
 import utils.MemberValidator;
 
@@ -48,13 +49,14 @@ public class GymManager {
 
         switch (args[0]) {
             case "A":
-                Member newMember = new Member(args[1], args[2], new Date(args[3]), new Date(args[4]), Location.fromString(args[5]));
+                Member newMember = MemberValidator.validateAndCreateMember(args[1], args[2], args[3], args[4], args[5]);
 
-                if (!MemberValidator.validateDatabaseMember(memberDatabase, newMember, args[5]))
+                if (newMember == null || !MemberValidator.validateMemberDatabaseInsertion(memberDatabase, newMember))
                     break;
 
                 if (memberDatabase.add(newMember))
                     System.out.printf("%s %s added.\n", newMember.getFname(), newMember.getLname());
+
                 break;
             case "R":
                 Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
@@ -86,36 +88,24 @@ public class GymManager {
 
                 break;
             case "C":
-                int targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
-                target = memberDatabase.get(targetIndex);
+                target = memberDatabase.get(args[2], args[3], new Date(args[4]));
 
-                if (!new Date(args[4]).isValid()) { // invalid dob
-                    System.out.printf("DOB %s: invalid calendar date!\n", args[4]);
+                if (!MemberValidator.validateMemberCheckIn(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
                     break;
-                }
 
-                if (target == null) { // member does not exist
-                    System.out.printf("%s %s %s is not in the database.\n", args[2], args[3], args[4]);
-                    break;
-                }
+                if (classDatabase.checkIn(FitnessClassType.fromString(args[1]), target))
+                    System.out.printf("%s %s checked in %s.\n", target.getFname(), target.getLname(), FitnessClassType.fromString(args[1]));
 
-                classDatabase.checkIn(args[1], target);
                 break;
             case "D":
-                targetIndex = memberDatabase.indexOf(new Member(args[2], args[3], new Date(args[4]), null, null));
-                target = memberDatabase.get(targetIndex);
+                target = memberDatabase.get(args[2], args[3], new Date(args[4]));
 
-                if (!new Date(args[4]).isValid()) { // invalid dob
-                    System.out.printf("DOB %s: invalid calendar date!\n", args[4]);
+                if (!MemberValidator.validateMemberDrop(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
                     break;
-                }
 
-                if (target == null) { // member does not exist
-                    System.out.printf("%s %s %s is not in the database.\n", args[2], args[3], args[4]);
-                    break;
-                }
+                if (classDatabase.drop(FitnessClassType.fromString(args[1]), target))
+                    System.out.printf("%s %s dropped %s.\n", target.getFname(), target.getLname(), FitnessClassType.fromString(args[1]));
 
-                classDatabase.drop(args[1], target);
                 break;
             case "Q":
                 return EXECUTE_EXIT;

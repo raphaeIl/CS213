@@ -25,15 +25,6 @@ public class Member implements Comparable<Member>{
         this.location = location;
     }
 
-    public double getAge() {
-        Date today = new Date();
-
-        double year = today.getYear() - dob.getYear();
-        double month = (today.getMonth() - dob.getMonth()) / (double)Date.MONTHS_IN_YEAR;
-
-        return year + month;
-    }
-
     public String getFname() {
         return fname;
     }

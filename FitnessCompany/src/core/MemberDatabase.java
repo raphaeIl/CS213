@@ -1,5 +1,6 @@
 package core;
 
+import datatypes.Date;
 import utils.Utils;
 /**
  * @Author Michael Genfu
@@ -64,6 +65,12 @@ public class MemberDatabase {
             return null;
 
         return mlist[index];
+    }
+
+    public Member get(String fname, String lname, Date dob) {
+        int index = find(new Member(fname, lname, dob, null, null));
+
+        return index == -1 ? null : mlist[index];
     }
 
     public int getSize() {

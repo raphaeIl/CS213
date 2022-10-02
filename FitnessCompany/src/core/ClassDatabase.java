@@ -28,34 +28,23 @@ public class ClassDatabase {
         System.out.println();
     }
 
-    public void checkIn(String classType, Member target) {
-        FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
-
-        if (!MemberValidator.validateClassDatabase(classSchedule, classType, target))
-            return;
-
+    public boolean checkIn(FitnessClassType fitnessClassType, Member target) {
         FitnessClass currentClass = classSchedule[fitnessClassType.ordinal()];
 
-        if (currentClass.checkIn(target))
-            System.out.printf("%s %s checked in %s.\n", target.getFname(), target.getLname(), currentClass.getClassName());
+        return currentClass.checkIn(target);
     }
 
-    public void drop(String classType, Member target) {
-        FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
-
-        if (fitnessClassType == null) { // class does not exist
-            System.out.printf("%s class does not exist.\n", classType);
-            return;
-        }
-
+    public boolean drop(FitnessClassType fitnessClassType, Member target) {
         FitnessClass currentClass = classSchedule[fitnessClassType.ordinal()];
 
-        if (!currentClass.containsMember(target)) {
-            System.out.printf("%s %s is not a participant in %s.\n", target.getFname(), target.getLname(), fitnessClassType);
-            return;
-        }
+        return currentClass.drop(target);
+    }
 
-        if (currentClass.drop(target))
-            System.out.printf("%s %s dropped %s.\n", target.getFname(), target.getLname(), currentClass.getClassName());
+    public FitnessClass getFitnessClass(FitnessClassType fitnessClassType) {
+        return classSchedule[fitnessClassType.ordinal()];
+    }
+
+    public FitnessClass[] getClassSchedule() {
+        return classSchedule;
     }
 }
