@@ -64,7 +64,7 @@ public class FitnessClass {
     public void displaySchedule() {
         Member[] participants = currentMembers.getMembers();
 
-        System.out.printf("%s - %s, %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
+        System.out.printf("%s - %s %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
 
         if (participants.length > 0)
             System.out.printf("\t" + "** participants **\n");
