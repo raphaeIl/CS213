@@ -36,6 +36,9 @@ public class MemberDatabase {
      * @return the index of the member, NOT_FOUND (-1) if not found
      */
     private int find(Member member) {
+        if (member == null)
+            return NOT_FOUND;
+
         for (int i = 0; i < size; i++)
             if (member.equals(mlist[i]))
                 return i;
@@ -71,7 +74,7 @@ public class MemberDatabase {
 
     /**
      * Removes a member from the database
-     * @param member The membner to be removed
+     * @param member The member to be removed
      * @return if the member was removed successfully
      */
     public boolean remove(Member member) {

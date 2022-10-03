@@ -61,13 +61,12 @@ public class GymManager {
 
                 break;
             case "R":
-                Member target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
-
+                Member target = memberDatabase.get(new Member(args[1], args[2], new Date(args[3]), null, null));
 
                 if (memberDatabase.remove(target))
                     System.out.printf("%s %s removed.\n", target.getFname(), target.getLname());
                 else
-                    System.out.printf("%s %s is not in the database.\n", target.getFname(), target.getLname());
+                    System.out.printf("%s %s is not in the database.\n", args[1], args[2]);
 
                 break;
             case "P":
