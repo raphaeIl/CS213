@@ -15,24 +15,46 @@ public enum Location {
     private final String zipCode;
     private final String county;
 
+    /**
+     * Constructor to initialize a Location
+     * @param city the city of that location
+     * @param zipCode the zipcode of that location
+     * @param county the county of that location
+     */
     Location(String city, String zipCode, String county) {
         this.city = city;
         this.zipCode = zipCode;
         this.county = county;
     }
 
+    /**
+     * Getter for city
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Getter for zip code
+     * @return the zip code
+     */
     public String getZipCode() {
         return zipCode;
     }
 
+    /**
+     * Getter for the county
+     * @return the county
+     */
     public String getCounty() {
         return county;
     }
 
+    /**
+     * toString to format the location
+     * @return the formatted string
+     */
     @Override
     public String toString() {
         return String.format("%s, %s, %s", city.toUpperCase(), zipCode, county.toUpperCase());

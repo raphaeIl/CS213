@@ -1,6 +1,5 @@
 package core;
 
-import datatypes.Date;
 import utils.Utils;
 
 /**
@@ -13,13 +12,29 @@ public class MemberDatabase {
     public static final int NOT_FOUND = -1;
     private static final int EXPANSION_SIZE = 4;
 
+    /**
+     * An array of members that are currently in the database,
+     * grows automatically by EXPANSION_SIZE, can contain null elements
+     */
     private Member[] mlist;
+
+    /**
+     * Actual size of the database, since the array contains null elements
+     */
     private int size;
 
+    /**
+     * Constructor to initialize the database array
+     */
     public MemberDatabase() {
         mlist = new Member[EXPANSION_SIZE];
     }
 
+    /**
+     * Finds a specific member
+     * @param member The member that is being queried
+     * @return the index of the member, NOT_FOUND (-1) if not found
+     */
     private int find(Member member) {
         for (int i = 0; i < size; i++)
             if (member.equals(mlist[i]))
@@ -28,6 +43,9 @@ public class MemberDatabase {
         return NOT_FOUND;
     }
 
+    /**
+     * Automatically grows the array by EXPANSION_SIZE (4) everytime it's full
+     */
     private void grow() {
         Member[] grew = new Member[size + EXPANSION_SIZE];
 
@@ -37,6 +55,11 @@ public class MemberDatabase {
         mlist = grew;
     }
 
+    /**
+     * Adds a member to the database
+     * @param member The member to be added
+     * @return if the member was added successfully
+     */
     public boolean add(Member member) {
         if (size == mlist.length)
             grow();
@@ -46,6 +69,11 @@ public class MemberDatabase {
         return true;
     }
 
+    /**
+     * Removes a member from the database
+     * @param member The membner to be removed
+     * @return if the member was removed successfully
+     */
     public boolean remove(Member member) {
         int targetIndex = find(member);
 
@@ -60,27 +88,28 @@ public class MemberDatabase {
         return true;
     }
 
-    public int indexOf(Member member) { // why is find even private
-        return find(member);
+    /**
+     * Finds a member from it's first name, last name and dob which are stored inside the member parameter
+     * (would've preferred just passing the info through 3 separate params instead of a temp member param)
+     * @param member the member that is being queried
+     * @return the member that matches the info in the member param, null if not found
+     */
+    public Member get(Member member) { // why is find even private
+        return find(member) == -1 ? null : mlist[find(member)];
     }
 
-    public Member get(int index) {
-        if (index == -1)
-            return null;
-
-        return mlist[index];
-    }
-
-    public Member get(String fname, String lname, Date dob) {
-        int index = find(new Member(fname, lname, dob, null, null));
-
-        return index == -1 ? null : mlist[index];
-    }
-
+    /**
+     * Gets the size of the database
+     * @return the size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Gets all the members that is in the database in an array with no null elements (unlike the original auto growing one)
+     * @return the array of all the members in the database
+     */
     public Member[] getMembers() {
         Member[] members = new Member[size];
 
@@ -92,23 +121,37 @@ public class MemberDatabase {
         return members;
     }
 
-    public void print() { // print the array contents as is
+    /**
+     * print the array contents as is
+     */
+    public void print() {
         printDatabase("");
     }
 
-    public void printByCounty() { // sort by county and then zipcode
+    /**
+     * print the array sorted by county and then zipcode
+     */
+    public void printByCounty() { //
         Member.CompareMode = Member.CompareMode.County;
         Utils.insertionSort(mlist, size);
 
         printDatabase(" sorted by county and zipcode");
     }
-    public void printByExpirationDate() { //sort by the expiration date
+
+    /**
+     * print the arrat sort by the expiration date
+     */
+    public void printByExpirationDate() { //
         Member.CompareMode = Member.CompareMode.ExpirationDate;
         Utils.insertionSort(mlist, size);
 
         printDatabase(" sorted by membership expiration date");
     }
-    public void printByName() { //sort by last name and then first name
+
+    /**
+     * print the array sorted by last name and then first name
+     */
+    public void printByName() {
         Member.CompareMode = Member.CompareMode.Name;
         Utils.insertionSort(mlist, size);
 
@@ -133,6 +176,10 @@ public class MemberDatabase {
         System.out.println("-end of list-\n");
     }
 
+    /**
+     * Inherited toString method to format the database array
+     * @return
+     */
     @Override
     public String toString() {
         return Utils.arrayToString(mlist);

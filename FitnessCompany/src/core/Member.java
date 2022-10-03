@@ -22,6 +22,14 @@ public class Member implements Comparable<Member>{
     private Date expire;
     private Location location;
 
+    /**
+     * Construtor to initalize all the member's info
+     * @param fname Member's first name
+     * @param lname Member's last name
+     * @param dob Member's date of birth
+     * @param expire Member's membership expiration date
+     * @param location Member's location
+     */
     public Member(String fname, String lname, Date dob, Date expire, Location location) {
         this.fname = fname;
         this.lname = lname;
@@ -30,31 +38,61 @@ public class Member implements Comparable<Member>{
         this.location = location;
     }
 
+    /**
+     * Member first name getter
+     * @return Member's first name
+     */
     public String getFname() {
         return fname;
     }
 
+    /**
+     * Member last name getter
+     * @return Member's last name
+     */
     public String getLname() {
         return lname;
     }
 
+    /**
+     * Member dob getter
+     * @return Member's date of birth
+     */
     public Date getDob() {
         return dob;
     }
 
+    /**
+     * Member membership expiration date getter
+     * @return Member's membership expiration date
+     */
     public Date getExpire() {
         return expire;
     }
 
+    /**
+     * Member location getter
+     * @return Member's location
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * Inherited toString method to convert class to a formatted string
+     * @return the formatted string
+     */
     @Override
     public String toString() {
         return String.format("%s %s, DOB: %s, Membership expires %s, Location: %s", fname, lname, dob, expire, location);
     }
 
+    /**
+     * Inherited equals method that compares two member objects,
+     * equal if they have the same first, last name and dob
+     * @param obj the other object (most likely a member) to compare for equality
+     * @return true if equal false if not
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Member other &&
@@ -125,20 +163,21 @@ public class Member implements Comparable<Member>{
      */
     public static void main(String[] args) {
         Testcase[] compareToTestcases = {
-                new Testcase("Create two instance of Member with random info, CompareMode = None", 0, new Object[] { CompareMode.None }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Edison) }),
+// Test case:
+   /* 1 */      new Testcase("Create two instance of Member with random info, CompareMode = None", 0, new Object[] { CompareMode.None }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Edison) }),
 
-                new Testcase("Create one instance of Member with a random info, another one but with the same last name and a lexicographically greater first name than the first one, CompareMode = Name", -1, new Object[] { CompareMode.Name }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Siegfried", "Kaslana", new Date("11/25/1972"), new Date("7/19/2212"), Location.Piscataway) }),
-                new Testcase("Create one instance of Member with a random info, another one but with the same last name and a lexicographically smaller first name than the first one, CompareMode = Name", 1, new Object[] { CompareMode.Name }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Kallen", "Kaslana", new Date("11/7/1998"), new Date("2/30/2717"), Location.Franklin) }),
+   /* 2 */      new Testcase("Create one instance of Member with a random info, another one but with the same last name and a lexicographically greater first name than the first one, CompareMode = Name", -1, new Object[] { CompareMode.Name }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Siegfried", "Kaslana", new Date("11/25/1972"), new Date("7/19/2212"), Location.Piscataway) }),
+   /* 3 */      new Testcase("Create one instance of Member with a random info, another one but with the same last name and a lexicographically smaller first name than the first one, CompareMode = Name", 1, new Object[] { CompareMode.Name }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Bridgewater), new Member("Kallen", "Kaslana", new Date("11/7/1998"), new Date("2/30/2717"), Location.Franklin) }),
 
-                new Testcase("Create one instance of Member with a random info, another one but with the same county and a zip code greater than the first one, CompareMode = County", -1, new Object[] { CompareMode.County }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Somerville) }),
-                new Testcase("Create one instance of Member with a random info, another one but with the same county and a zip code less than the first one, CompareMode = County", 1, new Object[] { CompareMode.County }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Bridgewater) }),
+   /* 4 */      new Testcase("Create one instance of Member with a random info, another one but with the same county and a zip code greater than the first one, CompareMode = County", -1, new Object[] { CompareMode.County }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Somerville) }),
+   /* 5 */      new Testcase("Create one instance of Member with a random info, another one but with the same county and a zip code less than the first one, CompareMode = County", 1, new Object[] { CompareMode.County }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/30/2500"), Location.Bridgewater) }),
 
-                new Testcase("Create one instance of Member with a random info, another one but an expiration date after the first one, CompareMode = ExpirationDate", -1, new Object[] { CompareMode.ExpirationDate }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("4/1/2727"), Location.Somerville) }),
-                new Testcase("Create one instance of Member with a random info, another one but an expiration date before the first one, CompareMode = ExpirationDate", 1, new Object[] { CompareMode.ExpirationDate }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/21/2707"), Location.Somerville) }),
+   /* 6 */      new Testcase("Create one instance of Member with a random info, another one but an expiration date after the first one, CompareMode = ExpirationDate", -1, new Object[] { CompareMode.ExpirationDate }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("4/1/2727"), Location.Somerville) }),
+   /* 7 */      new Testcase("Create one instance of Member with a random info, another one but an expiration date before the first one, CompareMode = ExpirationDate", 1, new Object[] { CompareMode.ExpirationDate }, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("Raiden", "Mei", new Date("4/13/1997"), new Date("3/21/2707"), Location.Somerville) }),
         };
 
         Testcase[] equalsTestcases = {
-                new Testcase("Create an instance of Member with random info, and another one with the same first, last name, and date of birth.", true, null, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("kiana", "kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin) }),
+/* Testcase 1 */new Testcase("Create an instance of Member with random info, and another one with the same first, last name, and date of birth.", true, null, new Member[] { new Member("Kiana", "Kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin), new Member("kiana", "kaslana", new Date("12/7/1998"), new Date("3/30/2717"), Location.Franklin) }),
         };
 
         System.out.println("\n\n-- Now testing: Member.compareTo(other) --");

@@ -11,11 +11,20 @@ public enum Time {
     private final int hour;
     private final int minute;
 
+    /**
+     * Constructor to create a time in a day
+     * @param hour the current hour
+     * @param minute the current minute
+     */
     Time(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
+    /**
+     * toString to format the string into hh:mm form
+     * @return
+     */
     @Override
     public String toString() {
         return String.format("%02d:%02d", hour, minute);

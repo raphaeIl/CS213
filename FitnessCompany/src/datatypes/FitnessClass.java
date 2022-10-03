@@ -18,6 +18,12 @@ public class FitnessClass {
      */
     private MemberDatabase currentMembers;
 
+    /**
+     * Constructor used to initialize all the class info
+     * @param className The name of the fitness class
+     * @param classInstructor The instructor for this class
+     * @param classTime The class time for this class
+     */
     public FitnessClass(String className, String classInstructor, Time classTime) {
         this.className = className;
         this.classInstructor = classInstructor;
@@ -44,10 +50,12 @@ public class FitnessClass {
     }
 
     /**
-     * If this class contains a member
+     * Used to check if this class contains a specific member
+     * @param member the member to be checked
+     * @return if this class contains the member
      */
     public boolean containsMember(Member member) {
-        return currentMembers.indexOf(member) != -1;
+        return currentMembers.get(member) != null;
     }
 
     /**
@@ -65,18 +73,34 @@ public class FitnessClass {
             System.out.printf("\t\t" + member + "\n");
     }
 
+    /**
+     * Getter for class name
+     * @return the class name
+     */
     public String getClassName() {
         return className;
     }
 
+    /**
+     * Getter for the class instructor
+     * @return the class instructor
+     */
     public String getClassInstructor() {
         return classInstructor;
     }
 
+    /**
+     * Getter for the class time
+     * @return a Time enum representing the class time
+     */
     public Time getClassTime() {
         return classTime;
     }
 
+    /**
+     * toString used to format the fitness class
+     * @return the formatted string
+     */
     @Override
     public String toString() {
         return String.format("%s class taught by %s at %s with members:\n%s", className, classInstructor, classTime, currentMembers);

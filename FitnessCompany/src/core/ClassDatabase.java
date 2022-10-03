@@ -16,6 +16,9 @@ public class ClassDatabase {
      */
     private final FitnessClass[] classSchedule;
 
+    /**
+     * ClassDatabase constructor used to initialize all the fitness classes
+     */
     public ClassDatabase() {
         FitnessClass Pilates = new FitnessClass("Pilates", "Jennifer", Time.Morning);
         FitnessClass Spinning = new FitnessClass("Spinning", "Denise", Time.Afternoon);
@@ -60,10 +63,19 @@ public class ClassDatabase {
         return currentClass.drop(target);
     }
 
+    /**
+     * Gets a specific fitness class from the schedule
+     * @param fitnessClassType
+     * @return the FitnessClass
+     */
     public FitnessClass getFitnessClass(FitnessClassType fitnessClassType) {
         return classSchedule[fitnessClassType.ordinal()];
     }
 
+    /**
+     * Get the entire class schedule
+     * @return an array of FitnessClass representing the schedule
+     */
     public FitnessClass[] getClassSchedule() {
         return classSchedule;
     }

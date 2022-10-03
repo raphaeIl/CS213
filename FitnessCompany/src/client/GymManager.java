@@ -30,6 +30,9 @@ public class GymManager {
      */
     private final ClassDatabase classDatabase;
 
+    /**
+     * Constructor of GymManager to initialize both databases
+     */
     public GymManager() {
         memberDatabase = new MemberDatabase();
         classDatabase = new ClassDatabase();
@@ -58,7 +61,8 @@ public class GymManager {
 
                 break;
             case "R":
-                Member target = new Member(args[1], args[2], new Date(args[3]), null, null);
+                Member target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
+
 
                 if (memberDatabase.remove(target))
                     System.out.printf("%s %s removed.\n", target.getFname(), target.getLname());
@@ -87,7 +91,7 @@ public class GymManager {
 
                 break;
             case "C":
-                target = memberDatabase.get(args[2], args[3], new Date(args[4]));
+                target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
 
                 if (!MemberValidator.validateMemberCheckIn(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
                     break;
@@ -97,7 +101,7 @@ public class GymManager {
 
                 break;
             case "D":
-                target = memberDatabase.get(args[2], args[3], new Date(args[4]));
+                target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
 
                 if (!MemberValidator.validateMemberDrop(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
                     break;
@@ -116,6 +120,9 @@ public class GymManager {
         return EXECUTE_SUCCESS;
     }
 
+    /**
+     * Starts the user interface, continuously reads user input command lines
+     */
     public void run() {
         System.out.println("Gym Manager running...");
 

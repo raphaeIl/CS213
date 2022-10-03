@@ -20,8 +20,8 @@ public class MemberValidator {
      * @param fname Member first name
      * @param lname Member last name
      * @param dob Member dob in String form
-     * @param expire Membership expiration date in String form
-     * @param location Member location in String form
+     * @param expire Membership expiration date in String form (optional param)
+     * @param location Member location in String form (optional param)
      * @return true if all the member info are valid, false and also prints out an error message if invalid
      */
     public static boolean validateMember(String fname, String lname, String dob, String expire, String location) { // expire and location are optional params
@@ -78,7 +78,7 @@ public class MemberValidator {
      * @return if the member can be inserted or not
      */
     public static boolean validateMemberDatabaseInsertion(MemberDatabase memberDatabase, Member member) {
-        if (memberDatabase.indexOf(member) != MemberDatabase.NOT_FOUND) { // checking if member is already in database
+        if (memberDatabase.get(member) != null) { // checking if member is already in database
             System.out.printf("%s %s is already in the database.\n", member.getFname(), member.getLname());
             return false;
         }
@@ -87,7 +87,7 @@ public class MemberValidator {
     }
 
     /**
-     * Used specifically when checking in a member from the ClassDatabase to check if it's a valid operation
+     * Used specifically when checking in a member to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to check in to
      * @param memberDatabase The MemberDatabase containing all the registered members
      * @param classType The class the member is trying to check in
@@ -95,10 +95,10 @@ public class MemberValidator {
      * @return if the member can be checked in or not
      */
     public static boolean validateMemberCheckIn(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
-        // member info validation
         FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
-        Member target = memberDatabase.get(fname, lname, new Date(dob));
+        Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
+        // member info validation
         if (!MemberValidator.validateMember(fname, lname, dob, null, null))
             return false;
 
@@ -145,8 +145,9 @@ public class MemberValidator {
      */
     public static boolean validateMemberDrop(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
         FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
-        Member target = memberDatabase.get(fname, lname, new Date(dob));
+        Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
+        // member info validation
         if (!MemberValidator.validateMember(fname, lname, dob, null, null))
             return false;
 
@@ -155,6 +156,7 @@ public class MemberValidator {
             return false;
         }
 
+        // member is not a participant in that class
         if (!classDatabase.getFitnessClass(fitnessClassType).containsMember(new Member(fname, lname, new Date(dob), null, null))) {
             System.out.printf("%s %s is not a participant in %s.\n", fname, lname, fitnessClassType);
             return false;

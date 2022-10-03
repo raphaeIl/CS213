@@ -9,6 +9,11 @@ import datatypes.Date;
  */
 public class Utils {
 
+    /**
+     * Calculates your age from your date of birth
+     * @param dob your dob
+     * @return your age (contains the decimal)
+     */
     public static double dobToAge(Date dob) {
         Date today = new Date();
 
@@ -18,6 +23,11 @@ public class Utils {
         return year + month;
     }
 
+    /**
+     * Converts array to string for display purposes
+     * @param array the array to be converted
+     * @return the formatted string representation of the array
+     */
     public static String arrayToString(Object[] array) {
         String toString = "[";
 
@@ -30,6 +40,12 @@ public class Utils {
         return toString;
     }
 
+    /**
+     * Check if an int array contains a specific element
+     * @param array the array
+     * @param element the element to be checked
+     * @return if the array contains the element
+     */
     public static boolean arrayContains(int[] array, int element) {
         for (int e: array)
             if (e == element)
@@ -38,7 +54,11 @@ public class Utils {
         return false;
     }
 
-    // sorting helper
+    /**
+     * Sorts a Member array using Insertion Sort
+     * @param array the Member array to be sorted
+     * @param size the actual size of the array, since there might be null elements
+     */
     public static void insertionSort(Member[] array, int size) {
         for (int i = 1; i < size; i++) {
             Member target = array[i];
