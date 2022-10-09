@@ -1,4 +1,4 @@
-package core;
+package core.entity;
 
 import datatypes.Date;
 import datatypes.Location;
@@ -16,11 +16,14 @@ public class Member implements Comparable<Member>{
      */
     public static CompareMode CompareMode = Member.CompareMode.None;
 
-    private String fname;
-    private String lname;
-    private Date dob;
-    private Date expire;
-    private Location location;
+    protected static final double STANDARD_ONE_TIME_FEE = 29.99;
+    protected static final double STANDARD_MONTHLY_FEE = 39.99;
+
+    protected String fname;
+    protected String lname;
+    protected Date dob;
+    protected Date expire;
+    protected Location location;
 
     /**
      * Construtor to initalize all the member's info
@@ -35,7 +38,15 @@ public class Member implements Comparable<Member>{
         this.lname = lname;
         this.dob = dob;
         this.expire = expire;
+
+        if (this.expire == null)
+            this.expire = new Date().add(0, 3);
+
         this.location = location;
+    }
+
+    public double memberShipFee() {
+        return STANDARD_ONE_TIME_FEE + 3 * STANDARD_MONTHLY_FEE;
     }
 
     /**

@@ -6,7 +6,8 @@ package datatypes;
  */
 public enum Time {
     Morning(9, 30),
-    Afternoon(14, 0);
+    Afternoon(14, 0),
+    Evening(18, 30);
 
     private final int hour;
     private final int minute;
@@ -28,5 +29,18 @@ public enum Time {
     @Override
     public String toString() {
         return String.format("%02d:%02d", hour, minute);
+    }
+
+    public static Time fromString(String time) {
+        switch (time.toLowerCase()) {
+            case "morning":
+                return Time.Morning;
+            case "afternoon":
+                return Time.Afternoon;
+            case "evening":
+                return Time.Evening;
+            default:
+                return null;
+        }
     }
 }

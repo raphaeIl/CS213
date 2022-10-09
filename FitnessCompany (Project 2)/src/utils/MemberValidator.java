@@ -1,12 +1,11 @@
 package utils;
 
-import core.ClassDatabase;
-import core.Member;
+import core.ClassSchedule;
+import core.entity.Family;
+import core.entity.Member;
 import core.MemberDatabase;
-import datatypes.Date;
-import datatypes.FitnessClass;
-import datatypes.FitnessClassType;
-import datatypes.Location;
+import core.entity.Premium;
+import datatypes.*;
 
 /**
  * This class is mainly responsible for validating member info from client input,
@@ -64,11 +63,16 @@ public class MemberValidator {
      * @params all params are the Member's info
      * @return a created Member object if all the info are valid, null if invalid
      */
-    public static Member validateAndCreateMember(String fname, String lname, String dob, String expire, String location) {
+    public static Member validateAndCreateMember(String fname, String lname, String dob, String expire, String location, MemberType memberType) {
         if (!validateMember(fname, lname, dob, expire, location))
             return null;
 
-        return new Member(fname, lname, new Date(dob), new Date(expire), Location.fromString(location));
+        if (memberType == MemberType.Standard)
+            return new Member(fname, lname, new Date(dob), null, Location.fromString(location));
+        else if (memberType == MemberType.Family)
+            return new Family(fname, lname, new Date(dob), null, Location.fromString(location));
+        else
+            return new Premium(fname, lname, new Date(dob), null, Location.fromString(location));
     }
 
     /**
@@ -88,14 +92,13 @@ public class MemberValidator {
 
     /**
      * Used specifically when checking in a member to check if it's a valid operation
-     * @param classDatabase The ClassDatabase we're attempting to check in to
+     * @param classSchedule The ClassDatabase we're attempting to check in to
      * @param memberDatabase The MemberDatabase containing all the registered members
      * @param classType The class the member is trying to check in
      * @params all other params are the Member's info
      * @return if the member can be checked in or not
      */
-    public static boolean validateMemberCheckIn(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
-        FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
+    public static boolean validateMemberCheckIn(ClassSchedule classSchedule, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
         Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
         // member info validation
@@ -107,66 +110,168 @@ public class MemberValidator {
             return false;
         }
 
-        if (fitnessClassType == null) { // class does not exist
-            System.out.printf("%s class does not exist.\n", classType);
+        FitnessClass currentClass = validateAndFindFitnessClass(classSchedule, className, classInstructor, classLocation);
+
+        if (currentClass == null)
             return false;
-        }
 
         if (target.getExpire().compareTo(new Date()) < 0) { // membership expired
             System.out.printf("%s %s %s membership expired.\n", target.getFname(), target.getLname(), target.getDob());
             return false;
         }
 
-        FitnessClass currentClass = classDatabase.getFitnessClass(fitnessClassType);
-
         if (currentClass.containsMember(target)) { // member already checked in
-            System.out.printf("%s %s has already checked in %s.\n", target.getFname(), target.getLname(), currentClass.getClassName());
+            System.out.printf("%s %s has already checked in.\n", target.getFname(), target.getLname());
             return false;
         }
 
-        for (FitnessClass fitnessClass: classDatabase.getClassSchedule()) // time conflict with other fitness class
-            if (!fitnessClass.getClassName().equals(currentClass.getClassName()) &&
+        for (FitnessClass fitnessClass: classSchedule.getClassSchedule()) // time conflict with other fitness class
+            if (!fitnessClass.equals(currentClass) &&
                     fitnessClass.containsMember(target) &&
-                    fitnessClass.getClassTime() == currentClass.getClassTime()) {
-                System.out.printf("%s time conflict -- %s %s has already checked in %s.\n", currentClass.getClassName(), target.getFname(), target.getLname(), fitnessClass.getClassName());
+                        fitnessClass.getClassTime().equals(currentClass.getClassTime())) {
+                System.out.printf("Time Conflict - %s, %s %s %s\n", currentClass.getClassName().toUpperCase(), currentClass.getClassInstructor().toUpperCase(), currentClass.getClassTime(), currentClass.getClassLocation());
                 return false;
             }
+
+        if (!(target instanceof Family) && // location restriction for non family/premium members
+                target.getLocation() != currentClass.getClassLocation()) {
+            System.out.printf("%s %s checking in %s - standard membership location restriction.\n", target.getFname(), target.getLname(), currentClass.getClassLocation());
+            return false;
+        }
 
         return true;
     }
 
-    /**
-     * Used specifically when dropping a member from the ClassDatabase to check if it's a valid operation
-     * @param classDatabase The ClassDatabase we're attempting to drop from
-     * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param classType The class the member is trying to drop
-     * @params all other params are the Member's info
-     * @return if the member can be dropped
-     */
-    public static boolean validateMemberDrop(ClassDatabase classDatabase, MemberDatabase memberDatabase, String classType, String fname, String lname, String dob) {
-        FitnessClassType fitnessClassType = FitnessClassType.fromString(classType);
+
+    public static boolean validateGuestCheckIn(ClassSchedule classSchedule, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
         Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
         // member info validation
         if (!MemberValidator.validateMember(fname, lname, dob, null, null))
             return false;
 
-        if (fitnessClassType == null) { // class does not exist
-            System.out.printf("%s class does not exist.\n", classType);
+        if (target == null) { // member does not exist
+            System.out.printf("%s %s %s is not in the database.\n", fname, lname, dob);
             return false;
         }
 
-        // member is not a participant in that class
-        if (!classDatabase.getFitnessClass(fitnessClassType).containsMember(new Member(fname, lname, new Date(dob), null, null))) {
-            System.out.printf("%s %s is not a participant in %s.\n", fname, lname, fitnessClassType);
+        FitnessClass currentClass = validateAndFindFitnessClass(classSchedule, className, classInstructor, classLocation);
+
+        if (currentClass == null)
+            return false;
+
+        if (target.getExpire().compareTo(new Date()) < 0) { // membership expired
+            System.out.printf("%s %s %s membership expired.\n", target.getFname(), target.getLname(), target.getDob());
             return false;
         }
+
+        if (!(target instanceof Family)) { // can not check-in guest with standard
+            System.out.println("Standard membership - guest check-in is not allowed.");
+            return false;
+        }
+
+        if (!classLocation.equalsIgnoreCase(target.getLocation().getCity())) {
+            System.out.printf("%s %s Guest checking in %s - guest location restriction.\n", target.getFname(), target.getLname(), Location.fromString(classLocation));
+            return false;
+        }
+
+        if (!((Family)target).useGuestPass()) {
+            System.out.printf("%s %s ran out of guest pass.\n", fname, lname);
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    /**
+     * Used specifically when dropping a member from the ClassDatabase to check if it's a valid operation
+     * @param classSchedule The ClassDatabase we're attempting to drop from
+     * @param memberDatabase The MemberDatabase containing all the registered members
+     * @param classType The class the member is trying to drop
+     * @params all other params are the Member's info
+     * @return if the member can be dropped
+     */
+    public static boolean validateMemberDrop(ClassSchedule classSchedule, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
+        Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
+
+        // member info validation
+        if (!MemberValidator.validateMember(fname, lname, dob, null, null))
+            return false;
+
+        FitnessClass currentClass = validateAndFindFitnessClass(classSchedule, className, classInstructor, classLocation);
+
+        if (currentClass == null)
+            return false;
 
         if (target == null) { // member does not exist
             System.out.printf("%s %s %s is not in the database.\n", fname, lname, dob);
             return false;
         }
 
+        // member is not a participant in that class/ did not check in
+        if (!classSchedule.getFitnessClass(currentClass).containsMember(new Member(fname, lname, new Date(dob), null, null))) {
+            System.out.printf("%s %s did not check in.\n", fname, lname);
+            return false;
+        }
+
         return true;
+    }
+
+    public static boolean validateGuestDrop(ClassSchedule classSchedule, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
+        Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
+
+        // member info validation
+        if (!MemberValidator.validateMember(fname, lname, dob, null, null))
+            return false;
+
+        FitnessClass currentClass = validateAndFindFitnessClass(classSchedule, className, classInstructor, classLocation);
+
+        if (currentClass == null)
+            return false;
+
+        if (target == null) { // member does not exist
+            System.out.printf("%s %s %s is not in the database.\n", fname, lname, dob);
+            return false;
+        }
+
+        // member is not a participant in that class/did not check in
+        if (!classSchedule.getFitnessClass(currentClass).containsGuest(new Member(fname, lname, new Date(dob), null, null))) {
+            System.out.printf("%s %s did not check in.\n", fname, lname);
+            return false;
+        }
+
+        if (!((Family)target).returnGuestPass()) { // somehow can not return guest pass?
+            return false;
+        }
+
+        return true;
+    }
+
+    public static FitnessClass validateAndFindFitnessClass(ClassSchedule classSchedule, String className, String classInstructor, String classLocation) {
+        FitnessClass fitnessClass = classSchedule.getFitnessClass(new FitnessClass(className, classInstructor, "", classLocation));
+
+        if (!classSchedule.containsInstructor(classInstructor)) { // instructor does not exist
+            System.out.printf("%s - instructor does not exist.\n", classInstructor);
+            return null;
+        }
+
+        if (!classSchedule.containsClass(className)) { // class does not exist
+            System.out.printf("%s - class does not exist.\n", className);
+            return null;
+        }
+
+        if (!classSchedule.containsLocation(classLocation)) { // invalid location
+            System.out.printf("%s - invalid location.\n", classLocation);
+            return null;
+        }
+
+        if (fitnessClass == null) { // class/instructor exists but combined doesn't
+            System.out.printf("%s by %s does not exist at %s.\n", className, classInstructor, classLocation);
+            return null;
+        }
+
+        return fitnessClass;
     }
 }

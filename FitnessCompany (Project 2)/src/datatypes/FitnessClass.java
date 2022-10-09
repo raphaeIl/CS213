@@ -1,6 +1,6 @@
 package datatypes;
 
-import core.Member;
+import core.entity.Member;
 import core.MemberDatabase;
 
 /**
@@ -12,11 +12,14 @@ public class FitnessClass {
     private String className;
     private String classInstructor;
     private Time classTime;
+    private Location classLocation;
 
     /**
      * All current members that are in this class, (reused MemberDatabase class)
      */
     private MemberDatabase currentMembers;
+
+    private MemberDatabase currentGuests;
 
     /**
      * Constructor used to initialize all the class info
@@ -24,11 +27,18 @@ public class FitnessClass {
      * @param classInstructor The instructor for this class
      * @param classTime The class time for this class
      */
-    public FitnessClass(String className, String classInstructor, Time classTime) {
+    public FitnessClass(String className, String classInstructor, Time classTime, Location classLocation) {
         this.className = className;
         this.classInstructor = classInstructor;
         this.classTime = classTime;
+        this.classLocation = classLocation;
+
         this.currentMembers = new MemberDatabase();
+        this.currentGuests = new MemberDatabase();
+    }
+
+    public FitnessClass(String className, String classInstructor, String classTime, String classLocation) {
+        this(className, classInstructor, Time.fromString(classTime), Location.fromString(classLocation));
     }
 
     /**
@@ -49,6 +59,14 @@ public class FitnessClass {
         return currentMembers.remove(member);
     }
 
+    public boolean checkInGuest(Member member) {
+        return currentGuests.add(member);
+    }
+
+    public boolean dropGuest(Member member) {
+        return currentGuests.remove(member);
+    }
+
     /**
      * Used to check if this class contains a specific member
      * @param member the member to be checked
@@ -58,19 +76,31 @@ public class FitnessClass {
         return currentMembers.get(member) != null;
     }
 
+    public boolean containsGuest(Member guest) {
+        return currentGuests.get(guest) != null;
+    }
+
     /**
      * Displays the current class' schedule along with all the participants
      */
     public void displaySchedule() {
         Member[] participants = currentMembers.getMembers();
+        Member[] guests = currentGuests.getMembers();
 
-        System.out.printf("%s - %s %s\n", this.className, this.classInstructor.toUpperCase(), this.classTime);
+        System.out.println(this);
 
         if (participants.length > 0)
-            System.out.printf("\t" + "** participants **\n");
+            System.out.println("- Participants -");
 
         for (Member member: participants)
-            System.out.printf("\t\t" + member + "\n");
+            System.out.printf("\t" + member + "\n");
+
+        if (guests.length > 0)
+            System.out.println("- Guests -");
+
+        for (Member guest: guests)
+            System.out.printf("\t" + guest + "\n");
+
     }
 
     /**
@@ -97,12 +127,25 @@ public class FitnessClass {
         return classTime;
     }
 
+    public Location getClassLocation() {
+        return classLocation;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof FitnessClass other &&
+                this.className.equalsIgnoreCase(other.className) &&
+                    this.classLocation.equals(other.classLocation) &&
+                        this.classInstructor.equalsIgnoreCase(other.classInstructor);
+//                        &&  this.classTime.equals(other.classTime);
+    }
+
     /**
      * toString used to format the fitness class
      * @return the formatted string
      */
     @Override
     public String toString() {
-        return String.format("%s class taught by %s at %s with members:\n%s", className, classInstructor, classTime, currentMembers);
+        return String.format("%s - %s, %s, %s", this.className.toUpperCase(), this.classInstructor.toUpperCase(), this.classTime, this.classLocation.getCity().toUpperCase());
     }
 }

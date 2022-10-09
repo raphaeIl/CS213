@@ -1,6 +1,17 @@
 package core;
 
+import core.entity.Family;
+import core.entity.Member;
+import core.entity.Premium;
+import datatypes.Date;
+import datatypes.FitnessClass;
+import datatypes.Location;
 import utils.Utils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * An array-based linear data structure that hold the list of members,
@@ -161,6 +172,25 @@ public class MemberDatabase {
         printDatabase(" sorted by last name, and first name");
     }
 
+    public void printWithMembershipFees() {
+        if (size <= 0) {
+            System.out.println("Member database is empty!");
+            return;
+        }
+
+        System.out.printf("\n-list of members%s-\n", " with membership fees");
+
+        for (int i = 0; i < size; i++) {
+            Member current = mlist[i];
+            String display = current.toString();
+
+            display += String.format(", Membership fee $%.2f", mlist[i].memberShipFee());
+            System.out.println(display);
+        }
+
+        System.out.println("-end of list-\n");
+    }
+
     /**
      * This is a helper method we added to reduce code duplication such as repeatedly checking if the database is empty in the other print methods
      * @param displayMessage displays this message along with the list of members currently in the database
@@ -177,6 +207,24 @@ public class MemberDatabase {
             System.out.println(mlist[i].toString());
 
         System.out.println("-end of list-\n");
+    }
+
+    public void loadMembers(String filePath) {
+        Scanner scanner;
+
+        try {
+            scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found!");
+        }
+
+        while (scanner.hasNext()) {
+            String[] args = scanner.nextLine().split(" ");
+
+            add(new Member(args[0], args[1], new Date(args[2]), new Date(args[3]), Location.fromString(args[4])));
+        }
+
+        printDatabase(" loaded");
     }
 
     /**

@@ -1,13 +1,42 @@
 package utils;
 
-import core.Member;
+import core.entity.Member;
 import datatypes.Date;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Utilities class for random helper methods
  * @author Michael Liu, Genfu Liu
  */
 public class Utils {
+
+    /**
+     * Counts the number of lines in a text file
+     * @param filePath the path of the text file
+     * @return the number of lines the text file contains, -1 if the file was not found
+     */
+    public static int fileLines(String filePath) {
+        Scanner scanner;
+
+        try {
+            scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            return -1;
+        }
+
+        int lines = 0;
+        while (scanner.hasNext()) {
+            lines++;
+            scanner.nextLine();
+        }
+
+        scanner.close();
+
+        return lines;
+    }
 
     /**
      * Calculates your age from your date of birth
@@ -49,6 +78,14 @@ public class Utils {
     public static boolean arrayContains(int[] array, int element) {
         for (int e: array)
             if (e == element)
+                return true;
+
+        return false;
+    }
+
+    public static boolean arrayContains(String[] array, String element) {
+        for (String e: array)
+            if (e.equals(element))
                 return true;
 
         return false;

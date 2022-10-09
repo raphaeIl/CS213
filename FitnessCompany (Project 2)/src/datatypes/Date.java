@@ -51,12 +51,30 @@ public class Date implements Comparable<Date> {
         this.year = Integer.parseInt(dateArray[2]);
     }
 
+    public Date add(int year, int month) { // too lazy to implement +day
+        this.year += year;
+
+        this.year += month / 12;
+        this.month += month - (month / 12) * 12;
+
+        if (this.month > 12) {
+            this.month %= 12;
+            this.year++;
+        }
+
+        return this;
+    }
+
     /**
      * Getter for year
      * @return the current year
      */
     public int getYear() {
         return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     /**
@@ -67,12 +85,20 @@ public class Date implements Comparable<Date> {
         return month;
     }
 
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
     /**
      * Getter for day
      * @return the current day
      */
     public int getDay() {
         return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
     /**

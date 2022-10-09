@@ -1,10 +1,13 @@
 package client;
 
-import core.ClassDatabase;
-import core.Member;
+import core.ClassSchedule;
+import core.entity.Family;
+import core.entity.Member;
 import core.MemberDatabase;
 import datatypes.Date;
+import datatypes.FitnessClass;
 import datatypes.FitnessClassType;
+import datatypes.MemberType;
 import utils.MemberValidator;
 
 import java.util.Scanner;
@@ -28,14 +31,14 @@ public class GymManager {
     /**
      * Database used to store all classes along with their current members
      */
-    private final ClassDatabase classDatabase;
+    private final ClassSchedule classSchedule;
 
     /**
      * Constructor of GymManager to initialize both databases
      */
     public GymManager() {
         memberDatabase = new MemberDatabase();
-        classDatabase = new ClassDatabase();
+        classSchedule = new ClassSchedule();
     }
 
     /**
@@ -51,7 +54,17 @@ public class GymManager {
 
         switch (args[0]) {
             case "A":
-                Member newMember = MemberValidator.validateAndCreateMember(args[1], args[2], args[3], args[4], args[5]);
+            case "AF":
+            case "AP":
+                MemberType memberType = null;
+
+                switch (args[0]) {
+                    case "A": memberType = MemberType.Standard; break;
+                    case "AF": memberType = MemberType.Family; break;
+                    case "AP": memberType = MemberType.Premium; break;
+                }
+
+                Member newMember = MemberValidator.validateAndCreateMember(args[1], args[2], args[3], null, args[4], memberType);
 
                 if (newMember == null || !MemberValidator.validateMemberDatabaseInsertion(memberDatabase, newMember))
                     break;
@@ -85,32 +98,73 @@ public class GymManager {
                 memberDatabase.printByExpirationDate();
 
                 break;
+            case "PF":
+                memberDatabase.printWithMembershipFees();
+
+                break;
             case "S":
-                classDatabase.displaySchedule();
+                classSchedule.displaySchedule();
 
                 break;
             case "C":
-                target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
+                target = memberDatabase.get(new Member(args[4], args[5], new Date(args[6]), null, null));
 
-                if (!MemberValidator.validateMemberCheckIn(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
+                if (!MemberValidator.validateMemberCheckIn(classSchedule, memberDatabase, args[1], args[2], args[3], args[4], args[5], args[6]))
                     break;
 
-                if (classDatabase.checkIn(FitnessClassType.fromString(args[1]), target))
-                    System.out.printf("%s %s checked in %s.\n", target.getFname(), target.getLname(), FitnessClassType.fromString(args[1]));
+                FitnessClass fitnessClass = classSchedule.getFitnessClass(new FitnessClass(args[1], args[2], "", args[3]));
 
+                if (classSchedule.checkIn(fitnessClass, target))
+                    System.out.printf("%s %s checked in ", target.getFname(), target.getLname(), fitnessClass);
+
+                fitnessClass.displaySchedule();
+                break;
+            case "CG":
+                target = memberDatabase.get(new Member(args[4], args[5], new Date(args[6]), null, null));
+
+                if (!MemberValidator.validateGuestCheckIn(classSchedule, memberDatabase, args[1], args[2], args[3], args[4], args[5], args[6]))
+                    break;
+
+                fitnessClass = classSchedule.getFitnessClass(new FitnessClass(args[1], args[2], "", args[3]));
+
+                if (classSchedule.checkInGuest(new FitnessClass(args[1], args[2], "", args[3]), target))
+                    System.out.printf("%s %s (guest) checked in ", target.getFname(), target.getLname(), fitnessClass);
+
+                fitnessClass.displaySchedule();
+                System.out.println();
                 break;
             case "D":
-                target = memberDatabase.get(new Member(args[2], args[3], new Date(args[4]), null, null));
+                target = memberDatabase.get(new Member(args[4], args[5], new Date(args[6]), null, null));
 
-                if (!MemberValidator.validateMemberDrop(classDatabase, memberDatabase, args[1], args[2], args[3], args[4]))
+                if (!MemberValidator.validateMemberDrop(classSchedule, memberDatabase,  args[1], args[2], args[3], args[4], args[5], args[6]))
                     break;
 
-                if (classDatabase.drop(FitnessClassType.fromString(args[1]), target))
-                    System.out.printf("%s %s dropped %s.\n", target.getFname(), target.getLname(), FitnessClassType.fromString(args[1]));
+                if (classSchedule.drop(new FitnessClass(args[1], args[2], "", args[3]), target))
+                    System.out.printf("%s %s done with the class.\n", target.getFname(), target.getLname());
 
                 break;
+
+            case "DG":
+                target = memberDatabase.get(new Member(args[4], args[5], new Date(args[6]), null, null));
+
+                if (!MemberValidator.validateGuestDrop(classSchedule, memberDatabase, args[1], args[2], args[3], args[4], args[5], args[6]))
+                    break;
+
+                if (classSchedule.dropGuest(new FitnessClass(args[1], args[2], "", args[3]), target))
+                    System.out.printf("%s %s Guest done with the class.\n", target.getFname(), target.getLname());
+
+                break;
+            case "LS":
+                classSchedule.loadSchedule("C:\\Users\\micha\\IdeaProjects\\CS213\\FitnessCompany (Project 2)\\classSchedule.txt");
+                break;
+
+            case "LM":
+                memberDatabase.loadMembers("C:\\Users\\micha\\IdeaProjects\\CS213\\FitnessCompany (Project 2)\\memberList.txt");
+                break;
+
             case "Q":
                 return EXECUTE_EXIT;
+
             default:
                 System.out.println(args[0] + " is an invalid command!");
                 break;
