@@ -155,11 +155,11 @@ public class GymManager {
 
                 break;
             case "LS":
-                classSchedule.loadSchedule("C:\\Users\\micha\\IdeaProjects\\CS213\\FitnessCompany (Project 2)\\classSchedule.txt");
+                classSchedule.loadSchedule("FitnessCompany (Project 2)/classSchedule.txt");
                 break;
 
             case "LM":
-                memberDatabase.loadMembers("C:\\Users\\micha\\IdeaProjects\\CS213\\FitnessCompany (Project 2)\\memberList.txt");
+                memberDatabase.loadMembers("FitnessCompany (Project 2)/memberList.txt");
                 break;
 
             case "Q":
