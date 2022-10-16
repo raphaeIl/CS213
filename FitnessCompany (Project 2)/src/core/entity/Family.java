@@ -7,7 +7,7 @@ public class Family extends Member {
 
     private static final int FAMILY_MAX_GUESS_PASS = 1;
 
-    protected static final double FAMILY_ONE_TIME_FEE = 29.99;
+    protected static final double FAMILY_ONE_TIME_FEE = STANDARD_ONE_TIME_FEE;
     protected static final double FAMILY_MONTHLY_FEE = 59.99;
 
     protected int guessPassCount;
@@ -29,7 +29,7 @@ public class Family extends Member {
 
     @Override
     public double memberShipFee() {
-        return STANDARD_ONE_TIME_FEE + 3 * FAMILY_MONTHLY_FEE;
+        return FAMILY_ONE_TIME_FEE + 3 * FAMILY_MONTHLY_FEE;
     }
 
     public boolean useGuestPass() {
@@ -43,10 +43,6 @@ public class Family extends Member {
     public boolean returnGuestPass() {
         this.guessPassCount++;
         return true;
-    }
-
-    public int getGuessPassCount() {
-        return guessPassCount;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package client;
 
-import core.ClassDatabase;
 import core.Member;
 import core.MemberDatabase;
 import datatypes.Date;

@@ -1,16 +1,12 @@
 package core;
 
-import core.entity.Family;
 import core.entity.Member;
-import core.entity.Premium;
 import datatypes.Date;
-import datatypes.FitnessClass;
 import datatypes.Location;
 import utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**

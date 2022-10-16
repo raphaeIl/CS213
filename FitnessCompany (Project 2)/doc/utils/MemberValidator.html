@@ -130,7 +130,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Validates all the member info that the user inputs</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateMemberCheckIn(core.ClassSchedule,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">validateMemberCheckIn</a><wbr>(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classSchedule,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateMemberCheckIn(core.ClassDatabase,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">validateMemberCheckIn</a><wbr>(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classDatabase,
  <a href="../core/MemberDatabase.html" title="class in core">MemberDatabase</a>&nbsp;memberDatabase,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname,
@@ -146,7 +146,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Used specifically when adding members to the MemberDatabase to check if it's a valid operation</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateMemberDrop(core.ClassSchedule,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">validateMemberDrop</a><wbr>(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classSchedule,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateMemberDrop(core.ClassDatabase,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">validateMemberDrop</a><wbr>(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classDatabase,
  <a href="../core/MemberDatabase.html" title="class in core">MemberDatabase</a>&nbsp;memberDatabase,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname,
@@ -238,9 +238,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="validateMemberCheckIn(core.ClassSchedule,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<section class="detail" id="validateMemberCheckIn(core.ClassDatabase,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
 <h3>validateMemberCheckIn</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">validateMemberCheckIn</span><wbr><span class="parameters">(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classSchedule,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">validateMemberCheckIn</span><wbr><span class="parameters">(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classDatabase,
  <a href="../core/MemberDatabase.html" title="class in core">MemberDatabase</a>&nbsp;memberDatabase,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname,
@@ -249,7 +249,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Used specifically when checking in a member to check if it's a valid operation</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>classSchedule</code> - The ClassDatabase we're attempting to check in to</dd>
+<dd><code>classDatabase</code> - The ClassDatabase we're attempting to check in to</dd>
 <dd><code>memberDatabase</code> - The MemberDatabase containing all the registered members</dd>
 <dd><code>classType</code> - The class the member is trying to check in</dd>
 <dt>Returns:</dt>
@@ -258,9 +258,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="validateMemberDrop(core.ClassSchedule,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<section class="detail" id="validateMemberDrop(core.ClassDatabase,core.MemberDatabase,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
 <h3>validateMemberDrop</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">validateMemberDrop</span><wbr><span class="parameters">(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classSchedule,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">validateMemberDrop</span><wbr><span class="parameters">(<a href="../core/ClassDatabase.html" title="class in core">ClassDatabase</a>&nbsp;classDatabase,
  <a href="../core/MemberDatabase.html" title="class in core">MemberDatabase</a>&nbsp;memberDatabase,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;classType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname,
@@ -269,7 +269,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Used specifically when dropping a member from the ClassDatabase to check if it's a valid operation</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>classSchedule</code> - The ClassDatabase we're attempting to drop from</dd>
+<dd><code>classDatabase</code> - The ClassDatabase we're attempting to drop from</dd>
 <dd><code>memberDatabase</code> - The MemberDatabase containing all the registered members</dd>
 <dd><code>classType</code> - The class the member is trying to drop</dd>
 <dt>Returns:</dt>

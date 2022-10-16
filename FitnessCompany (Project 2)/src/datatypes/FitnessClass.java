@@ -101,6 +101,8 @@ public class FitnessClass {
         for (Member guest: guests)
             System.out.printf("\t" + guest + "\n");
 
+        if (participants.length > 0 || guests.length > 0)
+            System.out.println();
     }
 
     /**

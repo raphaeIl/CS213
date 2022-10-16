@@ -73,10 +73,6 @@ public class Date implements Comparable<Date> {
         return year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     /**
      * Getter for month
      * @return the current month
@@ -85,20 +81,12 @@ public class Date implements Comparable<Date> {
         return month;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
     /**
      * Getter for day
      * @return the current day
      */
     public int getDay() {
         return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
     }
 
     /**
@@ -167,14 +155,6 @@ public class Date implements Comparable<Date> {
             return true;
         else
             return false;
-    }
-
-    /**
-     * gets a random date, used for testing purposes
-     * @return
-     */
-    public static Date random() {
-        return new Date(String.format("%d/%d/%d", (int)(Math.random() * 12 + 1), (int)(Math.random() * 31 + 1), 1800 + (int)(Math.random() * 400 + 1)));
     }
 
     /**

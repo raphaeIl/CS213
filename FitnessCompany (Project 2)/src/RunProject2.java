@@ -1,6 +1,4 @@
 import client.GymManager;
-import datatypes.Date;
-import utils.Utils;
 
 /**
  * Driver class for the project
