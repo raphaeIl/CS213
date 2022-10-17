@@ -1,7 +1,13 @@
 package core;
 
+import client.GymManager;
 import datatypes.FitnessClass;
 
+/**
+ * An array-based linear data structure that hold the list of fitnessclasses,
+ * also provide the methods for managing classes as well as displaying them
+ * @author Michael Liu, Genfu Liu
+ */
 public class ClassSchedule {
 
     /**
@@ -11,22 +17,33 @@ public class ClassSchedule {
      */
     private final FitnessClass[] classSchedule;
 
+    /**
+     * The current total number of classes
+     */
     private int numClasses;
 
+    /**
+     * Constructor to initialize the class schedule with a fixed size
+     * @param numClasses the fixed number of classes in this schedule
+     */
     public ClassSchedule(int numClasses) {
         this.numClasses = 0;
 
         classSchedule = new FitnessClass[numClasses];
     }
 
+    /**
+     * Adds a fitness class to the class schedule
+     * @param fitnessClass
+     */
     public void addFitnessClass(FitnessClass fitnessClass) {
         classSchedule[numClasses++] = fitnessClass;
     }
 
     /**
-     * Gets a specific fitness class from the schedule
-     * @param fitnessClassType
-     * @return the FitnessClass
+     * Gets a specific fitness class from the schedule that matches the param's fitness class
+     * @param fitnessClass the fitness class to be queried
+     * @return the queried fitnessClass, null if not found
      */
     public FitnessClass getFitnessClass(FitnessClass fitnessClass) {
         int index = indexOf(fitnessClass);
@@ -34,6 +51,11 @@ public class ClassSchedule {
         return index == -1 ? null : classSchedule[index];
     }
 
+    /**
+     * Gets the index of a specific fitness class
+     * @param fitnessClass the fitness class to be queried
+     * @return the index of the fitness class, -1 if not found
+     */
     public int indexOf(FitnessClass fitnessClass) {
         for (int i = 0; i < classSchedule.length; i++)
             if (classSchedule[i].equals(fitnessClass))
@@ -47,18 +69,22 @@ public class ClassSchedule {
      */
     public void displaySchedule() {
         if (classSchedule == null || classSchedule.length == 0) {
-            System.out.println("Fitness class schedule is empty.");
+            GymManager.log("Fitness class schedule is empty.");
             return;
         }
 
-        System.out.println("\n-Fitness classes-");
+        GymManager.log("\n-Fitness classes-");
 
         for (FitnessClass fitnessClass: classSchedule)
             fitnessClass.displaySchedule();
 
-        System.out.println("-end of class list.\n");
+        GymManager.log("-end of class list.\n");
     }
 
+    /**
+     * Gets all the fitness classes that is in the class schedule
+     * @return the fitnessclasses as an array
+     */
     public FitnessClass[] getAllClasses() {
         return classSchedule;
     }

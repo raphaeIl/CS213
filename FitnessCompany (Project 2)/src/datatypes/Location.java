@@ -11,8 +11,19 @@ public enum Location {
     Piscataway  ("Piscataway",  "08854", "Middlesex"),
     Somerville  ("Somerville",  "08876", "Somerset");
 
+    /**
+     * The city of the location
+     */
     private final String city;
+
+    /**
+     * The zip code of the location
+     */
     private final String zipCode;
+
+    /**
+     * The county of the location
+     */
     private final String county;
 
     /**

@@ -19,10 +19,29 @@ public class Member implements Comparable<Member>{
     protected static final double STANDARD_ONE_TIME_FEE = 29.99;
     protected static final double STANDARD_MONTHLY_FEE = 39.99;
 
+    /**
+     * Member's first name
+     */
     protected String fname;
+
+    /**
+     * Member's last name
+     */
     protected String lname;
+
+    /**
+     * Member's date of birth
+     */
     protected Date dob;
+
+    /**
+     * Member's membership expiration date
+     */
     protected Date expire;
+
+    /**
+     * Member's location
+     */
     protected Location location;
 
     /**
@@ -45,6 +64,10 @@ public class Member implements Comparable<Member>{
         this.location = location;
     }
 
+    /**
+     * Gets the current member's membership fee due for the next billing statement
+     * @return the membership fee in a double
+     */
     public double memberShipFee() {
         return STANDARD_ONE_TIME_FEE + 3 * STANDARD_MONTHLY_FEE;
     }

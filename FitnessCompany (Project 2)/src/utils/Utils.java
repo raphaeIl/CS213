@@ -83,6 +83,12 @@ public class Utils {
         return false;
     }
 
+    /**
+     * Check if an string array contains a speific elements
+     * @param array the array
+     * @param element the element to be checked
+     * @return if the array contains the element
+     */
     public static boolean arrayContains(String[] array, String element) {
         for (String e: array)
             if (e.equals(element))

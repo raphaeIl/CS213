@@ -9,14 +9,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Holds the list of fitness classes and also provides functionality
+ * Holds the fitness class schedule and also provides functionality
  * such as checking in, dropping, and displaying the schedule
  * @author Michael Liu, Genfu Liu
  */
 public class ClassDatabase {
 
     /**
-     * Array that holds all the available classes
+     * The ClassSchedule that holds all the available classes
      */
     private ClassSchedule classSchedule;
 
@@ -30,10 +30,19 @@ public class ClassDatabase {
         classSchedule.displaySchedule();
     }
 
+    /**
+     * Adds a fitness class to the class schedule, passes it to the ClassSchedule object
+     * @param fitnessClass the fitness class to be added
+     */
     public void addFitnessClass(FitnessClass fitnessClass) {
         classSchedule.addFitnessClass(fitnessClass);
     }
 
+    /**
+     * Finds and returns a fitness class from the schedule
+     * @param fitnessClass the fitness class to be queried
+     * @return the queried FitnessClass
+     */
     public FitnessClass getFitnessClass(FitnessClass fitnessClass) {
         return classSchedule.getFitnessClass(fitnessClass);
     }
@@ -51,8 +60,8 @@ public class ClassDatabase {
     }
 
     /**
-     * Dropping a member from a class, passes the member along into the FitnessClass
-     * @param fitnessClassType the class type the member is dropping from
+     * Dropping/Checking out a member from a class, passes the member along into the FitnessClass
+     * @param fitnessClass the class the member is dropping from
      * @param target the member that is being dropped
      * @return if the member was successfully dropped or not
      */
@@ -62,18 +71,35 @@ public class ClassDatabase {
         return currentClass.drop(target);
     }
 
+    /**
+     * Checking in a guest to a class, passes the guest along into the FitnessClass
+     * @param fitnessClass the class the guest is checking in
+     * @param guest the guest that is checking in,
+     * @return if the guest was successfully checked in or not
+     */
     public boolean checkInGuest(FitnessClass fitnessClass, Member guest) {
         FitnessClass currentClass = classSchedule.getFitnessClass(fitnessClass);
 
         return currentClass.checkInGuest(guest);
     }
 
+    /**
+     * Dropping/Checking out a guest from a class, passes the guest along into the FitnessClass
+     * @param fitnessClass the class the guest is dropping from
+     * @param guest the guest that is being dropped
+     * @return if the guest was successfully dropped or not
+     */
     public boolean dropGuest(FitnessClass fitnessClass, Member guest) {
         FitnessClass currentClass = classSchedule.getFitnessClass(fitnessClass);
 
         return currentClass.dropGuest(guest);
     }
 
+    /**
+     * This is used to load all the fitness classes from a file to the current class database
+     * @param filePath the file's path
+     * @throws RuntimeException if the filepath is invalid (file not found)
+     */
     public void loadSchedule(String filePath) {
         int classCount = Utils.fileLines(filePath);
         classSchedule = new ClassSchedule(classCount);
@@ -108,6 +134,11 @@ public class ClassDatabase {
         return classSchedule.getAllClasses();
     }
 
+    /**
+     * Checks if the class schedule contains a certain class
+     * @param className the class that is being checked
+     * @return if the class exists in the schedule
+     */
     public boolean containsClass(String className) {
         for (FitnessClass fitnessClass: classSchedule.getAllClasses())
             if (fitnessClass.getClassName().equalsIgnoreCase(className))
@@ -116,6 +147,11 @@ public class ClassDatabase {
         return false;
     }
 
+    /**
+     * Checks if the class schedule contains a certain class with the specified instructor
+     * @param classInstructor the instructor of the class that is being checked
+     * @return if the class with this instructor exists
+     */
     public boolean containsInstructor(String classInstructor) {
         for (FitnessClass fitnessClass: classSchedule.getAllClasses())
             if (fitnessClass.getClassInstructor().equalsIgnoreCase(classInstructor))
@@ -124,6 +160,11 @@ public class ClassDatabase {
         return false;
     }
 
+    /**
+     * Checks if the class schedule contains a certain class with the specified class location
+     * @param classLocation the location of the class that is being checked
+     * @return if the class with this location exists
+     */
     public boolean containsLocation(String classLocation) {
         for (FitnessClass fitnessClass: classSchedule.getAllClasses())
             if (fitnessClass.getClassLocation().getCity().equalsIgnoreCase(classLocation))

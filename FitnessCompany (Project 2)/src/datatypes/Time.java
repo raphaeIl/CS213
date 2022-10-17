@@ -9,7 +9,14 @@ public enum Time {
     Afternoon(14, 0),
     Evening(18, 30);
 
+    /**
+     * Hour of the time
+     */
     private final int hour;
+
+    /**
+     * Minute of the time
+     */
     private final int minute;
 
     /**
@@ -24,13 +31,18 @@ public enum Time {
 
     /**
      * toString to format the string into hh:mm form
-     * @return
+     * @return the formatted string
      */
     @Override
     public String toString() {
         return String.format("%d:%02d", hour, minute);
     }
 
+    /**
+     * Converts a string to the Time enum equivalence
+     * @param time The time in string
+     * @return The time in a Time enum
+     */
     public static Time fromString(String time) {
         switch (time.toLowerCase()) {
             case "morning":

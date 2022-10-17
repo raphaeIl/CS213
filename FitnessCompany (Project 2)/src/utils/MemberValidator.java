@@ -60,15 +60,20 @@ public class MemberValidator {
     }
 
     /**
-     * Validates member info using validateMember() but additionally creates a Member if all info are valid
-     * @params all params are the Member's info
-     * @return a created Member object if all the info are valid, null if invalid
+     * Validates member info using validateMember() but additionally creates either a Member or any of its subclass if all info are valid
+     * @param fname Member first name
+     * @param lname Member last name
+     * @param dob Member dob in String form
+     * @param expire Membership expiration date in String form (optional param)
+     * @param location Member location in String form (optional param)
+     * @param memberType The type of Member to be created
+     * @return the created Member (polymorphism included) or any of its subclasses according to memberType
      */
     public static Member validateAndCreateMember(String fname, String lname, String dob, String expire, String location, MemberType memberType) {
         if (!validateMember(fname, lname, dob, expire, location))
             return null;
 
-        if (memberType == MemberType.Standard)
+        if (memberType == MemberType.Standard) // expiration date left null for the Member classes to set it automatically
             return new Member(fname, lname, new Date(dob), null, Location.fromString(location));
         else if (memberType == MemberType.Family)
             return new Family(fname, lname, new Date(dob), null, Location.fromString(location));
@@ -95,8 +100,12 @@ public class MemberValidator {
      * Used specifically when checking in a member to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to check in to
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param classType The class the member is trying to check in
-     * @params all other params are the Member's info
+     * @param className The name of the class the member is trying to check in
+     * @param classInstructor The instructor of the class
+     * @param classLocation The location of the class
+     * @param fname Member's first name
+     * @param lname Member's last name
+     * @param dob Member's dob
      * @return if the member can be checked in or not
      */
     public static boolean validateMemberCheckIn(ClassDatabase classDatabase, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
@@ -143,7 +152,18 @@ public class MemberValidator {
         return true;
     }
 
-
+    /**
+     * Used specifically when checking in a guest to check if it's a valid operation
+     * @param classDatabase The ClassDatabase we're attempting to check in to
+     * @param memberDatabase The MemberDatabase containing all the registered members
+     * @param className The name of the class the guest is trying to check in
+     * @param classInstructor The instructor of the class
+     * @param classLocation The location of the class
+     * @param fname Guest's first name
+     * @param lname Guest's last name
+     * @param dob Guest's dob
+     * @return if the guest can be checked in or not
+     */
     public static boolean validateGuestCheckIn(ClassDatabase classDatabase, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
         Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
@@ -184,15 +204,17 @@ public class MemberValidator {
         return true;
     }
 
-
-
     /**
-     * Used specifically when dropping a member from the ClassDatabase to check if it's a valid operation
+     * Used specifically when dropping a member to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to drop from
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param classType The class the member is trying to drop
-     * @params all other params are the Member's info
-     * @return if the member can be dropped
+     * @param className The name of the class the member is trying to drop from
+     * @param classInstructor The instructor of the class
+     * @param classLocation The location of the class
+     * @param fname Member's first name
+     * @param lname Member's last name
+     * @param dob Member's dob
+     * @return
      */
     public static boolean validateMemberDrop(ClassDatabase classDatabase, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
         Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
@@ -220,6 +242,18 @@ public class MemberValidator {
         return true;
     }
 
+    /**
+     * Used specifically when dropping a guest to check if it's a valid operation
+     * @param classDatabase The ClassDatabase we're attempting to drop from
+     * @param memberDatabase The MemberDatabase containing all the registered members
+     * @param className The name of the class the guest is trying to drop from
+     * @param classInstructor The instructor of the class
+     * @param classLocation The location of the class
+     * @param fname Guest's first name
+     * @param lname Guest's last name
+     * @param dob Guest's dob
+     * @return
+     */
     public static boolean validateGuestDrop(ClassDatabase classDatabase, MemberDatabase memberDatabase, String className, String classInstructor, String classLocation, String fname, String lname, String dob) {
         Member target = memberDatabase.get(new Member(fname, lname, new Date(dob), null, null));
 
@@ -250,6 +284,14 @@ public class MemberValidator {
         return true;
     }
 
+    /**
+     * Validates the given fitness class info and attempts to find the class in the database
+     * @param classDatabase The ClassDatabase containing all the classes
+     * @param className The name of the class
+     * @param classInstructor The instructor of the class
+     * @param classLocation The location of the class
+     * @return The FitnessClass found, null if not found
+     */
     public static FitnessClass validateAndFindFitnessClass(ClassDatabase classDatabase, String className, String classInstructor, String classLocation) {
         FitnessClass fitnessClass = classDatabase.getFitnessClass(new FitnessClass(className, classInstructor, "", classLocation));
 

@@ -168,6 +168,9 @@ public class MemberDatabase {
         printDatabase(" sorted by last name, and first name");
     }
 
+    /**
+     * print the list of members with the membership fees.
+     */
     public void printWithMembershipFees() {
         if (size <= 0) {
             System.out.println("Member database is empty!");
@@ -205,6 +208,11 @@ public class MemberDatabase {
         System.out.println("-end of list-\n");
     }
 
+    /**
+     * This is used to load all the members from a file to the current member database
+     * @param filePath the file's path
+     * @throws RuntimeException if the filepath is invalid (file not found)
+     */
     public void loadMembers(String filePath) {
         Scanner scanner;
 

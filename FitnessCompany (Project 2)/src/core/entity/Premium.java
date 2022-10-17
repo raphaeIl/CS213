@@ -3,12 +3,17 @@ package core.entity;
 import datatypes.Date;
 import datatypes.Location;
 
+/**
+ * Premium class that represents a premium membership,
+ * extends the Family class and includes specific data and operations to a premium membership;
+ * @author Michael Liu, Genfu Liu
+ */
 public class Premium extends Family {
 
     private static final int PREMIUM_MAX_GUESS_PASS = 3;
 
     /**
-     * Construtor to initalize all the member's info
+     * Constructor to initialize all the member's info
      *
      * @param fname    Member's first name
      * @param lname    Member's last name
@@ -22,11 +27,19 @@ public class Premium extends Family {
         this.guessPassCount = PREMIUM_MAX_GUESS_PASS;
     }
 
+    /**
+     * Inherited methods that gets the current premium member's membership fee due for the next billing statement
+     * @return the membership fee in a double
+     */
     @Override
     public double memberShipFee() {
         return 11 * FAMILY_MONTHLY_FEE;
     }
 
+    /**
+     * Inherited toString method to format and display the member
+     * @return the formatted string
+     */
     @Override
     public String toString() {
         return String.format("%s %s, DOB: %s, Membership expires %s, Location: %s, (Premium) guest-pass remaining: %d", fname, lname, dob, expire, location, this.guessPassCount);

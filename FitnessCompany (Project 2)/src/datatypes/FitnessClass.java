@@ -1,5 +1,6 @@
 package datatypes;
 
+import client.GymManager;
 import core.entity.Member;
 import core.MemberDatabase;
 
@@ -9,9 +10,24 @@ import core.MemberDatabase;
  */
 public class FitnessClass {
 
+    /**
+     * Name of the class
+     */
     private String className;
+
+    /**
+     * Instructor for this class
+     */
     private String classInstructor;
+
+    /**
+     * Time of this class
+     */
     private Time classTime;
+
+    /**
+     * Location of this class
+     */
     private Location classLocation;
 
     /**
@@ -19,6 +35,9 @@ public class FitnessClass {
      */
     private MemberDatabase currentMembers;
 
+    /**
+     * All current guests that are in this class, (reused MemberDatabase class)
+     */
     private MemberDatabase currentGuests;
 
     /**
@@ -26,6 +45,7 @@ public class FitnessClass {
      * @param className The name of the fitness class
      * @param classInstructor The instructor for this class
      * @param classTime The class time for this class
+     * @param classLocation The location of this class
      */
     public FitnessClass(String className, String classInstructor, Time classTime, Location classLocation) {
         this.className = className;
@@ -37,6 +57,14 @@ public class FitnessClass {
         this.currentGuests = new MemberDatabase();
     }
 
+    /**
+     * Alternative constructor to initialize all the info,
+     * which takes all string inputs and converts them into their according enums
+     * @param className The name of the fitness class
+     * @param classInstructor The instructor for this class
+     * @param classTime The class time for this class
+     * @param classLocation The location of this class
+     */
     public FitnessClass(String className, String classInstructor, String classTime, String classLocation) {
         this(className, classInstructor, Time.fromString(classTime), Location.fromString(classLocation));
     }
@@ -51,7 +79,7 @@ public class FitnessClass {
     }
 
     /**
-     * Used for dropping a member
+     * Used for dropping/check out a member
      * @param member The member to be dropped, has to be a valid member
      * @return if the member was successfully dropped in or not
      */
@@ -59,10 +87,20 @@ public class FitnessClass {
         return currentMembers.remove(member);
     }
 
+    /**
+     * Used for checking in a guest
+     * @param member The guest to be checked in, has to be a valid member, checks are done on the previous step
+     * @return if the guest was successfully checked in or not
+     */
     public boolean checkInGuest(Member member) {
         return currentGuests.add(member);
     }
 
+    /**
+     * Used for dropping/check out a guest
+     * @param member The guest to be dropped, has to be a valid member
+     * @return if the guest was successfully dropped in or not
+     */
     public boolean dropGuest(Member member) {
         return currentGuests.remove(member);
     }
@@ -76,6 +114,11 @@ public class FitnessClass {
         return currentMembers.get(member) != null;
     }
 
+    /**
+     * Used to check if this class contains a specific guest
+     * @param guest the guest to be checked
+     * @return if this class contains the guest
+     */
     public boolean containsGuest(Member guest) {
         return currentGuests.get(guest) != null;
     }
@@ -87,22 +130,22 @@ public class FitnessClass {
         Member[] participants = currentMembers.getMembers();
         Member[] guests = currentGuests.getMembers();
 
-        System.out.println(this);
+        GymManager.log(this.toString());
 
         if (participants.length > 0)
-            System.out.println("- Participants -");
+            GymManager.log("- Participants -");
 
         for (Member member: participants)
-            System.out.printf("\t" + member + "\n");
+            GymManager.logf("\t" + member + "\n");
 
         if (guests.length > 0)
-            System.out.println("- Guests -");
+            GymManager.log("- Guests -");
 
         for (Member guest: guests)
-            System.out.printf("\t" + guest + "\n");
+            GymManager.logf("\t" + guest + "\n");
 
         if (participants.length > 0 || guests.length > 0)
-            System.out.println();
+            GymManager.log("");
     }
 
     /**
@@ -129,10 +172,20 @@ public class FitnessClass {
         return classTime;
     }
 
+    /**
+     * Getter for the class location
+     * @return a Location enum representing the class location
+     */
     public Location getClassLocation() {
         return classLocation;
     }
 
+    /**
+     * Inherited equals method to compare this class with another by
+     * name, location and instructor, not class time since not necessary yet
+     * @param obj The other (preferably) FitnessClass
+     * @return if they are equal
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof FitnessClass other &&
