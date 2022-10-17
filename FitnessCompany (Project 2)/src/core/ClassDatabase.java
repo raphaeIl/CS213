@@ -1,7 +1,6 @@
 package core;
 
 import core.entity.Member;
-import datatypes.FitnessClass;
 import utils.Utils;
 
 import java.io.File;

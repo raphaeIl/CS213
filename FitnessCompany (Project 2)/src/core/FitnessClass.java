@@ -1,8 +1,9 @@
-package datatypes;
+package core;
 
 import client.GymManager;
 import core.entity.Member;
-import core.MemberDatabase;
+import datatypes.Location;
+import datatypes.Time;
 
 /**
  * Defines a fitness class the members can check in

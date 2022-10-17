@@ -6,7 +6,7 @@ import core.ClassDatabase;
 import core.MemberDatabase;
 import core.entity.Member;
 import datatypes.Date;
-import datatypes.FitnessClass;
+import core.FitnessClass;
 import managers.DatabaseManager;
 import utils.MemberValidator;
 

@@ -1,7 +1,6 @@
 package core;
 
 import client.GymManager;
-import datatypes.FitnessClass;
 
 /**
  * An array-based linear data structure that hold the list of fitnessclasses,

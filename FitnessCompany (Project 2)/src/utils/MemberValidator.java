@@ -2,6 +2,7 @@ package utils;
 
 import client.GymManager;
 import core.ClassDatabase;
+import core.FitnessClass;
 import core.entity.Family;
 import core.entity.Member;
 import core.MemberDatabase;
