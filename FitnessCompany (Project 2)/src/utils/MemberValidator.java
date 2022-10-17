@@ -46,7 +46,9 @@ public class MemberValidator {
             }
         }
 
-        if (Utils.dobToAge(dobDate) < 18) { // You are not 18 years old
+        final int ADULT_AGE = 18;
+
+        if (Utils.dobToAge(dobDate) < ADULT_AGE) { // You are not 18 years old
             GymManager.logf("DOB %s: must be 18 or older to join!\n", dobDate);
             return false;
         }

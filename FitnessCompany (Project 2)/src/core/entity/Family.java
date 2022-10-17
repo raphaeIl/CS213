@@ -12,6 +12,7 @@ public class Family extends Member {
 
     private static final int FAMILY_MAX_GUESS_PASS = 1;
 
+    protected static final int INITIAL_FAMILY_MEMBERSHIP_LENGTH = INITIAL_STANDARD_MEMBERSHIP_LENGTH; // in months
     protected static final double FAMILY_ONE_TIME_FEE = STANDARD_ONE_TIME_FEE;
     protected static final double FAMILY_MONTHLY_FEE = 59.99;
 
@@ -41,7 +42,7 @@ public class Family extends Member {
      */
     @Override
     public double memberShipFee() {
-        return FAMILY_ONE_TIME_FEE + 3 * FAMILY_MONTHLY_FEE;
+        return FAMILY_ONE_TIME_FEE + INITIAL_FAMILY_MEMBERSHIP_LENGTH * FAMILY_MONTHLY_FEE;
     }
 
     /**

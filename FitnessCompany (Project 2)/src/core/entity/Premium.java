@@ -10,6 +10,8 @@ import datatypes.Location;
  */
 public class Premium extends Family {
 
+    protected static final int INITIAL_PREMIUM_MEMBERSHIP_LENGTH = 12; // in months
+
     private static final int PREMIUM_MAX_GUESS_PASS = 3;
 
     /**
@@ -33,7 +35,7 @@ public class Premium extends Family {
      */
     @Override
     public double memberShipFee() {
-        return 11 * FAMILY_MONTHLY_FEE;
+        return (INITIAL_PREMIUM_MEMBERSHIP_LENGTH - 1) * FAMILY_MONTHLY_FEE;
     }
 
     /**

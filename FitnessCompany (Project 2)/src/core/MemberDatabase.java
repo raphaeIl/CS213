@@ -105,7 +105,7 @@ public class MemberDatabase {
      * @return the member that matches the info in the member param, null if not found
      */
     public Member get(Member member) { // why is find even private
-        return find(member) == -1 ? null : mlist[find(member)];
+        return find(member) == NOT_FOUND ? null : mlist[find(member)];
     }
 
     /**

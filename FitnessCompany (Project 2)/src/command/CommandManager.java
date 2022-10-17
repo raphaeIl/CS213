@@ -33,14 +33,26 @@ public class CommandManager {
     }
     // endregion
 
+    /**
+     * Returned when invoking a command if it has been successfully executed
+     */
     public static final int EXECUTE_SUCCESS = 0;
+
+    /**
+     * A special execution status that is returned and tells the program to exit
+     */
     public static final int EXECUTE_EXIT = 1;
+
+    /**
+     * Returned when ran into an error when invoking a command,
+     * currently does nothing and the program will continue to run
+     */
     public static final int EXECUTE_ERROR = -1;
 
     /**
      * A list (custom class, not java's list) of all the registered commands
      */
-    private List<Command> commands; // using our custom List, not java's arraylist
+    private final List<Command> commands; // using our custom List, not java's arraylist
 
     /**
      * A private constructor that is used to register all the commands
@@ -102,7 +114,7 @@ public class CommandManager {
     }
 
     /**
-     * Gets a command's executor from it's name
+     * Gets a command's executor from its name
      * @param label the main command's name
      * @return the command's executor
      */
