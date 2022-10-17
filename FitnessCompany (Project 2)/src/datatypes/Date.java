@@ -69,12 +69,10 @@ public class Date implements Comparable<Date> {
      */
     public Date add(int year, int month) { // too lazy to implement +day
         this.year += year;
+        this.month += month;
 
-        this.year += month / MONTHS_IN_YEAR;
-        this.month += month - (month / MONTHS_IN_YEAR) * MONTHS_IN_YEAR;
-
-        if (this.month > MONTHS_IN_YEAR) {
-            this.month %= MONTHS_IN_YEAR;
+        while (this.month > MONTHS_IN_YEAR) {
+            this.month -= MONTHS_IN_YEAR;
             this.year++;
         }
 

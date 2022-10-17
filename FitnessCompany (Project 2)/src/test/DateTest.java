@@ -11,6 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class DateTest {
 
+    @Test
+    public void add() {
+        Date date = new Date("1/1/2002");
+        date = date.add(1, 0);
+
+        assertEquals(new Date("1/1/2003"), date);
+    }
+
     /**
      * An instance of Date with an invalid year, month, or day should return false
      */

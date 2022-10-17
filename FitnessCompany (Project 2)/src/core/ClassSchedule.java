@@ -67,17 +67,20 @@ public class ClassSchedule {
      * Displays all classes and their schedules
      */
     public void displaySchedule() {
-        if (classSchedule == null || classSchedule.length == 0) {
-            GymManager.log("Fitness class schedule is empty.");
-            return;
-        }
-
         GymManager.log("\n-Fitness classes-");
 
         for (FitnessClass fitnessClass: classSchedule)
             fitnessClass.displaySchedule();
 
         GymManager.log("-end of class list.\n");
+    }
+
+    /**
+     * Getter to get the number of classes that is in the schedule
+     * @return the number of classes
+     */
+    public int getNumClasses() {
+        return numClasses;
     }
 
     /**

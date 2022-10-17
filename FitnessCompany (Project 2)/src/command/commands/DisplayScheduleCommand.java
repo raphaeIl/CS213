@@ -20,9 +20,6 @@ public class DisplayScheduleCommand implements CommandExecutor {
     public boolean executeCommand(String label, String[] args) {
         ClassDatabase classDatabase = DatabaseManager.getInstance().getClassDatabase();
 
-        if (classDatabase == null)
-            return false;
-
         classDatabase.displaySchedule();
 
         return true;

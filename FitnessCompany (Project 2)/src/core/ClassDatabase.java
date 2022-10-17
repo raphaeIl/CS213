@@ -1,5 +1,6 @@
 package core;
 
+import client.GymManager;
 import core.entity.Member;
 import utils.Utils;
 
@@ -23,8 +24,10 @@ public class ClassDatabase {
      * Displays all classes and their schedules
      */
     public void displaySchedule() {
-        if (classSchedule == null)
+        if (classSchedule == null || classSchedule.getNumClasses() == 0) {
+            GymManager.log("Fitness class schedule is empty.");
             return;
+        }
 
         classSchedule.displaySchedule();
     }
