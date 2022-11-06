@@ -24,7 +24,7 @@ public class Utils {
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            return -1;
+            throw new RuntimeException("File not found!");
         }
 
         int lines = 0;

@@ -115,7 +115,7 @@ public class ClassDatabase {
         }
 
         while (scanner.hasNext()) {
-            String[] args = scanner.nextLine().split(" ");
+            String[] args = scanner.nextLine().split("\\s+");
 
             addFitnessClass(new FitnessClass(args[0], args[1], args[2], args[3]));
         }

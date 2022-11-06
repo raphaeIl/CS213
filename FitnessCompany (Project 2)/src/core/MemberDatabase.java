@@ -223,7 +223,7 @@ public class MemberDatabase {
         }
 
         while (scanner.hasNext()) {
-            String[] args = scanner.nextLine().split(" ");
+            String[] args = scanner.nextLine().split("\\s+");
 
             add(new Member(args[0], args[1], new Date(args[2]), new Date(args[3]), Location.fromString(args[4])));
         }
