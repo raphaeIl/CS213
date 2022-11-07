@@ -1,6 +1,6 @@
 package core;
 
-import client.GymManager;
+import javafx.GymManagerController;
 
 /**
  * An array-based linear data structure that hold the list of fitnessclasses,
@@ -67,12 +67,12 @@ public class ClassSchedule {
      * Displays all classes and their schedules
      */
     public void displaySchedule() {
-        GymManager.log("\n-Fitness classes-");
+        GymManagerController.log("\n-Fitness classes-");
 
         for (FitnessClass fitnessClass: classSchedule)
             fitnessClass.displaySchedule();
 
-        GymManager.log("-end of class list.\n");
+        GymManagerController.log("-end of class list.\n");
     }
 
     /**

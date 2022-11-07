@@ -1,9 +1,9 @@
 package core;
 
-import client.GymManager;
 import core.entity.Member;
 import datatypes.Location;
 import datatypes.Time;
+import javafx.GymManagerController;
 
 /**
  * Defines a fitness class the members can check in
@@ -131,22 +131,22 @@ public class FitnessClass {
         Member[] participants = currentMembers.getMembers();
         Member[] guests = currentGuests.getMembers();
 
-        GymManager.log(this.toString());
+        GymManagerController.log(this.toString());
 
         if (participants.length > 0)
-            GymManager.log("- Participants -");
+            GymManagerController.log("- Participants -");
 
         for (Member member: participants)
-            GymManager.logf("\t" + member + "\n");
+            GymManagerController.logf("\t" + member + "\n");
 
         if (guests.length > 0)
-            GymManager.log("- Guests -");
+            GymManagerController.log("- Guests -");
 
         for (Member guest: guests)
-            GymManager.logf("\t" + guest + "\n");
+            GymManagerController.logf("\t" + guest + "\n");
 
         if (participants.length > 0 || guests.length > 0)
-            GymManager.log("");
+            GymManagerController.log("");
     }
 
     /**

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -29,31 +30,31 @@
                                        <Font name="Calibri" size="20.0" />
                                    </font>
                                </Label>
-                               <TextField layoutX="225.0" layoutY="67.0" prefHeight="9.0" prefWidth="249.0" />
+                               <TextField fx:id="m_firstNameText" layoutX="225.0" layoutY="67.0" prefHeight="9.0" prefWidth="249.0" />
                                <Label layoutX="125.0" layoutY="112.0" text="Last Name">
                                    <font>
                                        <Font name="Calibri" size="20.0" />
                                    </font>
                                </Label>
-                               <TextField layoutX="225.0" layoutY="111.0" prefHeight="9.0" prefWidth="249.0" />
+                               <TextField fx:id="m_lastNameText" layoutX="225.0" layoutY="111.0" prefHeight="9.0" prefWidth="249.0" />
                                <Label layoutX="110.0" layoutY="161.0" text="Date of Birth">
                                    <font>
                                        <Font name="Calibri" size="20.0" />
                                    </font>
                                </Label>
-                               <DatePicker layoutX="225.0" layoutY="160.0" prefHeight="26.0" prefWidth="250.0" />
+                               <DatePicker fx:id="m_dobText" layoutX="225.0" layoutY="160.0" prefHeight="26.0" prefWidth="250.0" />
                                <Label layoutX="141.0" layoutY="210.0" text="Location">
                                    <font>
                                        <Font name="Calibri" size="20.0" />
                                    </font>
                                </Label>
-                               <TextField layoutX="225.0" layoutY="209.0" prefHeight="9.0" prefWidth="249.0" />
+                        <ChoiceBox fx:id="m_locationText" layoutX="225.0" layoutY="209.0" prefHeight="26.0" prefWidth="250.0" />
                                <Label layoutX="67.0" layoutY="261.0" text="Membership Type">
                                    <font>
                                        <Font name="Calibri" size="20.0" />
                                    </font>
                                </Label>
-                               <RadioButton layoutX="239.0" layoutY="262.0" mnemonicParsing="false" text="Standard">
+                               <RadioButton fx:id="m_standardButton" layoutX="239.0" layoutY="262.0" mnemonicParsing="false" selected="true" text="Standard">
                                    <font>
                                        <Font size="15.0" />
                                    </font>
@@ -61,26 +62,72 @@
                                        <ToggleGroup fx:id="membershipType" />
                                    </toggleGroup>
                                </RadioButton>
-                               <RadioButton layoutX="331.0" layoutY="262.0" mnemonicParsing="false" text="Family" toggleGroup="$membershipType">
+                               <RadioButton fx:id="m_familyButton" layoutX="331.0" layoutY="262.0" mnemonicParsing="false" text="Family" toggleGroup="$membershipType">
                                    <font>
                                        <Font size="15.0" />
                                    </font>
                                </RadioButton>
-                               <RadioButton layoutX="412.0" layoutY="262.0" mnemonicParsing="false" text="Premium" toggleGroup="$membershipType">
+                               <RadioButton fx:id="m_premiumButton" layoutX="412.0" layoutY="262.0" mnemonicParsing="false" text="Premium" toggleGroup="$membershipType">
                                    <font>
                                        <Font size="15.0" />
                                    </font>
                                </RadioButton>
-                               <Button layoutX="365.0" layoutY="338.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="121.0" text="Remove" />
-                               <AnchorPane layoutX="193.0" layoutY="402.0" prefHeight="200.0" prefWidth="200.0" />
+                               <Button layoutX="365.0" layoutY="338.0" mnemonicParsing="false" onAction="#remove" prefHeight="33.0" prefWidth="121.0" text="Remove" />
                            </children></AnchorPane>
                    </content>
                </Tab>
-               <Tab fx:id="fitnessClassTab" text="Fitness Class">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                   </content>
-               </Tab>
+            <Tab fx:id="fitnessClassTab" text="Fitness Class">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="125.0" layoutY="68.0" text="First Name">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fc_firstNameText" layoutX="225.0" layoutY="67.0" prefHeight="9.0" prefWidth="249.0" />
+                        <Label layoutX="125.0" layoutY="112.0" text="Last Name">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fc_lastNameText" layoutX="225.0" layoutY="111.0" prefHeight="9.0" prefWidth="249.0" />
+                        <Label layoutX="110.0" layoutY="161.0" text="Date of Birth">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="fc_dobText" layoutX="225.0" layoutY="160.0" prefHeight="26.0" prefWidth="250.0" />
+                        <Label layoutX="169.0" layoutY="210.0" text="Class">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="fc_fitnessClassText" layoutX="225.0" layoutY="209.0" prefHeight="26.0" prefWidth="249.0" />
+                        <Label layoutX="106.0" layoutY="261.0" text="Check in Type">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="fc_memberButton" layoutX="239.0" layoutY="262.0" mnemonicParsing="false" selected="true" text="Member">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="membershipType1" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="fc_guestButton" layoutX="331.0" layoutY="262.0" mnemonicParsing="false" text="Guest" toggleGroup="$membershipType1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </RadioButton>
+                        <Button layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="33.0" prefWidth="121.0" text="Check In" />
+                        <Button layoutX="365.0" layoutY="338.0" mnemonicParsing="false" onAction="#checkOut" prefHeight="33.0" prefWidth="121.0" text="Check out" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
                <Tab fx:id="informationHubTab" text="Information Hub">
                    <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -89,23 +136,18 @@
                           <menus>
                             <Menu mnemonicParsing="false" text="Member Database">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="Print" />
-                                    <MenuItem mnemonicParsing="false" text="Print by County/Zipcode" />
-                                    <MenuItem mnemonicParsing="false" text="Print by Last/First Names" />
-                                    <MenuItem mnemonicParsing="false" text="Print by Expiration Date" />
-                                    <MenuItem mnemonicParsing="false" text="Load member list from file" />
+                                <MenuItem mnemonicParsing="false" onAction="#print" text="Print" />
+                                    <MenuItem mnemonicParsing="false" onAction="#printByCounty" text="Print by County/Zipcode" />
+                                    <MenuItem mnemonicParsing="false" onAction="#printByName" text="Print by Last/First Names" />
+                                    <MenuItem mnemonicParsing="false" onAction="#printByExpirationDate" text="Print by Expiration Date" />
+                                    <MenuItem mnemonicParsing="false" onAction="#printWithMembershipFees" text="Print by Membership Fee" />
+                                    <MenuItem mnemonicParsing="false" onAction="#loadMembers" text="Load member list from file" />
                               </items>
                             </Menu>
                             <Menu mnemonicParsing="false" text="Class Schedule">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="Show all calsses" />
-                                    <MenuItem mnemonicParsing="false" text="Load class schedule from file" />
-                              </items>
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Membership Fee">
-                              <items>
-                                <MenuItem mnemonicParsing="false" text="First bill" />
-                                    <MenuItem mnemonicParsing="false" text="Next bill" />
+                                <MenuItem mnemonicParsing="false" onAction="#displaySchedule" text="Show all classes" />
+                                    <MenuItem mnemonicParsing="false" onAction="#loadSchedule" text="Load class schedule from file" />
                               </items>
                             </Menu>
                           </menus>

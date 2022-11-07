@@ -1,7 +1,7 @@
 package core;
 
-import client.GymManager;
 import core.entity.Member;
+import javafx.GymManagerController;
 import utils.Utils;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class ClassDatabase {
      */
     public void displaySchedule() {
         if (classSchedule == null || classSchedule.getNumClasses() == 0) {
-            GymManager.log("Fitness class schedule is empty.");
+            GymManagerController.log("Fitness class schedule is empty.");
             return;
         }
 
@@ -120,12 +120,16 @@ public class ClassDatabase {
             addFitnessClass(new FitnessClass(args[0], args[1], args[2], args[3]));
         }
 
-        System.out.println("\n-Fitness classes loaded-");
+        GymManagerController.log("\n-Fitness classes loaded-");
 
         for (FitnessClass fitnessClass: classSchedule.getAllClasses())
             fitnessClass.displaySchedule();
 
-        System.out.println("-end of class list.\n");
+        GymManagerController.log("-end of class list.\n");
+    }
+
+    public boolean isEmpty() {
+        return classSchedule == null || classSchedule.getNumClasses() == 0;
     }
 
     /**

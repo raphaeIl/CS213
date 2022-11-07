@@ -3,6 +3,7 @@ package core;
 import core.entity.Member;
 import datatypes.Date;
 import datatypes.Location;
+import javafx.GymManagerController;
 import utils.Utils;
 
 import java.io.File;
@@ -173,21 +174,21 @@ public class MemberDatabase {
      */
     public void printWithMembershipFees() {
         if (size <= 0) {
-            System.out.println("Member database is empty!");
+            GymManagerController.log("Member database is empty!");
             return;
         }
 
-        System.out.printf("\n-list of members%s-\n", " with membership fees");
+        GymManagerController.logf("\n-list of members%s-\n", " with membership fees");
 
         for (int i = 0; i < size; i++) {
             Member current = mlist[i];
             String display = current.toString();
 
             display += String.format(", Membership fee $%.2f", mlist[i].memberShipFee());
-            System.out.println(display);
+            GymManagerController.log(display);
         }
 
-        System.out.println("-end of list-\n");
+        GymManagerController.log("-end of list-\n");
     }
 
     /**
@@ -196,16 +197,16 @@ public class MemberDatabase {
      */
     private void printDatabase(String displayMessage) {
         if (size <= 0) {
-            System.out.println("Member database is empty!");
+            GymManagerController.log("Member database is empty!");
             return;
         }
 
-        System.out.printf("\n-list of members%s-\n", displayMessage);
+        GymManagerController.logf("\n-list of members%s-\n", displayMessage);
 
         for (int i = 0; i < size; i++)
-            System.out.println(mlist[i].toString());
+            GymManagerController.log(mlist[i].toString());
 
-        System.out.println("-end of list-\n");
+        GymManagerController.log("-end of list-\n");
     }
 
     /**
