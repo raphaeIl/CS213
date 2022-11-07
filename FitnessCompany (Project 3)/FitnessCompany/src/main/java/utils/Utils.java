@@ -2,6 +2,7 @@ package utils;
 
 import core.entity.Member;
 import datatypes.Date;
+import javafx.GymManagerController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,12 +20,14 @@ public class Utils {
      * @return the number of lines the text file contains, -1 if the file was not found
      */
     public static int fileLines(String filePath) {
-        Scanner scanner;
+        Scanner scanner = null;
 
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found!");
+            GymManagerController.logf("File %s not found!", filePath);
+
+            return -1;
         }
 
         int lines = 0;

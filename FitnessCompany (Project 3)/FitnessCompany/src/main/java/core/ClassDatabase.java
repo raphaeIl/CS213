@@ -2,6 +2,7 @@ package core;
 
 import core.entity.Member;
 import javafx.GymManagerController;
+import javafx.GymManagerMain;
 import utils.Utils;
 
 import java.io.File;
@@ -104,6 +105,12 @@ public class ClassDatabase {
      */
     public void loadSchedule(String filePath) {
         int classCount = Utils.fileLines(filePath);
+
+        if (classCount == -1) {
+            GymManagerController.log("An error occurred while trying to load the class schedule");
+            return;
+        }
+
         classSchedule = new ClassSchedule(classCount);
 
         Scanner scanner;
@@ -111,7 +118,9 @@ public class ClassDatabase {
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found!");
+            GymManagerController.logf("File %s not found!", filePath);
+
+            return;
         }
 
         while (scanner.hasNext()) {

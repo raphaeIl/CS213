@@ -201,7 +201,7 @@
                                                <TextField fx:id="fc_firstNameText" prefHeight="0.0" prefWidth="258.0" />
                                                <TextField fx:id="fc_lastNameText" prefHeight="0.0" prefWidth="258.0" />
                                                <DatePicker fx:id="fc_dobText" prefHeight="0.0" prefWidth="258.0" />
-                                               <ChoiceBox fx:id="fc_fitnessClassText" prefHeight="0.0" prefWidth="278.0" />
+                                               <ChoiceBox fx:id="fc_fitnessClassText" onContextMenuRequested="#isScheduleEmpty" onMouseClicked="#isScheduleEmpty" prefHeight="0.0" prefWidth="278.0" />
                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                    <children>
                                                        <RadioButton fx:id="fc_memberButton" mnemonicParsing="false" selected="true" text="Member">

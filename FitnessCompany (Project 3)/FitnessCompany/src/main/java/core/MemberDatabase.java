@@ -4,6 +4,7 @@ import core.entity.Member;
 import datatypes.Date;
 import datatypes.Location;
 import javafx.GymManagerController;
+import javafx.scene.control.TextInputDialog;
 import utils.Utils;
 
 import java.io.File;
@@ -220,7 +221,8 @@ public class MemberDatabase {
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found!");
+            GymManagerController.logf("File %s not found!", filePath);
+            return;
         }
 
         while (scanner.hasNext()) {

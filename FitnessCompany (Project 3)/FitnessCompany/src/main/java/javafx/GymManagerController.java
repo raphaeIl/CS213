@@ -161,7 +161,8 @@ public class GymManagerController implements Initializable {
     public void loadSchedule() {
         classDatabase.loadSchedule("src/main/resources/classSchedule.txt");
 
-        fc_fitnessClassText.getItems().addAll(classDatabase.getClassSchedule());
+        if (!classDatabase.isEmpty())
+            fc_fitnessClassText.getItems().addAll(classDatabase.getClassSchedule());
     }
 
     public void checkIn() {
@@ -271,6 +272,20 @@ public class GymManagerController implements Initializable {
         fitnessClass.displaySchedule();
     }
 
+    public void isScheduleEmpty() {
+        if (classDatabase.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+            alert.setTitle("Empty Schedule");
+            alert.setHeaderText("Your class schedule is current empty!");
+            alert.setContentText("Do you wish to load the class schedule from classSchedule.txt?");
+
+            if (alert.showAndWait().get() == ButtonType.OK)
+                loadSchedule();
+        }
+
+    }
+
     public void setConsole(TextArea textArea) {
         console = textArea;
     }
@@ -291,6 +306,6 @@ public class GymManagerController implements Initializable {
      * @param args arguments for the format string
      */
     public static void logf(String format, Object ... args) {
-        console.appendText(String.format(format, args));
+        console.appendText(String.format(format, args) + "\n");
     }
 }
