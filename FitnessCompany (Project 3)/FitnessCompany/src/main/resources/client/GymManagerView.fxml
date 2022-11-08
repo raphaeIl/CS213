@@ -22,7 +22,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.GymManagerController">
+<!-- JavaFX fxml file responsible for the "view" of the application -->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GymManagerController">
    <children>
        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
            <tabs>
@@ -87,7 +89,7 @@
                                            <children>
                                                <TextField fx:id="m_firstNameText" prefHeight="0.0" prefWidth="258.0" />
                                                <TextField fx:id="m_lastNameText" prefHeight="0.0" prefWidth="258.0" />
-                                               <DatePicker fx:id="m_dobText" prefHeight="0.0" prefWidth="258.0" />
+                                               <DatePicker fx:id="m_dobText" editable="false" prefHeight="0.0" prefWidth="258.0" />
                                                <ChoiceBox fx:id="m_locationText" prefHeight="0.0" prefWidth="278.0" />
                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                    <children>
@@ -200,7 +202,7 @@
                                            <children>
                                                <TextField fx:id="fc_firstNameText" prefHeight="0.0" prefWidth="258.0" />
                                                <TextField fx:id="fc_lastNameText" prefHeight="0.0" prefWidth="258.0" />
-                                               <DatePicker fx:id="fc_dobText" prefHeight="0.0" prefWidth="258.0" />
+                                               <DatePicker fx:id="fc_dobText" editable="false" prefHeight="0.0" prefWidth="258.0" />
                                                <ChoiceBox fx:id="fc_fitnessClassText" onContextMenuRequested="#isScheduleEmpty" onMouseClicked="#isScheduleEmpty" prefHeight="0.0" prefWidth="278.0" />
                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                    <children>

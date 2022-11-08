@@ -7,7 +7,7 @@ import core.entity.Member;
 import core.MemberDatabase;
 import core.entity.Premium;
 import datatypes.*;
-import javafx.GymManagerController;
+import client.GymManagerController;
 
 /**
  * This class is mainly responsible for validating member info from client input,
@@ -103,9 +103,7 @@ public class MemberValidator {
      * Used specifically when checking in a member to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to check in to
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param className The name of the class the member is trying to check in
-     * @param classInstructor The instructor of the class
-     * @param classLocation The location of the class
+     * @param fitnessClass The Fitness Class the member is trying to check into
      * @param fname Member's first name
      * @param lname Member's last name
      * @param dob Member's dob
@@ -157,9 +155,7 @@ public class MemberValidator {
      * Used specifically when checking in a guest to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to check in to
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param className The name of the class the guest is trying to check in
-     * @param classInstructor The instructor of the class
-     * @param classLocation The location of the class
+     * @param fitnessClass The Fitness Class the guest is trying to check into
      * @param fname Guest's first name
      * @param lname Guest's last name
      * @param dob Guest's dob
@@ -207,9 +203,7 @@ public class MemberValidator {
      * Used specifically when dropping a member to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to drop from
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param className The name of the class the member is trying to drop from
-     * @param classInstructor The instructor of the class
-     * @param classLocation The location of the class
+     * @param fitnessClass The Fitness Class the member is trying to drop/check-out from
      * @param fname Member's first name
      * @param lname Member's last name
      * @param dob Member's dob
@@ -243,9 +237,7 @@ public class MemberValidator {
      * Used specifically when dropping a guest to check if it's a valid operation
      * @param classDatabase The ClassDatabase we're attempting to drop from
      * @param memberDatabase The MemberDatabase containing all the registered members
-     * @param className The name of the class the guest is trying to drop from
-     * @param classInstructor The instructor of the class
-     * @param classLocation The location of the class
+     * @param fitnessClass The Fitness Class the guest is trying to drop/check-out from
      * @param fname Guest's first name
      * @param lname Guest's last name
      * @param dob Guest's dob

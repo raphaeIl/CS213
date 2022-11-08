@@ -3,8 +3,7 @@ package core;
 import core.entity.Member;
 import datatypes.Date;
 import datatypes.Location;
-import javafx.GymManagerController;
-import javafx.scene.control.TextInputDialog;
+import client.GymManagerController;
 import utils.Utils;
 
 import java.io.File;

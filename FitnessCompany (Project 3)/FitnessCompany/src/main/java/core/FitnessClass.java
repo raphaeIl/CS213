@@ -3,7 +3,7 @@ package core;
 import core.entity.Member;
 import datatypes.Location;
 import datatypes.Time;
-import javafx.GymManagerController;
+import client.GymManagerController;
 
 /**
  * Defines a fitness class the members can check in

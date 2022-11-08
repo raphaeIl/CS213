@@ -1,6 +1,6 @@
 package core;
 
-import javafx.GymManagerController;
+import client.GymManagerController;
 
 /**
  * An array-based linear data structure that hold the list of fitnessclasses,

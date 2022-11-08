@@ -1,4 +1,4 @@
-package javafx;
+package client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +9,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The main class to "launch" the GUI Client
+ * @author Michael Liu, Genfu Liu
+ */
 public class GymManagerMain extends Application {
 
+    /**
+     * Start method of a javafx Application class
+     * creates the actual javafx stage and scene
+     * as well as loading all the resources
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GymManagerMain.class.getResource("GymManagerView.fxml"));
@@ -20,7 +31,7 @@ public class GymManagerMain extends Application {
 
         GymManagerController controller = fxmlLoader.getController();
 
-        controller.setConsole((TextArea) scene.lookup("#console"));
+        controller.setConsole((TextArea) scene.lookup("#console")); // setting our custom console
         scene.getStylesheets().add(GymManagerMain.class.getResource("styles.css").toExternalForm());
 
         stage.setResizable(false);
@@ -30,6 +41,10 @@ public class GymManagerMain extends Application {
         stage.show();
     }
 
+    /**
+     * main method, starting point of the program
+     * which launches the javafx application
+     */
     public static void main(String[] args) {
         launch();
     }

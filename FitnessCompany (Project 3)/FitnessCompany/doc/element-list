@@ -1,0 +1,8 @@
+module:com.example.fitnesscompany
+client
+core
+core.entity
+datatypes
+managers
+test
+utils

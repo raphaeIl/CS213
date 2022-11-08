@@ -2,7 +2,7 @@ package utils;
 
 import core.entity.Member;
 import datatypes.Date;
-import javafx.GymManagerController;
+import client.GymManagerController;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,8 +1,7 @@
 package core;
 
 import core.entity.Member;
-import javafx.GymManagerController;
-import javafx.GymManagerMain;
+import client.GymManagerController;
 import utils.Utils;
 
 import java.io.File;
@@ -137,6 +136,10 @@ public class ClassDatabase {
         GymManagerController.log("-end of class list.\n");
     }
 
+    /**
+     * Checks to see if the current class schedule is empty or not
+     * @return if the schedule is empty
+     */
     public boolean isEmpty() {
         return classSchedule == null || classSchedule.getNumClasses() == 0;
     }

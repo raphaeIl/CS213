@@ -4,6 +4,6 @@ module com.example.fitnesscompany {
     requires org.junit.jupiter.api;
 
 
-    opens javafx to javafx.fxml;
-    exports javafx;
+    opens client to javafx.fxml;
+    exports client;
 }
