@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /*
-    Just in case if my file paths are not working, we've placed a built version
+    Just in case if my file paths are not working, we've placed a built version (i really hope this works)
     of this program in a separate folder called "build" in the zip,
     which contains all the javafx liberties and probably the correct file path.
 
