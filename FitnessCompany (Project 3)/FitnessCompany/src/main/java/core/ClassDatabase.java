@@ -117,7 +117,7 @@ public class ClassDatabase {
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            GymManagerController.logf("File %s not found!", filePath);
+            GymManagerController.logf("File %s not found!\n", filePath);
 
             return;
         }

@@ -436,6 +436,6 @@ public class GymManagerController implements Initializable {
      * @param args arguments for the format string
      */
     public static void logf(String format, Object ... args) {
-        console.appendText(String.format(format, args) + "\n");
+        console.appendText(String.format(format, args));
     }
 }

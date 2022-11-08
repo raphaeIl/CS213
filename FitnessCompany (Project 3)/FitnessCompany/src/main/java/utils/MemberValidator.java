@@ -54,11 +54,6 @@ public class MemberValidator {
             return false;
         }
 
-        if (location == null) { // that location does not exist
-            GymManagerController.logf("%s: invalid location!\n", location);
-            return false;
-        }
-
         return true;
     }
 

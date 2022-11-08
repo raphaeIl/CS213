@@ -9,6 +9,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/*
+    Just in case if my file paths are not working, we've placed a built version
+    of this program in a separate folder called "build" in the zip,
+    which contains all the javafx liberties and probably the correct file path.
+
+    To run the executable jar file, launch run.bat (windows), or copy the command in
+    run.txt into a command prompt (others?).
+*/
+
 /**
  * The main class to "launch" the GUI Client
  * @author Michael Liu, Genfu Liu
