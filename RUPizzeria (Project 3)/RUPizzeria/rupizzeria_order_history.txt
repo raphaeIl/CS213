@@ -1,0 +1,9 @@
+OrderHistory: 
+	Order -1818800614:
+		SMALL Deep_Dish Deluxe Pizza with toppings: [Sausage, Pepperoni, Green_Pepper, Onion, Mushroom]
+
+	Order -920630561:
+		SMALL Brooklyn Deluxe Pizza with toppings: [Sausage, Pepperoni, Green_Pepper, Onion, Mushroom]
+		SMALL Thin BBQ Chicken Pizza with toppings: [BBQ_Chicken, Green_Pepper, Provolone, Cheddar]
+		SMALL Pan Custom Pizza with toppings: [Sausage, Pepperoni, Green_Pepper, Onion, Mushroom, BBQ_Chicken, Provolone]
+

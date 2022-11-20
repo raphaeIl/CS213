@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.CurrentCartController">
+   <children>
+      <ListView fx:id="ordersList" layoutX="31.0" layoutY="100.0" prefHeight="200.0" prefWidth="538.0" />
+      <Label layoutX="230.0" layoutY="14.0" text="Current Cart">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="65.0" text="Order Number" />
+      <TextField fx:id="orderNumberText" editable="false" layoutX="118.0" layoutY="61.0" />
+      <Label layoutX="31.0" layoutY="322.0" text="subtotal $" />
+      <TextField fx:id="subtotalText" editable="false" layoutX="97.0" layoutY="317.0" prefHeight="26.0" prefWidth="89.0" />
+      <Label layoutX="31.0" layoutY="356.0" text="order total $" />
+      <TextField fx:id="orderTotalText" editable="false" layoutX="118.0" layoutY="352.0" />
+      <Label layoutX="203.0" layoutY="321.0" text="sales tax $" />
+      <TextField fx:id="salesTaxText" editable="false" layoutX="268.0" layoutY="317.0" prefHeight="26.0" prefWidth="78.0" />
+      <Button layoutX="443.0" layoutY="317.0" mnemonicParsing="false" onAction="#onRemovePizza" prefHeight="26.0" prefWidth="106.0" text="Remove Pizza" />
+      <Button layoutX="443.0" layoutY="351.0" mnemonicParsing="false" onAction="#onClearCart" prefHeight="26.0" prefWidth="106.0" text="Clear Cart" />
+      <Button layoutX="323.0" layoutY="351.0" mnemonicParsing="false" onAction="#onPlaceOrder" prefHeight="26.0" prefWidth="106.0" text="Place Order" />
+   </children>
+</AnchorPane>
