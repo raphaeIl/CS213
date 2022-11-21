@@ -4,7 +4,6 @@ import core.types.Flavor;
 import core.types.Size;
 import core.types.Style;
 import core.types.Topping;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -15,46 +14,95 @@ import pizzafactory.Pizza;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static core.types.Flavor.BBQ_Chicken;
 import static core.types.Flavor.BuildYourOwn;
 
 /**
- * Getting rid of duplicate code
+ * This class is a more generic abstract controller class
+ * for different kinds of pizza style controllers.
+ * Reduces code duplication for the two other controllers,
+ * contains all fxml injection elements, and functionality ordering pizzas
+ * @author Michael Liu, Genfu Liu
  */
 public abstract class PizzaStyleController implements Initializable {
 
+    /**
+     * Dropdown list for choosing the pizza flavor
+     */
     @FXML
     protected ComboBox<Flavor> selectFlavorDropdown;
 
+    /**
+     * Group of radio buttons for selecting the size of the pizza
+     */
     @FXML
     protected RadioButton smallSizeButton, mediumSizeButton, largeSizeButton;
 
+    /**
+     * TextField to display the crust of the selected pizza
+     */
     @FXML
     protected TextField crustTypeDisplay;
 
+    /**
+     * ImageView for displaying the image of the selected pizza
+     */
     @FXML
     protected ImageView pizzaImageView;
 
+    /**
+     * List of Available toppings for the selected pizza which the user can choose to add
+     */
     @FXML
     protected ListView<Topping> availableToppings;
 
+    /**
+     * List of already added toppings for the selected pizza
+     */
     @FXML
     protected ListView<Topping> selectedToppings;
 
+    /**
+     * Buttons to add and remove toppings from the pizza
+     */
     @FXML
     protected Button addToppingButton, removeToppingButton;
 
+    /**
+     * TextField to display the current pizza's price
+     * updated when the pizza is changed (size/toppings)
+     */
     @FXML
     protected TextField pizzaPriceDisplay;
 
+    /**
+     * Button to add the current pizza to the cart
+     */
     @FXML
-    protected Button addToOrderButton;
+    protected Button addToCart;
 
+    /**
+     * The current pizza that the user is ordering
+     */
     protected Pizza currentOrder;
 
+    /**
+     * StoreManager class declared here for convince
+     */
     protected StoreManager storeManager;
 
+    /**
+     * The current pizza's style
+     * which will be set when the child controller is created
+     */
     protected Style style;
 
+    /**
+     * Inherited method of the Initializable interface,
+     * this is used to initialize our fields as well as some FXML elements
+     * @param url inherited param
+     * @param resourceBundle inherited param
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         storeManager = StoreManager.getInstance();
@@ -62,7 +110,12 @@ public abstract class PizzaStyleController implements Initializable {
         selectFlavorDropdown.getItems().addAll(Flavor.values());
     }
 
-    public void selectFlavor(ActionEvent event) {
+    /**
+     * This method will be called when the user selects a pizza flavor
+     * from the selectFlavorDropdown ComboBox in either view
+     * Initializes the currentOrder with the pizza the user selected
+     */
+    public void onSelectFlavor() {
         Flavor selectFlavor = selectFlavorDropdown.getSelectionModel().getSelectedItem();
 
         if (selectFlavor == null)
@@ -73,39 +126,52 @@ public abstract class PizzaStyleController implements Initializable {
         updateOrderDisplay(selectFlavor);
     }
 
-    public void updateOrderDisplay(Flavor flavor) {
-        crustTypeDisplay.setText(currentOrder.getCrust().toString());
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
-
-        selectedToppings.getItems().setAll(currentOrder.getToppings());
-        availableToppings.getItems().setAll(Topping.values());
-
-
-        availableToppings.setDisable(flavor != BuildYourOwn);
-        addToppingButton.setDisable(flavor != BuildYourOwn);
-        removeToppingButton.setDisable(flavor != BuildYourOwn);
-
-        updateImageDisplay(flavor);
-    }
-
-    public abstract void updateImageDisplay(Flavor flavor);
-
+    /**
+     * Set the pizza's size to small,
+     * called when the radio button small is selected
+     */
     public void onSmallSizeButton() {
+        if (currentOrder == null) {
+            MainController.log("Please select your pizza style first!");
+            return;
+        }
+
         currentOrder.setSize(Size.SMALL);
         pizzaPriceDisplay.setText(currentOrder.price() + "");
     }
 
+    /**
+     * Set the pizza's size to medium,
+     * called when the radio button medium is selected
+     */
     public void onMediumSizeButton() {
+        if (currentOrder == null) {
+            MainController.log("Please select your pizza style first!");
+            return;
+        }
+
         currentOrder.setSize(Size.MEDIUM);
         pizzaPriceDisplay.setText(currentOrder.price() + "");
     }
 
+    /**
+     * Set the pizza's size to large,
+     * called when the radio button large is selected
+     */
     public void onLargeSizeButton() {
+        if (currentOrder == null) {
+            MainController.log("Please select your pizza style first!");
+            return;
+        }
+
         currentOrder.setSize(Size.LARGE);
         pizzaPriceDisplay.setText(currentOrder.price() + "");
     }
 
-
+    /**
+     * Adds the topping that the user selected to the pizza,
+     * called when the add topping button is clicked
+     */
     public void onAddTopping() {
         Topping selectedTopping = availableToppings.getSelectionModel().getSelectedItem();
 
@@ -125,6 +191,10 @@ public abstract class PizzaStyleController implements Initializable {
         pizzaPriceDisplay.setText(currentOrder.price() + "");
     }
 
+    /**
+     * Removes the topping that the user selected from the pizza,
+     * called when the remove topping button is clicked
+     */
     public void onRemoveTopping() {
         Topping selectedTopping = selectedToppings.getSelectionModel().getSelectedItem();
 
@@ -139,7 +209,11 @@ public abstract class PizzaStyleController implements Initializable {
         pizzaPriceDisplay.setText(currentOrder.price() + "");
     }
 
-    public void onAddToOrder() {
+    /**
+     * Adds the current order to the cart,
+     * called when the addToCart button is clicked
+     */
+    public void onAddToCart() {
         if (currentOrder == null) {
             MainController.log("Please select your order");
             return;
@@ -148,19 +222,55 @@ public abstract class PizzaStyleController implements Initializable {
         currentOrder.setSize(smallSizeButton.isSelected() ? Size.SMALL : mediumSizeButton.isSelected() ? Size.MEDIUM : Size.LARGE);
         storeManager.addToCart(currentOrder);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        MainController.log("Order added!");
 
-        alert.setTitle("Log");
-        alert.setHeaderText("Log Info");
-
-        alert.setContentText("Order added!");
-        alert.show();
-
-        // reset view to default
         selectFlavorDropdown.getSelectionModel().clearSelection();
+        clearOrderDisplay();
+        currentOrder = null;
     }
 
-    public void setStyle(Style style) {
-        this.style = style;
+    /**
+     * Updates the ImageView display for the current pizza with the corresponding flavor
+     * different images for different styles
+     * @param flavor the selected pizza's flavor
+     */
+    protected abstract void updateImageDisplay(Flavor flavor);
+
+    /**
+     * Update all displayed info when the user selects a flavor
+     * in the selectFlavorDropdown
+     * @param flavor the selected flavor
+     */
+    private void updateOrderDisplay(Flavor flavor) {
+        crustTypeDisplay.setText(currentOrder.getCrust().toString());
+        pizzaPriceDisplay.setText(currentOrder.price() + "");
+
+        selectedToppings.getItems().setAll(currentOrder.getToppings());
+        availableToppings.getItems().setAll(Topping.values());
+
+        availableToppings.setDisable(flavor != BuildYourOwn);
+        addToppingButton.setDisable(flavor != BuildYourOwn);
+        removeToppingButton.setDisable(flavor != BuildYourOwn);
+
+        updateImageDisplay(flavor);
     }
+
+    /**
+     * Clear all displayed info
+     */
+    private void clearOrderDisplay() {
+        crustTypeDisplay.clear();
+        pizzaPriceDisplay.clear();
+
+        selectedToppings.getItems().clear();
+        availableToppings.getItems().setAll(Topping.values());
+
+        availableToppings.setDisable(true);
+        addToppingButton.setDisable(true);
+        removeToppingButton.setDisable(true);
+
+        smallSizeButton.setSelected(true);
+        pizzaImageView.setImage(null);
+    }
+
 }

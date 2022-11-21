@@ -1,5 +1,9 @@
 package core.types;
 
+/**
+ * enum representing different types of pizza toppings
+ * @author Michael Liu, Genfu Liu
+ */
 public enum Topping {
     Sausage,
     Pepperoni,

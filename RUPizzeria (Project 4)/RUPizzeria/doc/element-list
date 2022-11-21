@@ -1,0 +1,7 @@
+module:com.example.rupizzeria
+client
+core.customizable
+core.types
+managers
+pizzafactory
+pizzafactory.flavors

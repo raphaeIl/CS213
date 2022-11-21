@@ -7,8 +7,19 @@ import javafx.scene.image.Image;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the chicago-style-view
+ * that provides functionality for ordering chicago style pizzas
+ * @author Michael Liu, Genfu Liu
+ */
 public class ChicagoStyleController extends PizzaStyleController {
 
+    /**
+     * Inherited method of the Initializable interface,
+     * this is used to initialize our fields
+     * @param url inherited param
+     * @param resourceBundle inherited param
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -16,6 +27,11 @@ public class ChicagoStyleController extends PizzaStyleController {
         this.style = Style.Chicago;
     }
 
+    /**
+     * Custom implementation for changing the display images of the selected pizza
+     * to corresponding Chicago style ones
+     * @param flavor the selected pizza's flavor
+     */
     @Override
     public void updateImageDisplay(Flavor flavor) {
         Image pizzaImage = null;

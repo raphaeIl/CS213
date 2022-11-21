@@ -11,8 +11,17 @@ import pizzafactory.flavors.Meatzza;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation for a PizzaFactory,
+ * creates different types of Chicago Style Pizzas
+ * @author Michael Liu, Genfu Liu
+ */
 public class ChicagoPizza implements PizzaFactory {
 
+    /**
+     * Overridden method that creates a pizza that is Chicago style Deluxe flavor
+     * @return the pizza created
+     */
     @Override
     public Pizza createDeluxe() {
         ArrayList<Topping> toppings = new ArrayList<>(
@@ -21,6 +30,10 @@ public class ChicagoPizza implements PizzaFactory {
         return new Deluxe(Size.SMALL, Crust.Deep_Dish, toppings);
     }
 
+    /**
+     * Overridden method that creates a pizza that is Chicago style Meatzza flavor
+     * @return the pizza created
+     */
     @Override
     public Pizza createMeatzza() {
         ArrayList<Topping> toppings = new ArrayList<>(
@@ -29,6 +42,10 @@ public class ChicagoPizza implements PizzaFactory {
         return new Meatzza(Size.SMALL, Crust.Stuffed, toppings);
     }
 
+    /**
+     * Overridden method that creates a pizza that is Chicago style BBQChicken flavor
+     * @return the pizza created
+     */
     @Override
     public Pizza createBBQChicken() {
         ArrayList<Topping> toppings = new ArrayList<>(
@@ -37,6 +54,10 @@ public class ChicagoPizza implements PizzaFactory {
         return new BBQChicken(Size.SMALL, Crust.Pan, toppings);
     }
 
+    /**
+     * Overridden method that creates a pizza that is Chicago style Custom flavor
+     * @return the pizza created
+     */
     @Override
     public Pizza createBuildYourOwn() {
         ArrayList<Topping> toppings = new ArrayList<>();

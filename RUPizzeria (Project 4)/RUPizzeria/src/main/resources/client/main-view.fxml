@@ -6,7 +6,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.MainController">
    <children>
       <Button layoutX="53.0" layoutY="71.0" mnemonicParsing="false" onAction="#onChicagoStyle" prefHeight="200.0" prefWidth="200.0" text="Chicago Style" />
-      <Button layoutX="327.0" layoutY="331.0" mnemonicParsing="false" onAction="#onCurrentOrder" prefHeight="200.0" prefWidth="200.0" text="Current Cart" />
+      <Button layoutX="327.0" layoutY="331.0" mnemonicParsing="false" onAction="#onViewCurrentCart" prefHeight="200.0" prefWidth="200.0" text="View Current Cart" />
       <Button layoutX="53.0" layoutY="331.0" mnemonicParsing="false" onAction="#onStoreOrders" prefHeight="200.0" prefWidth="200.0" text="Store Orders" />
       <Button layoutX="327.0" layoutY="71.0" mnemonicParsing="false" onAction="#onNYStyle" prefHeight="200.0" prefWidth="200.0" text="NY Style" />
    </children>

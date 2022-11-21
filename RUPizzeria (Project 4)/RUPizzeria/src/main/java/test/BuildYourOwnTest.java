@@ -12,8 +12,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Note: For some reasons for us JUunit just would not work with Maven or javafx,
- *
+ * Note: For some reasons for us JUnit just would not work with Maven or javafx,
+ * so we created a separate default intellij project in a folder "Testing" next to the main project folder
+ * 
+ * @author Michael Liu, Genfu Liu
  */
 class BuildYourOwnTest {
 
