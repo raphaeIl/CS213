@@ -1,6 +1,10 @@
 package managers;
 
-import core.*;
+import core.customizable.Order;
+import core.customizable.StoreOrder;
+import core.types.Flavor;
+import core.types.Size;
+import core.types.Style;
 import pizzafactory.ChicagoPizza;
 import pizzafactory.NYPizza;
 import pizzafactory.Pizza;
@@ -91,8 +95,6 @@ public class StoreManager {
         orderHistory.add(currentOrder);
 
         currentOrder = new Order(); // clear the current order after placing
-
-        System.out.println(getOrderHistory());
     }
 
     public Order getCurrentOrder() {

@@ -1,8 +1,8 @@
 package test;
 
-import core.Crust;
-import core.Size;
-import core.Topping;
+import core.types.Crust;
+import core.types.Size;
+import core.types.Topping;
 import org.junit.jupiter.api.Test;
 import pizzafactory.flavors.BuildYourOwn;
 

@@ -1,8 +1,8 @@
 package pizzafactory.flavors;
 
-import core.Crust;
-import core.Size;
-import core.Topping;
+import core.types.Crust;
+import core.types.Size;
+import core.types.Topping;
 import pizzafactory.Pizza;
 
 import java.util.ArrayList;
@@ -15,17 +15,17 @@ public class BBQChicken extends Pizza {
 
     @Override
     public boolean add(Object obj) {
-        return this.toppings.add((Topping) obj);
+        return this.getToppings().add((Topping) obj);
     }
 
     @Override
     public boolean remove(Object obj) {
-        return this.toppings.remove((Topping) obj);
+        return this.getToppings().remove((Topping) obj);
     }
 
     @Override
     public double price() {
-        switch (this.size) {
+        switch (this.getSize()) {
             case SMALL:
                 return 13.99;
             case MEDIUM:
@@ -39,6 +39,6 @@ public class BBQChicken extends Pizza {
 
     @Override
     public String toString() {
-        return String.format("%s %s BBQ Chicken Pizza with toppings: %s", size, crust, toppings);
+        return String.format("%s %s BBQ Chicken Pizza with toppings: %s", getSize(), getCrust(), getToppings());
     }
 }

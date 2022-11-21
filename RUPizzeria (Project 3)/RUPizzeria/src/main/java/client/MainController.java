@@ -13,23 +13,23 @@ import java.io.IOException;
 public class MainController {
 
     public void onChicagoStyle(ActionEvent event) {
-        switchScene(event, "chicago-style-view.fxml");
+        switchScene("Order Chicago Style", "chicago-style-view.fxml");
     }
 
     public void onNYStyle(ActionEvent event) {
-        switchScene(event, "ny-style-view.fxml");
+        switchScene("Order NY Style", "ny-style-view.fxml");
     }
 
     public void onStoreOrders(ActionEvent event) {
-        switchScene(event, "store-orders-view.fxml");
+        switchScene("Store Orders", "store-orders-view.fxml");
     }
 
     public void onCurrentOrder(ActionEvent event) {
-        switchScene(event, "current-cart-view.fxml");
+        switchScene("Current Cart", "current-cart-view.fxml");
     }
 
-    private void switchScene(ActionEvent event, String fxmlPath) {
-        FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource(fxmlPath));
+    private void switchScene(String windowName, String fxmlPath) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent otherRoot = null;
 
         try {
@@ -39,8 +39,8 @@ public class MainController {
         }
 
         Stage stage = new Stage();
-//        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
+        stage.setTitle(windowName);
         stage.setScene(new Scene(otherRoot));
         stage.show();
     }

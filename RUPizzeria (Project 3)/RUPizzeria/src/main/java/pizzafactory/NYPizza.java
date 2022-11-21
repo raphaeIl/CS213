@@ -1,8 +1,8 @@
 package pizzafactory;
 
-import core.Crust;
-import core.Size;
-import core.Topping;
+import core.types.Crust;
+import core.types.Size;
+import core.types.Topping;
 import pizzafactory.flavors.BBQChicken;
 import pizzafactory.flavors.BuildYourOwn;
 import pizzafactory.flavors.Deluxe;

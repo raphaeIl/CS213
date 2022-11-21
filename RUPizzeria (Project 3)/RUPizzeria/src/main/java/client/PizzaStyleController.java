@@ -1,11 +1,13 @@
 package client;
 
-import core.*;
+import core.types.Flavor;
+import core.types.Size;
+import core.types.Style;
+import core.types.Topping;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import managers.StoreManager;
 import pizzafactory.Pizza;
@@ -13,10 +15,12 @@ import pizzafactory.Pizza;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static core.types.Flavor.BuildYourOwn;
+
 /**
  * Getting rid of duplicate code
  */
-public class PizzaStyleController implements Initializable {
+public abstract class PizzaStyleController implements Initializable {
 
     @FXML
     protected ComboBox<Flavor> selectFlavorDropdown;
@@ -77,29 +81,14 @@ public class PizzaStyleController implements Initializable {
         availableToppings.getItems().setAll(Topping.values());
 
 
-        availableToppings.setDisable(flavor != Flavor.BuildYourOwn);
-        addToppingButton.setDisable(flavor != Flavor.BuildYourOwn);
-        removeToppingButton.setDisable(flavor != Flavor.BuildYourOwn);
+        availableToppings.setDisable(flavor != BuildYourOwn);
+        addToppingButton.setDisable(flavor != BuildYourOwn);
+        removeToppingButton.setDisable(flavor != BuildYourOwn);
 
-        Image pizzaImage = null;
-
-        switch (flavor) {
-            case BBQ_Chicken:
-                pizzaImage = new Image(getClass().getResource("images/NilouVeryPog.gif").toExternalForm());
-                break;
-            case Deluxe:
-                pizzaImage = new Image(getClass().getResource("images/HutaoVeryPog.gif").toExternalForm());
-                break;
-            case Meatzza:
-                pizzaImage = new Image(getClass().getResource("images/KeqingVeryPog.gif").toExternalForm());
-                break;
-            case BuildYourOwn:
-                pizzaImage = new Image(getClass().getResource("images/KleeVeryPog.gif").toExternalForm());
-                break;
-        }
-
-        pizzaImageView.setImage(pizzaImage);
+        updateImageDisplay(flavor);
     }
+
+    public abstract void updateImageDisplay(Flavor flavor);
 
     public void onSmallSizeButton() {
         currentOrder.setSize(Size.SMALL);
@@ -169,8 +158,6 @@ public class PizzaStyleController implements Initializable {
 
         // reset view to default
         selectFlavorDropdown.getSelectionModel().clearSelection();
-//        selectFlavorDropdown.setButtonCell(selectFlavorDropdown.getButtonCell());
-        System.out.println(storeManager.getCurrentOrder());
     }
 
     public void setStyle(Style style) {

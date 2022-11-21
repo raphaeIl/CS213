@@ -1,6 +1,6 @@
 package client;
 
-import core.Order;
+import core.customizable.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;

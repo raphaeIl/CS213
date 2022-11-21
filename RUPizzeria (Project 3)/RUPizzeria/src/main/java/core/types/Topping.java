@@ -1,4 +1,4 @@
-package core;
+package core.types;
 
 public enum Topping {
     Sausage,
@@ -11,4 +11,7 @@ public enum Topping {
     Cheddar,
     Beef,
     Ham,
+    Bacon,
+    Black_Olives,
+    Pineapple
 }

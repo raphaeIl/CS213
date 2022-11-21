@@ -1,4 +1,4 @@
-package core;
+package core.types;
 
 public enum Style {
     Chicago,
