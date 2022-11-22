@@ -1,5 +1,9 @@
 package core;
 
+/**
+ * enum representing different types of pizza toppings
+ * @author Michael Liu, Genfu Liu
+ */
 public enum Topping {
     Sausage,
     Pepperoni,
@@ -11,4 +15,7 @@ public enum Topping {
     Cheddar,
     Beef,
     Ham,
+    Bacon,
+    Black_Olives,
+    Pineapple
 }

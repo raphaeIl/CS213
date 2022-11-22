@@ -13,27 +13,27 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ChicagoStyleController">
    <children>
-      <ComboBox fx:id="selectFlavorDropdown" layoutX="83.0" layoutY="102.0" onAction="#onSelectFlavor" prefWidth="150.0" promptText="Select a Flavor" />
-      <ImageView fx:id="pizzaImageView" fitHeight="150.0" fitWidth="200.0" layoutX="389.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" />
-      <RadioButton fx:id="smallSizeButton" layoutX="50.0" layoutY="165.0" mnemonicParsing="false" onAction="#onSmallSizeButton" selected="true" text="small">
+      <ComboBox fx:id="selectFlavorDropdown" layoutX="50.0" layoutY="100.0" onAction="#onSelectFlavor" prefWidth="150.0" promptText="Select a Flavor" />
+      <ImageView fx:id="pizzaImageView" fitHeight="150.0" fitWidth="150.0" layoutX="400.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <RadioButton fx:id="smallSizeButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSmallSizeButton" selected="true" text="small">
          <toggleGroup>
             <ToggleGroup fx:id="pizzaSize" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="largeSizeButton" layoutX="226.0" layoutY="165.0" mnemonicParsing="false" onAction="#onLargeSizeButton" text="large" toggleGroup="$pizzaSize" />
-      <RadioButton fx:id="mediumSizeButton" layoutX="138.0" layoutY="165.0" mnemonicParsing="false" onAction="#onMediumSizeButton" text="medium" toggleGroup="$pizzaSize" />
-      <TextField fx:id="crustTypeDisplay" editable="false" layoutX="130.0" layoutY="230.0" />
-      <Label layoutX="80.0" layoutY="234.0" text="Curst" />
-      <ListView fx:id="availableToppings" layoutX="65.0" layoutY="297.0" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="selectedToppings" layoutX="364.0" layoutY="297.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="84.0" layoutY="270.0" text="Available Toppings" />
-      <Label layoutX="339.0" layoutY="270.0" text="Selected Toppings" />
-      <Button fx:id="addToppingButton" disable="true" layoutX="302.0" layoutY="339.0" mnemonicParsing="false" onAction="#onAddTopping" text="&gt;&gt;" />
-      <Button fx:id="removeToppingButton" disable="true" layoutX="300.0" layoutY="408.0" mnemonicParsing="false" onAction="#onRemoveTopping" text="&lt;&lt;" />
-      <Label layoutX="37.0" layoutY="554.0" text="Pizza Price $" />
-      <TextField fx:id="pizzaPriceDisplay" editable="false" layoutX="111.0" layoutY="550.0" />
-      <Button fx:id="addToCart" layoutX="362.0" layoutY="559.0" mnemonicParsing="false" onAction="#onAddToCart" prefHeight="26.0" prefWidth="150.0" text="Add to Cart" />
-      <Label layoutX="207.0" layoutY="22.0" text="Chicago Style Pizza">
+      <RadioButton fx:id="largeSizeButton" layoutX="200.0" layoutY="160.0" mnemonicParsing="false" onAction="#onLargeSizeButton" text="large" toggleGroup="$pizzaSize" />
+      <RadioButton fx:id="mediumSizeButton" layoutX="120.0" layoutY="160.0" mnemonicParsing="false" onAction="#onMediumSizeButton" text="medium" toggleGroup="$pizzaSize" />
+      <TextField fx:id="crustTypeDisplay" editable="false" layoutX="90.0" layoutY="220.0" />
+      <Label layoutX="50.0" layoutY="225.0" text="Crust" />
+      <ListView fx:id="availableToppings" layoutX="50.0" layoutY="300.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="selectedToppings" layoutX="350.0" layoutY="300.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="50.0" layoutY="280.0" text="Available Toppings" />
+      <Label layoutX="350.0" layoutY="280.0" text="Selected Toppings" />
+      <Button fx:id="addToppingButton" disable="true" layoutX="285.0" layoutY="350.0" mnemonicParsing="false" onAction="#onAddTopping" text="&gt;&gt;" />
+      <Button fx:id="removeToppingButton" disable="true" layoutX="285.0" layoutY="420.0" mnemonicParsing="false" onAction="#onRemoveTopping" text="&lt;&lt;" />
+      <Label layoutX="50.0" layoutY="554.0" text="Pizza Price $" />
+      <TextField fx:id="pizzaPriceDisplay" editable="false" layoutX="120.0" layoutY="550.0" prefHeight="25.0" prefWidth="140.0" />
+      <Button fx:id="addToCart" layoutX="400.0" layoutY="550.0" mnemonicParsing="false" onAction="#onAddToCart" prefHeight="25.0" prefWidth="150.0" text="Add to Cart" />
+      <Label alignment="CENTER" layoutY="30.0" prefHeight="35.0" prefWidth="600.0" text="Chicago Style Pizza">
          <font>
             <Font name="Calibri" size="29.0" />
          </font>

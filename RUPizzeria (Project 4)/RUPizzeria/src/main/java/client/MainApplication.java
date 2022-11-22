@@ -24,6 +24,8 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
 
+        scene.getStylesheets().add(MainApplication.class.getResource("styles.css").toExternalForm());
+
         stage.setTitle("RU Pizzeria");
         stage.setScene(scene);
         stage.setResizable(false);

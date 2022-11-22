@@ -1,13 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.MainController">
    <children>
-      <Button layoutX="53.0" layoutY="71.0" mnemonicParsing="false" onAction="#onChicagoStyle" prefHeight="200.0" prefWidth="200.0" text="Chicago Style" />
-      <Button layoutX="327.0" layoutY="331.0" mnemonicParsing="false" onAction="#onViewCurrentCart" prefHeight="200.0" prefWidth="200.0" text="View Current Cart" />
-      <Button layoutX="53.0" layoutY="331.0" mnemonicParsing="false" onAction="#onStoreOrders" prefHeight="200.0" prefWidth="200.0" text="Store Orders" />
-      <Button layoutX="327.0" layoutY="71.0" mnemonicParsing="false" onAction="#onNYStyle" prefHeight="200.0" prefWidth="200.0" text="NY Style" />
+      <StackPane layoutX="40.0" layoutY="130.0" prefHeight="200.0" prefWidth="250.0" style="-fx-background-radius: 10;" styleClass="main-menu-button">
+         <children>
+            <ImageView fitHeight="160.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+               <image>
+                  <Image url="@images/main_menu_chicago_style.png" />
+               </image>
+            </ImageView>
+            <Label alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="250.0" text="Chicago Style" textAlignment="CENTER">
+               <font>
+                  <Font name="Corbel" size="19.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onChicagoStyle" prefHeight="200.0" prefWidth="250.0" style="-fx-opacity: 0;" text="Chicago Style" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="310.0" layoutY="131.0" prefHeight="200.0" prefWidth="250.0" style="-fx-background-radius: 10;" styleClass="main-menu-button">
+         <children>
+            <ImageView fitHeight="160.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+               <image>
+                  <Image url="@images/main_menu_ny_style.png" />
+               </image>
+            </ImageView>
+            <Label alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="250.0" text="NY Style" textAlignment="CENTER">
+               <font>
+                  <Font name="Corbel" size="19.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onNYStyle" prefHeight="200.0" prefWidth="250.0" style="-fx-opacity: 0;" text="NY Style" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="40.0" layoutY="360.0" prefHeight="200.0" prefWidth="250.0" style="-fx-background-radius: 10;" styleClass="main-menu-button">
+         <children>
+            <ImageView fitHeight="160.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+               <image>
+                  <Image url="@images/main_menu_store_icon.png" />
+               </image>
+            </ImageView>
+            <Label alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="250.0" text="Store Orders" textAlignment="CENTER">
+               <font>
+                  <Font name="Corbel" size="19.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onStoreOrders" prefHeight="200.0" prefWidth="250.0" style="-fx-opacity: 0;" text="Store Orders" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="310.0" layoutY="360.0" prefHeight="200.0" prefWidth="250.0" style="-fx-background-radius: 10;" styleClass="main-menu-button">
+         <children>
+            <ImageView fitHeight="160.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+               <image>
+                  <Image url="@images/main_menu_cart_icon.png" />
+               </image>
+            </ImageView>
+            <Label alignment="BOTTOM_CENTER" prefHeight="218.0" prefWidth="250.0" text="View Current Cart" textAlignment="CENTER">
+               <font>
+                  <Font name="Corbel" size="19.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onViewCurrentCart" prefHeight="200.0" prefWidth="250.0" style="-fx-opacity: 0;" text="View Current Cart" />
+         </children>
+      </StackPane>
+      <Label layoutX="158.0" layoutY="42.0" text="RUPizzeria">
+         <font>
+            <Font name="Cooper Black" size="50.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

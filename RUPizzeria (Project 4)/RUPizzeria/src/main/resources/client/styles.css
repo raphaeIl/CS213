@@ -1,0 +1,7 @@
+.main-menu-button {
+    -fx-background-color: WHITE
+}
+
+.main-menu-button:hover {
+    -fx-background-color: rgba(223, 223, 223, 0.619)
+}

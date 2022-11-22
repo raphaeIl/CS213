@@ -94,6 +94,8 @@ public class CurrentCartController implements Initializable {
         ordersList.getItems().setAll(storeManager.getCurrentOrder().getAllItems());
 
         updatePriceDisplays();
+
+        MainController.log("Order has been successfully placed!");
     }
 
     /**

@@ -74,12 +74,15 @@ public class StoreOrdersController implements Initializable {
      * called when the "cancel order" button is clicked
      */
     public void onCancelOrder() {
-        storeManager.cancelOrder(selectOrderDropdown.getSelectionModel().getSelectedItem());
+        int orderId = selectOrderDropdown.getSelectionModel().getSelectedItem();
+        storeManager.cancelOrder(orderId);
 
         selectOrderDropdown.getSelectionModel().clearSelection();
         selectOrderDropdown.getItems().setAll(storeManager.getOrderHistory().getAllOrders().keySet());
         itemsList.getItems().clear();
         orderTotalText.clear();
+
+        MainController.logf("Order %s has been canceled!", orderId);
     }
 
     /**

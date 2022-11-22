@@ -14,8 +14,6 @@ import pizzafactory.Pizza;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static core.types.Flavor.BBQ_Chicken;
-import static core.types.Flavor.BuildYourOwn;
 
 /**
  * This class is a more generic abstract controller class
@@ -137,7 +135,7 @@ public abstract class PizzaStyleController implements Initializable {
         }
 
         currentOrder.setSize(Size.SMALL);
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
     }
 
     /**
@@ -151,7 +149,7 @@ public abstract class PizzaStyleController implements Initializable {
         }
 
         currentOrder.setSize(Size.MEDIUM);
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
     }
 
     /**
@@ -165,7 +163,7 @@ public abstract class PizzaStyleController implements Initializable {
         }
 
         currentOrder.setSize(Size.LARGE);
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
     }
 
     /**
@@ -188,7 +186,7 @@ public abstract class PizzaStyleController implements Initializable {
         selectedToppings.getItems().add(selectedTopping);
         availableToppings.getItems().remove(selectedTopping);
         currentOrder.add(selectedTopping);
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
     }
 
     /**
@@ -206,7 +204,7 @@ public abstract class PizzaStyleController implements Initializable {
         selectedToppings.getItems().remove(selectedTopping);
         availableToppings.getItems().add(selectedTopping);
         currentOrder.remove(selectedTopping);
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
     }
 
     /**
@@ -243,16 +241,25 @@ public abstract class PizzaStyleController implements Initializable {
      */
     private void updateOrderDisplay(Flavor flavor) {
         crustTypeDisplay.setText(currentOrder.getCrust().toString());
-        pizzaPriceDisplay.setText(currentOrder.price() + "");
+        updatePriceDisplay();
 
         selectedToppings.getItems().setAll(currentOrder.getToppings());
         availableToppings.getItems().setAll(Topping.values());
 
-        availableToppings.setDisable(flavor != BuildYourOwn);
-        addToppingButton.setDisable(flavor != BuildYourOwn);
-        removeToppingButton.setDisable(flavor != BuildYourOwn);
+        availableToppings.setDisable(flavor != Flavor.BuildYourOwn);
+        addToppingButton.setDisable(flavor != Flavor.BuildYourOwn);
+        removeToppingButton.setDisable(flavor != Flavor.BuildYourOwn);
+
+        smallSizeButton.setSelected(true);
 
         updateImageDisplay(flavor);
+    }
+
+    /**
+     * Updates the price display for the current order
+     */
+    private void updatePriceDisplay() {
+        pizzaPriceDisplay.setText(String.format("%.2f", currentOrder.price()));
     }
 
     /**
