@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/foods_recycler_view_item_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/recycler_item_food_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/main_menu_chicago_style" />
+
+        <TextView
+            android:id="@+id/recycler_item_food_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/black"
+            android:layout_marginStart="5dp"
+            android:text="🍕 Chicago Style Pizza"
+            android:layout_below="@id/recycler_item_food_image"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/recycler_item_food_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/black_light"
+            android:text="0 min • $12.99 • $0 Delivery fee"
+            android:layout_below="@id/recycler_item_food_name_text"
+            android:textSize="10sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="6dp"
+            />
+<!--            TODO: add star rating-->
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
