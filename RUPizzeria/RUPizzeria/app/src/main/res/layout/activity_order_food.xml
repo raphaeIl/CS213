@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderFoodActivity">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/order_food_image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/main_menu_chicago_style"
+                android:src="@drawable/chicago_deluxe"
                 />
 
             <TextView
                 android:id="@+id/order_food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chicago Style Pizza"
+                android:text="Deluxe"
                 android:layout_below="@id/order_food_image"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 />
 
             <TextView
@@ -34,78 +41,228 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/order_food_name"
-                android:text="$99.99"
+                android:text="$14.99"
+                android:textSize="16sp"
+                android:textColor="@color/black_dark"
+                android:paddingTop="5dp"
+                android:paddingLeft="20dp"
                 />
 
-            <TextView
-                android:id="@+id/order_food_flavor_text"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/order_food_choose_size_banner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/alata"
-                android:text="Flavors"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
                 android:layout_below="@id/order_food_price"
-                />
+                android:background="@color/really_light_gray"
+                android:layout_marginTop="25dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/order_food_choose_size_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
+                    android:text="Choose Size"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/order_food_choose_size_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/order_food_choose_size_text"
+                    android:text="Required"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    />
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_food_choose_size_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/order_food_flavor_text"
+                android:layout_below="@id/order_food_choose_size_banner"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
                 />
 
-            <!--            <RadioGroup-->
-<!--                android:id="@+id/order_food_radio_group"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/order_food_choose_a_size"-->
-<!--                android:orientation="vertical">-->
+            <RelativeLayout
+                android:id="@+id/order_food_choose_crust_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/order_food_choose_size_recycler_view"
+                android:background="@color/really_light_gray"
+                android:layout_marginTop="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="20dp"
+                >
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_small_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Small"-->
-<!--                    />-->
+                <TextView
+                    android:id="@+id/order_food_choose_crust_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
+                    android:text="Choose Crust"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_medium_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Medium"-->
-<!--                    />-->
+                <TextView
+                    android:id="@+id/order_food_choose_crust_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/order_food_choose_crust_text"
+                    android:text="Required"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_large_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Large"-->
-<!--                    />-->
+            </RelativeLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_food_choose_crust_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/order_food_choose_crust_banner"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                />
 
+            <RelativeLayout
+                android:id="@+id/order_food_select_toppings_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/order_food_choose_crust_recycler_view"
+                android:background="@color/really_light_gray"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="20dp"
+                >
 
+                <TextView
+                    android:id="@+id/order_food_select_toppings_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
+                    android:text="Select Toppings"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
 
-<!--            </RadioGroup>-->
+                <TextView
+                    android:id="@+id/order_food_select_toppings_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/order_food_select_toppings_text"
+                    android:text="Choose up to 7"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Curst"-->
-<!--                android:layout_below="@id/order_food_radio_group"-->
-<!--                />-->
+            </RelativeLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_food_select_toppings_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/order_food_select_toppings_banner"
+                android:paddingLeft="20dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                />
 
+            <!--                android:layout_below="@id/order_food_select_toppings_recycler_view"-->
 
+            <RelativeLayout
+                android:id="@+id/order_food_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/order_food_select_toppings_recycler_view"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="80dp"
+                >
 
+                <Button
+                    android:id="@+id/order_food_amount_minus_button"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/really_light_gray"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cornerRadius="50dp"
+                    android:fontFamily="@font/lato"
+                    android:text="—"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:layout_toRightOf="@id/order_food_amount_minus_button"
+                    android:id="@+id/order_food_amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    />
+
+                <Button
+                    android:id="@+id/order_food_amount_add_button"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/really_light_gray"
+                    android:outlineSpotShadowColor="@color/transparent"
+                    app:cornerRadius="50dp"
+                    android:fontFamily="@font/lato"
+                    android:text="+"
+                    android:layout_toRightOf="@id/order_food_amount_text"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    />
+
+            </RelativeLayout>
         </RelativeLayout>
 
 
+    </ScrollView>
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
 
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="Add 1 to cart • US $14.99"
+        app:cornerRadius="3dp"
+        />
 
-
-
-</ScrollView>
+</RelativeLayout>

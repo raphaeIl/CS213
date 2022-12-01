@@ -17,23 +17,12 @@ public class FoodItem {
         return foodImageResId;
     }
 
-    public void setFoodImageResId(int foodImageResId) {
-        this.foodImageResId = foodImageResId;
-    }
-
     public String getFoodName() {
         return foodName;
-    }
-
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
     }
 
     public String getFoodInfo() {
         return foodInfo;
     }
 
-    public void setFoodInfo(String foodInfo) {
-        this.foodInfo = foodInfo;
-    }
 }

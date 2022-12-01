@@ -1,4 +1,4 @@
-package core.types;
+package edu.rutgers.rupizzeria.types;
 
 /**
  * enum representing different types of pizza Crusts

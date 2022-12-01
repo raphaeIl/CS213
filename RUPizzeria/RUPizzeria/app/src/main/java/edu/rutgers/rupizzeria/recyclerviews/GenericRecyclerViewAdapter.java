@@ -1,4 +1,4 @@
-package edu.rutgers.rupizzeria.ui.home;
+package edu.rutgers.rupizzeria.recyclerviews;
 
 import android.content.Context;
 import android.view.LayoutInflater;

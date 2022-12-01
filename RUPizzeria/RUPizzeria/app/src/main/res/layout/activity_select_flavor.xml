@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectFlavorActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/select_flavor_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/main_menu_chicago_style"
+                />
+
+            <TextView
+                android:id="@+id/select_flavor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chicago Style Pizza"
+                android:layout_below="@id/select_flavor_image"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                />
+
+            <TextView
+                android:id="@+id/select_flavor_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/select_flavor_name"
+                android:text="0 min • $12.99 • $0 Delivery fee"
+                android:paddingTop="5dp"
+                android:paddingLeft="12dp"
+                />
+
+            <TextView
+                android:id="@+id/select_flavor_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="Flavors"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:layout_below="@id/select_flavor_price"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/select_flavor_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/select_flavor_text"
+                android:padding="12dp"
+                />
+
+            <!--            <RadioGroup-->
+<!--                android:id="@+id/order_food_radio_group"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/order_food_choose_a_size"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/order_food_small_radio_button"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Small"-->
+<!--                    />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/order_food_medium_radio_button"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Medium"-->
+<!--                    />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/order_food_large_radio_button"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Large"-->
+<!--                    />-->
+
+
+
+
+<!--            </RadioGroup>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Curst"-->
+<!--                android:layout_below="@id/order_food_radio_group"-->
+<!--                />-->
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+</ScrollView>
