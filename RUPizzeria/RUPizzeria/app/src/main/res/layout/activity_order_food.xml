@@ -229,7 +229,7 @@
                     />
 
                 <Button
-                    android:id="@+id/order_food_amount_add_button"
+                    android:id="@+id/cart_item_amount_add_button"
                     android:layout_width="50dp"
                     android:layout_height="60dp"
                     android:backgroundTint="@color/really_light_gray"

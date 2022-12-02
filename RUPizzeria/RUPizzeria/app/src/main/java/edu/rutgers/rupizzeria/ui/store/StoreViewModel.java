@@ -1,14 +1,14 @@
-package edu.rutgers.rupizzeria.ui.notifications;
+package edu.rutgers.rupizzeria.ui.store;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class StoreViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public StoreViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }

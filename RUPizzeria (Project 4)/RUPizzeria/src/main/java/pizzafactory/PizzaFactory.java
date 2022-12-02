@@ -2,7 +2,7 @@ package pizzafactory;
 
 /**
  * Blueprint for a pizza factory
- * who is responsible for creating different types of pizzas,
+ * who is responsible for creating different core.types of pizzas,
  * implements the "Abstract Factory" design pattern
  * @author Michael Liu, Genfu Liu
  */

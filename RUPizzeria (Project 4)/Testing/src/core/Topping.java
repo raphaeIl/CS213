@@ -1,7 +1,7 @@
 package core;
 
 /**
- * enum representing different types of pizza toppings
+ * enum representing different core.types of pizza toppings
  * @author Michael Liu, Genfu Liu
  */
 public enum Topping {

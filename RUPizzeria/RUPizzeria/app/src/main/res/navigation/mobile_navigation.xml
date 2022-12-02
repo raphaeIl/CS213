@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="edu.rutgers.rupizzeria.ui.dashboard.DashboardFragment"
+        android:name="edu.rutgers.rupizzeria.ui.cart.CartFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="edu.rutgers.rupizzeria.ui.notifications.NotificationsFragment"
+        android:name="edu.rutgers.rupizzeria.ui.store.StoreFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_store" />
 </navigation>

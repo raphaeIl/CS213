@@ -1,7 +1,7 @@
 package core;
 
 /**
- * enum representing different types of pizza Crusts
+ * enum representing different core.types of pizza Crusts
  * @author Michael Liu, Genfu Liu
  */
 public enum Crust {

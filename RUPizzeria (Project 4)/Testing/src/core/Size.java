@@ -1,7 +1,7 @@
 package core;
 
 /**
- * enum representing different types of pizza sizes
+ * enum representing different core.types of pizza sizes
  * @author Michael Liu, Genfu Liu
  */
 public enum Size {

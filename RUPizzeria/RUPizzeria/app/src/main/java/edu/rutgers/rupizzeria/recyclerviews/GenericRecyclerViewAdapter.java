@@ -52,4 +52,10 @@ public class GenericRecyclerViewAdapter<T, VH extends GenericViewHolder<T>> exte
     public int getItemCount() {
         return itemsList.size();
     }
+
+    public List<T> getItemsList() {
+        notifyDataSetChanged();
+
+        return itemsList;
+    }
 }

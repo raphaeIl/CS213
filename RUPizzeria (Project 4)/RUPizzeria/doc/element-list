@@ -1,7 +1,7 @@
 module:com.example.rupizzeria
 client
 core.customizable
-core.types
+core.core.types
 managers
 pizzafactory
 pizzafactory.flavors

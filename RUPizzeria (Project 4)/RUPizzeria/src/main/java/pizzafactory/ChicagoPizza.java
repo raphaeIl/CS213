@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Implementation for a PizzaFactory,
- * creates different types of Chicago Style Pizzas
+ * creates different core.types of Chicago Style Pizzas
  * @author Michael Liu, Genfu Liu
  */
 public class ChicagoPizza implements PizzaFactory {

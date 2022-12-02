@@ -11,7 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.rutgers.rupizzeria.OrderFoodActivity;
 import edu.rutgers.rupizzeria.R;
-import edu.rutgers.rupizzeria.SelectFlavorActivity;
 import edu.rutgers.rupizzeria.recyclerviews.GenericViewHolder;
 import edu.rutgers.rupizzeria.ui.home.FlavorItem;
 
@@ -29,9 +28,9 @@ public class FlavorsViewHolder extends GenericViewHolder<FlavorItem> {
         super(itemView);
 
         flavorImage = itemView.findViewById(R.id.select_flavor_list_image);
-        flavorNameText = itemView.findViewById(R.id.select_flavor_list_name);
-        flavorPriceText = itemView.findViewById(R.id.select_flavor_list_price);
-        flavorDescriptionText = itemView.findViewById(R.id.select_flavor_list_description);
+        flavorNameText = itemView.findViewById(R.id.cart_item_name);
+        flavorPriceText = itemView.findViewById(R.id.cart_item_price);
+        flavorDescriptionText = itemView.findViewById(R.id.cart_item_description);
 
         parent = itemView.findViewById(R.id.select_flavor_item_parent);
     }
@@ -44,7 +43,6 @@ public class FlavorsViewHolder extends GenericViewHolder<FlavorItem> {
         flavorDescriptionText.setText(flavorItem.getFlavorDescription());
 
         parent.setOnClickListener(v -> onSelectFlavor(flavorItem));
-
     }
 
     public void onSelectFlavor(FlavorItem flavorItem) {
