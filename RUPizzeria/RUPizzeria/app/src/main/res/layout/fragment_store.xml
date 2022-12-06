@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.store.StoreFragment">
+    tools:context=".client.ui.store.StoreFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:layout_marginTop="5dp"
 
                 android:fontFamily="@font/alata"
-                android:text="2 items • $18.99 Total"
+                android:text=""
                 android:textColor="@color/black_light"
                 android:textSize="16sp" />
 

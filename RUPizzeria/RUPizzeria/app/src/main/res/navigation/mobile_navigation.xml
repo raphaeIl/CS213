@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="edu.rutgers.rupizzeria.ui.home.HomeFragment"
+        android:name="edu.rutgers.rupizzeria.client.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="edu.rutgers.rupizzeria.ui.cart.CartFragment"
+        android:name="edu.rutgers.rupizzeria.client.ui.cart.CartFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="edu.rutgers.rupizzeria.ui.store.StoreFragment"
+        android:name="edu.rutgers.rupizzeria.client.ui.store.StoreFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_store" />
 </navigation>

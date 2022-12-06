@@ -4,21 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.rutgers.rupizzeria.recyclerviews.GenericRecyclerViewAdapter;
-import edu.rutgers.rupizzeria.recyclerviews.holders.CrustViewHolder;
-import edu.rutgers.rupizzeria.recyclerviews.holders.FlavorsViewHolder;
-import edu.rutgers.rupizzeria.recyclerviews.holders.SizeViewHolder;
-import edu.rutgers.rupizzeria.recyclerviews.holders.ToppingsViewHolder;
-import edu.rutgers.rupizzeria.types.Crust;
-import edu.rutgers.rupizzeria.types.Size;
-import edu.rutgers.rupizzeria.types.Topping;
-import edu.rutgers.rupizzeria.ui.home.FlavorItem;
+import edu.rutgers.rupizzeria.client.recyclerviews.GenericRecyclerViewAdapter;
+import edu.rutgers.rupizzeria.client.recyclerviews.holders.CrustViewHolder;
+import edu.rutgers.rupizzeria.client.recyclerviews.holders.SizeViewHolder;
+import edu.rutgers.rupizzeria.client.recyclerviews.holders.ToppingsViewHolder;
+import edu.rutgers.rupizzeria.main.core.types.Crust;
+import edu.rutgers.rupizzeria.main.core.types.Size;
+import edu.rutgers.rupizzeria.main.core.types.Topping;
+import edu.rutgers.rupizzeria.main.managers.StoreManager;
+import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
+import edu.rutgers.rupizzeria.utils.Logger;
 
 public class OrderFoodActivity extends AppCompatActivity {
 
@@ -29,9 +31,8 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // Choose Size
         RecyclerView chooseSizeRecyclerView = findViewById(R.id.order_food_choose_size_recycler_view);
-        List<Size> sizes = new ArrayList<>();
 
-        sizes.addAll(Arrays.asList(Size.values()));
+        List<Size> sizes = new ArrayList<>(Arrays.asList(Size.values()));
 
         GenericRecyclerViewAdapter<Size, SizeViewHolder> chooseSizeRecyclerViewAdapter =
                 new GenericRecyclerViewAdapter<>(sizes, this, SizeViewHolder.class, R.layout.recycler_view_radio_button_item);
@@ -41,9 +42,8 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // Choose Crust
         RecyclerView chooseCrustRecyclerView = findViewById(R.id.order_food_choose_crust_recycler_view);
-        List<Crust> crusts = new ArrayList<>();
 
-        crusts.addAll(Arrays.asList(Crust.values()));
+        List<Crust> crusts = new ArrayList<>(Arrays.asList(Crust.values()));
 
         GenericRecyclerViewAdapter<Crust, CrustViewHolder> crustRecyclerViewAdapter =
                 new GenericRecyclerViewAdapter<>(crusts, this, CrustViewHolder.class, R.layout.recycler_view_radio_button_item);
@@ -53,15 +53,24 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         // Select Toppings
         RecyclerView selectToppingsRecyclerView = findViewById(R.id.order_food_select_toppings_recycler_view);
-        List<Topping> toppings = new ArrayList<>();
 
-        toppings.addAll(Arrays.asList(Topping.values()));
+        List<Topping> toppings = new ArrayList<>(Arrays.asList(Topping.values()));
 
         GenericRecyclerViewAdapter<Topping, ToppingsViewHolder> toppingsRecyclerViewAdapter =
                 new GenericRecyclerViewAdapter<>(toppings, this, ToppingsViewHolder.class, R.layout.recycler_view_checkbox_item);
 
         selectToppingsRecyclerView.setAdapter(toppingsRecyclerViewAdapter);
         selectToppingsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        findViewById(R.id.order_food_add_to_cart_button).setOnClickListener(v -> onAddToCart());
+    }
+
+    public void onAddToCart() {
+        Logger.log(StoreManager.getInstance().getCurrentItem().toString());
+        StoreManager.getInstance().addCurrentItemToCart();
+
+        // TODO: clear item
+        startActivity(new Intent(this, SelectFlavorActivity.class));
     }
 
 }
