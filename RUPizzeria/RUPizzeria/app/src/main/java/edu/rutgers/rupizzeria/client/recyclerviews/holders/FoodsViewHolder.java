@@ -12,9 +12,9 @@ import androidx.cardview.widget.CardView;
 import edu.rutgers.rupizzeria.SelectFlavorActivity;
 import edu.rutgers.rupizzeria.R;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericViewHolder;
-import edu.rutgers.rupizzeria.client.ui.home.FoodItem;
+import edu.rutgers.rupizzeria.main.core.types.Style;
 
-public class FoodsViewHolder extends GenericViewHolder<FoodItem> {
+public class FoodsViewHolder extends GenericViewHolder<Style> {
 
     private ImageView foodImage;
     private TextView foodNameText;
@@ -32,20 +32,20 @@ public class FoodsViewHolder extends GenericViewHolder<FoodItem> {
     }
 
     @Override
-    public void onBind(FoodItem foodItem) {
-        foodImage.setImageResource(foodItem.getFoodImageResId());
-        foodInfoText.setText(foodItem.getFoodInfo());
-        foodNameText.setText(foodItem.getFoodName());
+    public void onBind(Style foodStyle) {
+        foodImage.setImageResource(foodStyle == Style.Chicago ? R.drawable.main_menu_chicago_style : R.drawable.main_menu_ny_style);
+        foodInfoText.setText("0 min • $0 Delivery fee");
+        foodNameText.setText(String.format("\uD83C\uDF55 %s Style Pizza", foodStyle));
 
-        parent.setOnClickListener(v -> onSelectFood(foodItem));
+        parent.setOnClickListener(v -> onSelectFood(foodStyle));
     }
 
-    public void onSelectFood(FoodItem foodItem) {
-        Toast.makeText(this.currentContext, foodItem.getFoodInfo(), Toast.LENGTH_SHORT).show();
+    public void onSelectFood(Style foodStyle) {
+        Toast.makeText(this.currentContext, foodStyle.toString(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this.currentContext, SelectFlavorActivity.class);
 
-        intent.putExtra("foodName", foodItem.getFoodName());
+        intent.putExtra("food_style", foodStyle);
         this.currentContext.startActivity(intent);
 //        ((Activity)currentContext).overridePendingTransition(); // custom activity transition animatino
     }

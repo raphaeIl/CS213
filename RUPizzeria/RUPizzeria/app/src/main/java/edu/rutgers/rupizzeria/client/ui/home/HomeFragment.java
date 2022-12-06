@@ -13,38 +13,35 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.rutgers.rupizzeria.R;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericRecyclerViewAdapter;
 import edu.rutgers.rupizzeria.client.recyclerviews.holders.FoodsViewHolder;
 import edu.rutgers.rupizzeria.databinding.FragmentHomeBinding;
+import edu.rutgers.rupizzeria.main.core.types.Style;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Context context = root.getContext();
 
         // Setting up the recycler view
         RecyclerView foodsRecyclerView = root.findViewById(R.id.foods_recycler_view);
-        List<FoodItem> foods = new ArrayList<>();
 
-        foods.add(new FoodItem(R.drawable.main_menu_chicago_style, "\uD83C\uDF55 Chicago Style Pizza", "0 min • $12.99 • $0 Delivery fee"));
-        foods.add(new FoodItem(R.drawable.main_menu_ny_style, "\uD83C\uDF55 NY Style Pizza", "0 min • $17.99 • $0 Delivery fee"));
+        List<Style> foods = new ArrayList<>(Arrays.asList(Style.values()));
 
-        GenericRecyclerViewAdapter<FoodItem, FoodsViewHolder> foodsRecyclerViewAdapter =
+        GenericRecyclerViewAdapter<Style, FoodsViewHolder> foodsRecyclerViewAdapter =
                 new GenericRecyclerViewAdapter<>(foods, context, FoodsViewHolder.class, R.layout.foods_recycler_view_item);
 
         foodsRecyclerView.setAdapter(foodsRecyclerViewAdapter);
         foodsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         // Setup done
-
 
         return root;
     }

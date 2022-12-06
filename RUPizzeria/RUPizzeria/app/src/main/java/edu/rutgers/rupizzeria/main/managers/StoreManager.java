@@ -54,7 +54,10 @@ public class StoreManager {
 
     private Pizza currentItem;
 
+    private List<ActionListener<Pizza>> currentItemChangedListeners;
+
     private List<ActionListener<Pizza>> cartItemChangedListeners;
+
     /**
      * Single private constructor to initialize all the fields
      */

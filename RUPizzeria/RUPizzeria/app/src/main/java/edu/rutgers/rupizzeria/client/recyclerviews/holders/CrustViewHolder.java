@@ -29,12 +29,9 @@ public class CrustViewHolder extends GenericViewHolder<Crust> {
     public void onBind(Crust crust) {
         crustText.setText(Utils.capitalize(crust.toString()));
 
-        crustRadioButton.setOnCheckedChangeListener((buttonView, isChecked) -> onChooseCrust(crust));
-    }
+        crustRadioButton.setEnabled(false);
 
-    public void onChooseCrust(Crust crust) {
-        Toast.makeText(currentContext, crust.toString(), Toast.LENGTH_SHORT).show();
-
-        // crust not setable
+        if (StoreManager.getInstance().getCurrentItem().getCrust() == crust)
+            crustRadioButton.setChecked(true);
     }
 }

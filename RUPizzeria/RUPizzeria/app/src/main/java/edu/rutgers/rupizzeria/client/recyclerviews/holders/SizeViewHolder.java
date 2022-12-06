@@ -15,6 +15,8 @@ import edu.rutgers.rupizzeria.utils.Utils;
 
 public class SizeViewHolder extends GenericViewHolder<Size> {
 
+    public static RadioButton currentlySelected;
+
     private TextView sizeText;
     private RadioButton sizeRadioButton;
 
@@ -30,11 +32,18 @@ public class SizeViewHolder extends GenericViewHolder<Size> {
         sizeText.setText(Utils.capitalize(size.toString()));
 
         sizeRadioButton.setOnCheckedChangeListener((buttonView, isChecked) -> onChooseSize(size));
+
+        if (size == Size.SMALL)
+            sizeRadioButton.setChecked(true);
     }
 
     public void onChooseSize(Size size) {
         Toast.makeText(currentContext, size.toString(), Toast.LENGTH_SHORT).show();
-
         StoreManager.getInstance().getCurrentItem().setSize(size);
+
+        if (currentlySelected != null)
+            currentlySelected.setChecked(false);
+
+        currentlySelected = sizeRadioButton;
     }
 }

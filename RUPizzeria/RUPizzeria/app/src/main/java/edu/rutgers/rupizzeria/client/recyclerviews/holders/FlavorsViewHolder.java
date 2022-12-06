@@ -11,16 +11,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.rutgers.rupizzeria.OrderFoodActivity;
 import edu.rutgers.rupizzeria.R;
+import edu.rutgers.rupizzeria.SelectFlavorActivity;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericViewHolder;
-import edu.rutgers.rupizzeria.client.ui.home.FlavorItem;
 import edu.rutgers.rupizzeria.main.core.customizable.Order;
+import edu.rutgers.rupizzeria.main.core.types.Flavor;
 import edu.rutgers.rupizzeria.main.core.types.Size;
 import edu.rutgers.rupizzeria.main.core.types.Style;
 import edu.rutgers.rupizzeria.main.managers.StoreManager;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.utils.Utils;
 
-public class FlavorsViewHolder extends GenericViewHolder<FlavorItem> {
+public class FlavorsViewHolder extends GenericViewHolder<Flavor> {
 
     private ImageView flavorImage;
 
@@ -29,6 +30,8 @@ public class FlavorsViewHolder extends GenericViewHolder<FlavorItem> {
     private TextView flavorDescriptionText;
 
     private ConstraintLayout parent;
+
+    private Style currentStyle;
 
     public FlavorsViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -42,23 +45,24 @@ public class FlavorsViewHolder extends GenericViewHolder<FlavorItem> {
     }
 
     @Override
-    public void onBind(FlavorItem flavorItem) {
-        flavorImage.setImageResource(flavorItem.getFlavorImageResId());
-        flavorNameText.setText(flavorItem.getFlavor() + " Pizza");
-        flavorPriceText.setText(flavorItem.getFlavorPrice());
-        flavorDescriptionText.setText(flavorItem.getFlavorDescription());
+    public void onBind(Flavor flavor) {
+        currentStyle = (Style) ((SelectFlavorActivity)currentContext).getIntent().getSerializableExtra("food_style");
 
-        parent.setOnClickListener(v -> onSelectFlavor(flavorItem));
+        flavorImage.setImageResource(Utils.getPizzaImage(currentStyle, flavor));
+        flavorNameText.setText(flavor + " Pizza");
+        flavorPriceText.setText(Utils.formatCurrency(0.00));
+        flavorDescriptionText.setText(String.format("A %s Style %s Pizza", currentStyle, flavor));
+
+        parent.setOnClickListener(v -> onSelectFlavor(flavor));
     }
 
-    public void onSelectFlavor(FlavorItem flavorItem) {
-        Toast.makeText(currentContext, flavorItem.getFlavor().toString(), Toast.LENGTH_SHORT).show();
+    public void onSelectFlavor(Flavor flavor) {
+        Toast.makeText(currentContext, flavor.toString(), Toast.LENGTH_SHORT).show();
 
-        StoreManager.getInstance().selectPizza(Style.Chicago, flavorItem.getFlavor(), Size.SMALL); // default size of small
+        StoreManager.getInstance().selectPizza(currentStyle, flavor, Size.SMALL);
 
         // next activity
         Intent intent = new Intent(this.currentContext, OrderFoodActivity.class);
-
         this.currentContext.startActivity(intent);
     }
 }

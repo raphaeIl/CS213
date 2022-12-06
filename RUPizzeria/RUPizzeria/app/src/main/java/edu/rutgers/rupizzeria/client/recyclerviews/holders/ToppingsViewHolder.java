@@ -1,5 +1,6 @@
 package edu.rutgers.rupizzeria.client.recyclerviews.holders;
 
+import android.os.Build;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -9,9 +10,11 @@ import androidx.annotation.NonNull;
 
 import edu.rutgers.rupizzeria.R;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericViewHolder;
+import edu.rutgers.rupizzeria.main.core.types.Flavor;
 import edu.rutgers.rupizzeria.main.core.types.Topping;
 import edu.rutgers.rupizzeria.main.managers.StoreManager;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
+import edu.rutgers.rupizzeria.utils.Logger;
 import edu.rutgers.rupizzeria.utils.Utils;
 
 public class ToppingsViewHolder extends GenericViewHolder<Topping> {
@@ -31,12 +34,29 @@ public class ToppingsViewHolder extends GenericViewHolder<Topping> {
         toppingText.setText(Utils.capitalize(topping.toString()));
 
         toppingCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> onSelectTopping(topping, isChecked));
+
+        Pizza currentItem = StoreManager.getInstance().getCurrentItem();
+
+        if (currentItem.getFlavor() != Flavor.Build_Your_Own)
+            toppingCheckBox.setEnabled(false);
+
+        Logger.log(currentItem.getToppings().toString());
+        if (currentItem.getToppings().contains(topping)) {
+            toppingCheckBox.setChecked(true);
+        }
+
     }
 
     public void onSelectTopping(Topping topping, boolean isSelected) {
         Toast.makeText(currentContext, topping.toString(), Toast.LENGTH_SHORT).show();
 
         Pizza currentItem = StoreManager.getInstance().getCurrentItem();
+        int totalToppingsCount = currentItem.getToppings().size();
+
+        if (isSelected && totalToppingsCount >= 7) {
+            toppingCheckBox.setChecked(false);
+            return;
+        }
 
         if (isSelected)
             currentItem.add(topping);

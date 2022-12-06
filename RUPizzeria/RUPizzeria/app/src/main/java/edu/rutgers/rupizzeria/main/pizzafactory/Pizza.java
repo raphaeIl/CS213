@@ -64,7 +64,10 @@ public abstract class Pizza implements Customizable {
      */
     @Override
     public boolean add(Object obj) {
-        return this.getToppings().add((Topping) obj);
+        if (!this.getToppings().contains(obj))
+            return this.getToppings().add((Topping) obj);
+
+        return false;
     }
 
     /**

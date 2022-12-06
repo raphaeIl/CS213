@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ import edu.rutgers.rupizzeria.main.core.types.Topping;
 import edu.rutgers.rupizzeria.main.managers.StoreManager;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.utils.Logger;
+import edu.rutgers.rupizzeria.utils.Utils;
 
 public class OrderFoodActivity extends AppCompatActivity {
 
@@ -28,6 +31,12 @@ public class OrderFoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_food);
+
+        Pizza currentFood = StoreManager.getInstance().getCurrentItem();
+
+        ((ImageView)findViewById(R.id.order_food_image)).setImageResource(Utils.getPizzaImage(currentFood.getStyle(), currentFood.getFlavor()));
+        ((TextView)findViewById(R.id.order_food_name)).setText(currentFood.getFlavor().toString());
+        ((TextView)findViewById(R.id.order_food_price)).setText(Utils.formatCurrency(currentFood.price()));
 
         // Choose Size
         RecyclerView chooseSizeRecyclerView = findViewById(R.id.order_food_choose_size_recycler_view);
@@ -70,7 +79,10 @@ public class OrderFoodActivity extends AppCompatActivity {
         StoreManager.getInstance().addCurrentItemToCart();
 
         // TODO: clear item
-        startActivity(new Intent(this, SelectFlavorActivity.class));
+        Intent intent = new Intent(this, SelectFlavorActivity.class);
+
+        intent.putExtra("food_style", StoreManager.getInstance().getCurrentItem().getStyle());
+        startActivity(intent);
     }
 
 }
