@@ -1,5 +1,7 @@
 package edu.rutgers.rupizzeria.client.recyclerviews.holders;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -10,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.rutgers.rupizzeria.R;
+import edu.rutgers.rupizzeria.SelectFlavorActivity;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericViewHolder;
 import edu.rutgers.rupizzeria.main.managers.StoreManager;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
+import edu.rutgers.rupizzeria.utils.Logger;
 import edu.rutgers.rupizzeria.utils.Utils;
 
 public class CartViewHolder extends GenericViewHolder<Pizza> {
@@ -47,17 +51,25 @@ public class CartViewHolder extends GenericViewHolder<Pizza> {
 
         cartItemNameText.setText(cartItem.toString());
         cartItemPriceText.setText(Utils.formatCurrency(cartItem.price()));
-        cartItemDescriptionText.setText("A cartItem");
+        cartItemDescriptionText.setText("");
 
         cartItemDelete.setOnClickListener(v -> onDeleteCartItem(cartItem));
         parent.setOnClickListener(v -> onClickCartItem(cartItem));
     }
 
     public void onClickCartItem(Pizza cartItem) {
-        Toast.makeText(currentContext, cartItem.toString(), Toast.LENGTH_SHORT).show();
+
     }
 
     public void onDeleteCartItem(Pizza cartItem) {
-        StoreManager.getInstance().removeFromCart(cartItem);
+        DialogInterface.OnClickListener onConfirmRemoveFromCart = (dialog, which) -> {
+            StoreManager.getInstance().removeFromCart(cartItem);
+
+            Toast.makeText(currentContext, "Item successfully removed!", Toast.LENGTH_SHORT).show();
+        };
+
+        DialogInterface.OnClickListener onCancelRemoveFromCart = (dialog, which) -> dialog.cancel();
+
+        Logger.logAlertConfirmation(currentContext, "Remove from Cart", "Are you sure you want to remove this item from your cart?", onConfirmRemoveFromCart, onCancelRemoveFromCart);
     }
 }

@@ -30,7 +30,7 @@
             android:fontFamily="@font/alata"
             android:textColor="@color/black"
             android:layout_marginStart="5dp"
-            android:text="🍕 Chicago Style Pizza"
+            android:text="@string/main_menu_pizza_name_placeholder"
             android:layout_below="@id/recycler_item_food_image"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -45,14 +45,11 @@
             android:fontFamily="@font/alata"
             android:textColor="@color/black_light"
             android:textSize="10sp"
-            android:text="0 min • $12.99 • $0 Delivery fee"
+            android:text="@string/pizza_description_placeholder"
             android:layout_below="@id/recycler_item_food_name_text"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="6dp"
             />
-<!--            TODO: add star rating-->
-
     </RelativeLayout>
-
 
 </androidx.cardview.widget.CardView>

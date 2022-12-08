@@ -1,11 +1,13 @@
 package edu.rutgers.rupizzeria.client.ui.cart;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +35,12 @@ public class CartFragment extends Fragment {
 
     private TextView orderNumberText;
 
+    private GenericRecyclerViewAdapter<Pizza, CartViewHolder> cartRecyclerViewAdapter;
+    private List<Pizza> cartItems;
+
+    private GenericRecyclerViewAdapter<KeyValueItem<String, Double>, KeyValueViewHolder> summaryRecyclerViewAdapter;
+    private List<KeyValueItem<String, Double>> summary;
+
     private StoreManager storeManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,43 +55,29 @@ public class CartFragment extends Fragment {
         // Items
         RecyclerView cartRecyclerView = root.findViewById(R.id.cart_items_recycler_view);
 
-        List<Pizza> cartItems = new ArrayList<>(StoreManager.getInstance().getCurrentCart().getAllItems());
-        GenericRecyclerViewAdapter<Pizza, CartViewHolder> cartRecyclerViewAdapter = new GenericRecyclerViewAdapter<>(cartItems, context, CartViewHolder.class, R.layout.cart_recycler_view_item);
+        cartItems = new ArrayList<>(StoreManager.getInstance().getCurrentCart().getAllItems());
+        cartRecyclerViewAdapter = new GenericRecyclerViewAdapter<>(cartItems, context, CartViewHolder.class, R.layout.cart_recycler_view_item);
 
         cartRecyclerView.setAdapter(cartRecyclerViewAdapter);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        storeManager.addCartItemChangedListener((itemChanged, isRemoved) -> {
-            if (!isRemoved)
-                cartItems.add(itemChanged);
-            else
-                cartItems.remove(itemChanged);
-
-            cartRecyclerViewAdapter.notifyDataSetChanged();
-        });
 
         // Summary
         RecyclerView summaryRecyclerView = root.findViewById(R.id.cart_summary_recycler_view);
-        List<KeyValueItem<String, Double>> summary = new ArrayList<>();
+        summary = new ArrayList<>();
 
         summary.add(new KeyValueItem<>("Subtotal",  storeManager.getSubtotal(), Size.SMALL));
         summary.add(new KeyValueItem<>("Delivery Fee", 0.00, Size.SMALL));
         summary.add(new KeyValueItem<>("Sales Tax", storeManager.getSalesTax(), Size.SMALL));
         summary.add(new KeyValueItem<>("Total", storeManager.getTotal(), Size.LARGE));
 
-        GenericRecyclerViewAdapter<KeyValueItem<String, Double>, KeyValueViewHolder> summaryRecyclerViewAdapter = new GenericRecyclerViewAdapter<>(summary, context, KeyValueViewHolder.class, R.layout.recycler_view_key_value_item);
+        summaryRecyclerViewAdapter = new GenericRecyclerViewAdapter<>(summary, context, KeyValueViewHolder.class, R.layout.recycler_view_key_value_item);
 
         summaryRecyclerView.setAdapter(summaryRecyclerViewAdapter);
         summaryRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        storeManager.addCartItemChangedListener((actionChanged, isRemoved) -> {
-            summary.get(0).setValue(storeManager.getSubtotal());
-            summary.get(2).setValue(storeManager.getSalesTax());
-            summary.get(3).setValue(storeManager.getTotal());
+        storeManager.addCartItemChangedListener((actionChanged, isRemoved) -> onCartItemChanged(actionChanged, isRemoved));
 
-            summaryRecyclerViewAdapter.notifyDataSetChanged();
-        });
-
-        root.findViewById(R.id.cart_clear_cart_button).setOnClickListener(v -> StoreManager.getInstance().clearCart());
+        root.findViewById(R.id.cart_clear_cart_button).setOnClickListener(v -> onClearCart());
         root.findViewById(R.id.cart_place_order_button).setOnClickListener(v -> onPlaceOrder(cartItems, cartRecyclerViewAdapter, summary, summaryRecyclerViewAdapter));
 
         return root;
@@ -101,24 +95,55 @@ public class CartFragment extends Fragment {
      */
     public void onPlaceOrder(List<Pizza> cartItems, GenericRecyclerViewAdapter cartAdapter, List<KeyValueItem<String, Double>> summary, GenericRecyclerViewAdapter summaryAdapter) {
         if (storeManager.getCurrentCart().isEmpty()) {
-            Logger.log("Cart is empty!");
+            Toast.makeText(getContext(), "Cart is empty!", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        DialogInterface.OnClickListener onConfirmPlaceOrder = (dialog, which) -> {
+            storeManager.placeOrder();
+            Toast.makeText(getContext(), "Your order has been placed!", Toast.LENGTH_SHORT).show();
 
+            cartItems.clear();
+            cartAdapter.notifyDataSetChanged();
 
-        storeManager.placeOrder();
-        Logger.log("Order has been successfully placed!");
+            summary.get(0).setValue(storeManager.getSubtotal());
+            summary.get(2).setValue(storeManager.getSalesTax());
+            summary.get(3).setValue(storeManager.getTotal());
 
-        cartItems.clear();
-        cartAdapter.notifyDataSetChanged();
+            summaryAdapter.notifyDataSetChanged();
+
+            orderNumberText.setText("Order #: " + storeManager.getCurrentCart().getOrderId());
+        };
+
+        DialogInterface.OnClickListener onCancelPlaceOrder = (dialog, which) -> dialog.cancel();
+
+        Logger.logAlertConfirmation(getContext(), "Place order", "Place Order?", onConfirmPlaceOrder, onCancelPlaceOrder);
+    }
+
+    public void onClearCart() {
+        DialogInterface.OnClickListener onConfirmClearCart = (dialog, which) -> {
+            StoreManager.getInstance().clearCart();
+
+            Toast.makeText(getContext(), "Your cart has been cleared!", Toast.LENGTH_SHORT).show();
+        };
+
+        DialogInterface.OnClickListener onCancelClearCart = (dialog, which) -> dialog.cancel();
+
+        Logger.logAlertConfirmation(getContext(), "Clear your cart", "Are you sure you want to clear all items from your cart?", onConfirmClearCart, onCancelClearCart);
+    }
+
+    public void onCartItemChanged(Pizza itemChanged, boolean isRemoved) {
+        if (!isRemoved)
+            cartItems.add(itemChanged);
+        else
+            cartItems.remove(itemChanged);
+
+        cartRecyclerViewAdapter.notifyDataSetChanged();
 
         summary.get(0).setValue(storeManager.getSubtotal());
         summary.get(2).setValue(storeManager.getSalesTax());
         summary.get(3).setValue(storeManager.getTotal());
 
-        summaryAdapter.notifyDataSetChanged();
-
-        orderNumberText.setText("Order #: " + storeManager.getCurrentCart().getOrderId());
+        summaryRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

@@ -22,7 +22,7 @@
                 android:id="@+id/select_flavor_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chicago Style Pizza"
+                android:text="@string/pizza_style_placeholder"
                 android:layout_below="@id/select_flavor_image"
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/select_flavor_name"
-                android:text="0 min • $12.99 • $0 Delivery fee"
+                android:text="@string/pizza_description_placeholder"
                 android:paddingTop="5dp"
                 android:paddingLeft="12dp"
                 />
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alata"
-                android:text="Flavors"
+                android:text="@string/flavors"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -65,56 +65,5 @@
                 android:layout_below="@id/select_flavor_text"
                 android:padding="12dp"
                 />
-
-            <!--            <RadioGroup-->
-<!--                android:id="@+id/order_food_radio_group"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/order_food_choose_a_size"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_small_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Small"-->
-<!--                    />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_medium_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Medium"-->
-<!--                    />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/order_food_large_radio_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Large"-->
-<!--                    />-->
-
-
-
-
-<!--            </RadioGroup>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Curst"-->
-<!--                android:layout_below="@id/order_food_radio_group"-->
-<!--                />-->
-
-
-
-
         </RelativeLayout>
-
-
-
-
-
-
-
 </ScrollView>

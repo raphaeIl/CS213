@@ -14,18 +14,21 @@ import java.util.List;
 
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericRecyclerViewAdapter;
 import edu.rutgers.rupizzeria.client.recyclerviews.holders.FlavorsViewHolder;
-import edu.rutgers.rupizzeria.client.ui.home.FlavorItem;
 import edu.rutgers.rupizzeria.main.core.types.Flavor;
 import edu.rutgers.rupizzeria.main.core.types.Style;
 
 public class SelectFlavorActivity extends AppCompatActivity {
 
+    public static Style currentStyle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_flavor);
+        setTitle(R.string.title_order_food);
 
-        Style currentStyle = (Style) getIntent().getSerializableExtra("food_style");
+        currentStyle = (Style) getIntent().getSerializableExtra("food_style");
+
         ((ImageView)findViewById(R.id.select_flavor_image)).setImageResource(currentStyle == Style.Chicago ? R.drawable.main_menu_chicago_style : R.drawable.main_menu_ny_style);
         ((TextView)findViewById(R.id.select_flavor_name)).setText(String.format("%s Style Pizza", currentStyle));
 

@@ -24,7 +24,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="@color/warm_red"
-                android:text="Clear Cart"
+                android:text="@string/clear_cart"
                 android:textSize="11sp"
                 app:cornerRadius="20dp"
                 android:layout_alignParentEnd="true"
@@ -37,7 +37,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/alata"
-                android:text="Items"
+                android:text="@string/items"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -51,7 +51,7 @@
                 android:layout_marginTop="0dp"
 
                 android:fontFamily="@font/alata"
-                android:text="Order #: -367506283"
+                android:text="@string/order_number_placeholder"
                 android:textColor="@color/gray"
                 android:textSize="12sp" />
 
@@ -67,7 +67,7 @@
                 android:id="@+id/cart_summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Summary"
+                android:text="@string/summary"
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"
                 android:textSize="25sp"
@@ -109,7 +109,7 @@
 
         android:layout_marginRight="15dp"
         android:layout_marginBottom="65dp"
-        android:text="Place Order"
+        android:text="@string/place_order"
         android:textSize="17dp"
         app:cornerRadius="3dp"
         />

@@ -1,6 +1,11 @@
 package edu.rutgers.rupizzeria.utils;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+
+import kotlin.text.UStringsKt;
 
 public class Logger {
 
@@ -23,6 +28,17 @@ public class Logger {
      */
     public static void logf(String format, Object ... args) {
         log(String.format(format, args));
+    }
+
+    public static void logAlertConfirmation(Context context, String title, String message, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setPositiveButton("Yes", positive)
+                .setNegativeButton("Cancel", negative)
+                .show();
+
     }
 
 }

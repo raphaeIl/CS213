@@ -9,6 +9,7 @@ import edu.rutgers.rupizzeria.main.core.customizable.StoreOrder;
 import edu.rutgers.rupizzeria.main.core.types.Flavor;
 import edu.rutgers.rupizzeria.main.core.types.Size;
 import edu.rutgers.rupizzeria.main.core.types.Style;
+import edu.rutgers.rupizzeria.main.core.types.Topping;
 import edu.rutgers.rupizzeria.main.pizzafactory.ChicagoPizza;
 import edu.rutgers.rupizzeria.main.pizzafactory.NYPizza;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
@@ -65,6 +66,7 @@ public class StoreManager {
         orderHistory = new StoreOrder();
         currentCart = new Order();
 
+        currentItemChangedListeners = new ArrayList<>();
         cartItemChangedListeners = new ArrayList<>();
     }
 
@@ -143,8 +145,8 @@ public class StoreManager {
      * Clear the entire shopping cart
      */
     public void clearCart() {
-        for (Pizza pizza : currentCart.getAllItems())
-            this.removeFromCart(pizza);
+        for (Pizza item: new ArrayList<>(currentCart.getAllItems()))
+            this.removeFromCart(item);
     }
 
     /**
@@ -153,7 +155,7 @@ public class StoreManager {
     public void placeOrder() {
         orderHistory.add(currentCart);
 
-        currentCart = new Order(); // clear the current order after placing
+        currentCart = new Order(); // reset the current order after placing
     }
 
     /**
@@ -166,6 +168,10 @@ public class StoreManager {
         this.currentCart = new Order();
     }
 
+    public void addCurrentItemChangedListener(ActionListener<Pizza> onCurrentItemChanged) {
+        this.currentItemChangedListeners.add(onCurrentItemChanged);
+    }
+
     public void addCartItemChangedListener(ActionListener<Pizza> onCartItemChanged) {
         this.cartItemChangedListeners.add(onCartItemChanged);
     }
@@ -173,6 +179,38 @@ public class StoreManager {
     public Pizza getCurrentItem() {
         return currentItem;
     }
+
+    public void setCurrentItemSize(Size size) {
+        currentItem.setSize(size);
+
+        if (!this.currentItemChangedListeners.isEmpty()) {
+            for (ActionListener<Pizza> al: currentItemChangedListeners)
+                al.onAction(currentItem, false);
+        }
+    }
+
+    public boolean addToppingToCurrentItem(Topping topping) {
+        boolean result = currentItem.add(topping);
+
+        if (!this.currentItemChangedListeners.isEmpty()) {
+            for (ActionListener<Pizza> al: currentItemChangedListeners)
+                al.onAction(currentItem, false);
+        }
+
+        return result;
+    }
+
+    public boolean removeToppingFromCurrentItem(Topping topping) {
+        boolean result = currentItem.remove(topping);
+
+        if (!this.currentItemChangedListeners.isEmpty()) {
+            for (ActionListener<Pizza> al: currentItemChangedListeners)
+                al.onAction(currentItem, false);
+        }
+
+        return result;
+    }
+
 
     /**
      * Getter for the current order

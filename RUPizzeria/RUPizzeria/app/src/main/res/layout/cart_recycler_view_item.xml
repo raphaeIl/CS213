@@ -51,7 +51,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:fontFamily="@font/lato"
-            android:text="1 x"
+            android:text="@string/_1_x"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:translationZ="50dp"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/alata"
-            android:text="Large Deluxe Pizza • Chicago Style"
+            android:text="@string/pizza_short_description_placeholder"
             android:textColor="@color/black"
             android:textSize="13sp" />
 
@@ -93,7 +93,7 @@
             android:layout_below="@id/cart_item_name"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/alata"
-            android:text="$15.95"
+            android:text="@string/price_placeholder"
             android:textColor="@color/black_light"
             android:textSize="10sp" />
 
@@ -105,7 +105,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:fontFamily="@font/alata"
-            android:text="Stuffed Crust"
+            android:text="@string/pizza_crust_placeholder"
             android:textColor="@color/gray"
             android:textSize="10sp" />
     </RelativeLayout>

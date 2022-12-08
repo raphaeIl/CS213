@@ -31,8 +31,6 @@ public class FlavorsViewHolder extends GenericViewHolder<Flavor> {
 
     private ConstraintLayout parent;
 
-    private Style currentStyle;
-
     public FlavorsViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -46,20 +44,18 @@ public class FlavorsViewHolder extends GenericViewHolder<Flavor> {
 
     @Override
     public void onBind(Flavor flavor) {
-        currentStyle = (Style) ((SelectFlavorActivity)currentContext).getIntent().getSerializableExtra("food_style");
+        Style currentStyle = SelectFlavorActivity.currentStyle;
 
         flavorImage.setImageResource(Utils.getPizzaImage(currentStyle, flavor));
         flavorNameText.setText(flavor + " Pizza");
         flavorPriceText.setText(Utils.formatCurrency(0.00));
         flavorDescriptionText.setText(String.format("A %s Style %s Pizza", currentStyle, flavor));
 
-        parent.setOnClickListener(v -> onSelectFlavor(flavor));
+        parent.setOnClickListener(v -> onSelectFlavor(currentStyle, flavor));
     }
 
-    public void onSelectFlavor(Flavor flavor) {
-        Toast.makeText(currentContext, flavor.toString(), Toast.LENGTH_SHORT).show();
-
-        StoreManager.getInstance().selectPizza(currentStyle, flavor, Size.SMALL);
+    public void onSelectFlavor(Style style, Flavor flavor) {
+        StoreManager.getInstance().selectPizza(style, flavor, Size.SMALL);
 
         // next activity
         Intent intent = new Intent(this.currentContext, OrderFoodActivity.class);

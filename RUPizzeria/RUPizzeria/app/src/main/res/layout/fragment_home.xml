@@ -11,7 +11,7 @@
         android:id="@+id/menu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popular Foods"
+        android:text="@string/popular_foods"
         android:textColor="@color/black"
         android:fontFamily="@font/alata"
         android:textSize="25sp"

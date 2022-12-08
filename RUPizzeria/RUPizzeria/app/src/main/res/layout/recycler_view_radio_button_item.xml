@@ -18,7 +18,7 @@
         android:layout_toRightOf="@+id/recycler_item_radio_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Large"
+        android:text="@string/size_placeholder"
         android:fontFamily="@font/alata"
         android:textColor="@color/black"
         android:textSize="18sp"

@@ -1,10 +1,49 @@
 <resources>
     <string name="app_name">RUPizzeria</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Cart</string>
-    <string name="title_notifications">Store</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">RUPizzeria</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_store">Store</string>
+    <string name="title_order_food">Order</string>
+
+    <!--  General Placeholders    -->
     <string name="lorem_placeholder">Lorem ipsum dolor sit amet. Est ullam molestiae qui totam molestiae ut repudiandae vitae et ipsam soluta est nobis odio.</string>
+    <string name="price_placeholder">$99.99</string>
     <string name="seperator_symbol">•</string>
+
+    <!--  Order food display prompts    -->
+    <string name="choose_size">Choose Size</string>
+    <string name="choose_crust">Choose Crust</string>
+    <string name="select_toppings">Select Toppings</string>
+    <string name="required">Required</string>
+    <string name="choose_up_to_7">Choose up to 7</string>
+    <string name="add_to_cart_button_placeholder_text">Add 99 to cart • US $99.99</string>
+    <string name="flavors">Flavors</string>
+
+    <!--  Various menu titles/subtitles    -->
+    <string name="items">Items</string>
+    <string name="summary">Summary</string>
+    <string name="place_order">Place Order</string>
+    <string name="popular_foods">Popular Foods</string>
+    <string name="order">Order #</string>
+
+    <!--  Button text    -->
+    <string name="clear_cart">Clear Cart</string>
+    <string name="cancel_current_order">Cancel Current Order</string>
+
+    <!--  Pizza item display    -->
+    <string name="pizza_flavor_placeholder">Deluxe</string>
+    <string name="pizza_style_placeholder">Chicago Style Pizza</string>
+    <string name="pizza_description_placeholder">0 min • $99.99 • $0 Delivery fee</string>
+    <string name="pizza_short_description_placeholder">Large Deluxe Pizza • Chicago Style</string>
+    <string name="pizza_crust_placeholder">Stuffed Crust</string>
+
+    <!--  Other placeholders   -->
+    <string name="main_menu_pizza_name_placeholder">🍕 Chicago Style Pizza</string>
+    <string name="order_number_placeholder">Order #: -367506283</string>
+    <string name="checkbox_item_name_placeholder">Hand tossed</string>
+    <string name="key_name_placeholder">Subtotal</string>
+    <string name="size_placeholder">Size</string>
+    <string name="deluxe_pizza">Deluxe Pizza</string>
+    <string name="_1_x">1 x</string>
+
 </resources>

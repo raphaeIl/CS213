@@ -22,18 +22,19 @@
             android:id="@+id/cart_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deluxe Pizza"
+            android:text="@string/deluxe_pizza"
             android:fontFamily="@font/alata"
             android:textColor="@color/black"
             android:textSize="13sp"
             />
 
         <TextView
+            android:visibility="gone"
             android:layout_marginTop="4dp"
             android:id="@+id/cart_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$15.95"
+            android:text="@string/price_placeholder"
             android:layout_below="@id/cart_item_name"
             android:fontFamily="@font/alata"
             android:textColor="@color/black_light"

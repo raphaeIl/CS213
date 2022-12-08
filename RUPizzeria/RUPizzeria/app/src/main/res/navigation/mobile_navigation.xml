@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="edu.rutgers.rupizzeria.client.ui.cart.CartFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_cart"
         tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="edu.rutgers.rupizzeria.client.ui.store.StoreFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_store"
         tools:layout="@layout/fragment_store" />
 </navigation>

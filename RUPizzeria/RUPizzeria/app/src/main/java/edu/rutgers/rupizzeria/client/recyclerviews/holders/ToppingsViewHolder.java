@@ -40,7 +40,6 @@ public class ToppingsViewHolder extends GenericViewHolder<Topping> {
         if (currentItem.getFlavor() != Flavor.Build_Your_Own)
             toppingCheckBox.setEnabled(false);
 
-        Logger.log(currentItem.getToppings().toString());
         if (currentItem.getToppings().contains(topping)) {
             toppingCheckBox.setChecked(true);
         }
@@ -48,10 +47,7 @@ public class ToppingsViewHolder extends GenericViewHolder<Topping> {
     }
 
     public void onSelectTopping(Topping topping, boolean isSelected) {
-        Toast.makeText(currentContext, topping.toString(), Toast.LENGTH_SHORT).show();
-
-        Pizza currentItem = StoreManager.getInstance().getCurrentItem();
-        int totalToppingsCount = currentItem.getToppings().size();
+        int totalToppingsCount = StoreManager.getInstance().getCurrentItem().getToppings().size();
 
         if (isSelected && totalToppingsCount >= 7) {
             toppingCheckBox.setChecked(false);
@@ -59,8 +55,8 @@ public class ToppingsViewHolder extends GenericViewHolder<Topping> {
         }
 
         if (isSelected)
-            currentItem.add(topping);
+            StoreManager.getInstance().addToppingToCurrentItem(topping);
         else
-            currentItem.remove(topping);
+            StoreManager.getInstance().removeToppingFromCurrentItem(topping);
     }
 }

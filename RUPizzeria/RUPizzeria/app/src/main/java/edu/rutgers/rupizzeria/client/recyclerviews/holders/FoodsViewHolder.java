@@ -41,12 +41,9 @@ public class FoodsViewHolder extends GenericViewHolder<Style> {
     }
 
     public void onSelectFood(Style foodStyle) {
-        Toast.makeText(this.currentContext, foodStyle.toString(), Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(this.currentContext, SelectFlavorActivity.class);
 
         intent.putExtra("food_style", foodStyle);
         this.currentContext.startActivity(intent);
-//        ((Activity)currentContext).overridePendingTransition(); // custom activity transition animatino
     }
 }
