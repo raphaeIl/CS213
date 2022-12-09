@@ -2,11 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/recycler_key_value_item_parent"
+    android:clickable="false"
+    android:focusable="false"
+    android:id="@+id/list_key_value_item_parent"
     >
 
     <TextView
-        android:id="@+id/recycler_item_key"
+        android:id="@+id/list_item_key"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/key_name_placeholder"
@@ -18,7 +20,7 @@
         />
 
     <TextView
-        android:id="@+id/recycler_item_value"
+        android:id="@+id/list_item_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/price_placeholder"

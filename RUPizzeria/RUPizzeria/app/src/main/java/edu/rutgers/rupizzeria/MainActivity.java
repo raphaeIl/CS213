@@ -9,20 +9,26 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import edu.rutgers.rupizzeria.databinding.ActivityMainBinding;
 
+/**
+ * Main/starting activity that controls the main menu of the application
+ * which contains 3 fragments
+ * @author Michael Liu, Genfu Liu
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
+    /**
+     * Inherited onCreate method that is called when the activity starts
+     * @param savedInstanceState inherited param
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // auto generated code from fragment template
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        // auto generated code from fragment template to setup the fragment and the navigation bar
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

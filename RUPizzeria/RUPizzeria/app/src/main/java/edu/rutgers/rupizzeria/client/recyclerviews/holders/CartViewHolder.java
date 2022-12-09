@@ -1,7 +1,6 @@
 package edu.rutgers.rupizzeria.client.recyclerviews.holders;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,26 +11,54 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.rutgers.rupizzeria.R;
-import edu.rutgers.rupizzeria.SelectFlavorActivity;
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericViewHolder;
 import edu.rutgers.rupizzeria.main.managers.StoreManager;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.utils.Logger;
 import edu.rutgers.rupizzeria.utils.Utils;
 
+/**
+ * ViewHolder for the items recyclerview in the cart view
+ * which stores the list of pizzas in the cart
+ * subclass of the GenericViewHolder
+ * @author Michael Liu, Genfu Liu
+ */
 public class CartViewHolder extends GenericViewHolder<Pizza> {
 
+    /**
+     * ImageView for displaying the current item's image
+     */
     private ImageView cartItemImage;
+
+    /**
+     * TextView for displaying the item name
+     */
     private TextView cartItemNameText;
+
+    /**
+     * TextView for displaying the price of the item
+     */
     private TextView cartItemPriceText;
+
+    /**
+     * TextView for displaying the type of crust/description of the item
+     */
     private TextView cartItemDescriptionText;
 
+    /**
+     * ImageButton for removing the item from the cart.
+     */
     private ImageButton cartItemDelete;
 
+    /**
+     * Parent of the entire item viewholder
+     */
     private ConstraintLayout parent;
 
-    private View currentItemView;
-
+    /**
+     * Constructor to find all the corresponding view elements and initializing the fields
+     * @param itemView Current list item's view to pass into the parent's constructor
+     */
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -42,9 +69,13 @@ public class CartViewHolder extends GenericViewHolder<Pizza> {
         cartItemDelete = itemView.findViewById(R.id.cart_item_delete_button);
 
         parent = itemView.findViewById(R.id.cart_item_parent);
-        currentItemView = itemView;
     }
 
+    /**
+     * Overridden onBind method to initialize all the view elements
+     * when they're created with their data
+     * @param cartItem
+     */
     @Override
     public void onBind(Pizza cartItem) {
         cartItemImage.setImageResource(Utils.getPizzaImage(cartItem.getStyle(), cartItem.getFlavor()));
@@ -57,10 +88,19 @@ public class CartViewHolder extends GenericViewHolder<Pizza> {
         parent.setOnClickListener(v -> onClickCartItem(cartItem));
     }
 
+    /**
+     * This method will be called when the user clicks on this item
+     * Unimplemented for now
+     * @param cartItem The current item that this holder is storing
+     */
     public void onClickCartItem(Pizza cartItem) {
-
+        // not implemented
     }
 
+    /**
+     * This will be called when the user clicks on the delete item button
+     * @param cartItem The current item that this holder is storing
+     */
     public void onDeleteCartItem(Pizza cartItem) {
         DialogInterface.OnClickListener onConfirmRemoveFromCart = (dialog, which) -> {
             StoreManager.getInstance().removeFromCart(cartItem);

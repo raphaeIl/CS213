@@ -30,8 +30,14 @@ public abstract class Pizza implements Customizable {
      */
     private Size size;
 
+    /**
+     * The style of the pizza
+     */
     private Style style;
 
+    /**
+     * The flavor of the pizza
+     */
     private Flavor flavor;
 
     /**
@@ -116,10 +122,18 @@ public abstract class Pizza implements Customizable {
         return toppings;
     }
 
+    /**
+     * Getter for the Style of the pizza
+     * @return the style
+     */
     public Style getStyle() {
         return style;
     }
 
+    /**
+     * Getter for the Flavor of the pizza
+     * @return the flavor
+     */
     public Flavor getFlavor() {
         return flavor;
     }

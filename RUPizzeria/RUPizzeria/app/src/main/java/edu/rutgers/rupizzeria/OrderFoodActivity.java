@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +19,6 @@ import java.util.List;
 
 import edu.rutgers.rupizzeria.client.recyclerviews.GenericRecyclerViewAdapter;
 import edu.rutgers.rupizzeria.client.recyclerviews.holders.CrustViewHolder;
-import edu.rutgers.rupizzeria.client.recyclerviews.holders.FlavorsViewHolder;
 import edu.rutgers.rupizzeria.client.recyclerviews.holders.SizeViewHolder;
 import edu.rutgers.rupizzeria.client.recyclerviews.holders.ToppingsViewHolder;
 import edu.rutgers.rupizzeria.main.core.types.Crust;
@@ -33,8 +29,20 @@ import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.utils.Logger;
 import edu.rutgers.rupizzeria.utils.Utils;
 
+/**
+ * This activity corresponds to the order food page of the application
+ * allows the user to choose the size, view the crust, and the toppings of the pizza
+ * as well as adding it to the cart.
+ * @author Michael Liu, Genfu Liu
+ */
 public class OrderFoodActivity extends AppCompatActivity {
 
+    /**
+     * Inherited onCreate method
+     * Another really long and ugly method to set up each of the recycler views
+     * for size, crust and topping selection lists.
+     * @param savedInstanceState inherited param
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +86,10 @@ public class OrderFoodActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Adds the current order to the cart,
+     * called when the add_to_cart button is clicked
+     */
     public void onAddToCart() {
         if (StoreManager.getInstance().getCurrentItem().getToppings().size() <= 0) {
             Toast.makeText(this, "Please select your toppings.", Toast.LENGTH_SHORT).show();
@@ -96,6 +108,12 @@ public class OrderFoodActivity extends AppCompatActivity {
         Logger.logAlertConfirmation(this, "Add To Cart", "Are you sure you want to add this item to the cart?", onConfirmAddToCart, onCancelAddToCart);
     }
 
+    /**
+     * This overridden method is called when the back arrow in the top options menu is clicked
+     * looks like an empty method but if we didn't override the method the page somehow crashes
+     * @param item inherited MenuItem param
+     * @return if the item is successfully selected
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         finish();

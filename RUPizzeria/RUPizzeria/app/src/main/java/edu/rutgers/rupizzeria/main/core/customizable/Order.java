@@ -1,7 +1,5 @@
 package edu.rutgers.rupizzeria.main.core.customizable;
 
-import androidx.annotation.NonNull;
-
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 
 import java.util.ArrayList;
@@ -97,6 +95,16 @@ public class Order implements Customizable {
             price += pizza.price();
 
         return price;
+    }
+
+    /**
+     * Gets the sales tax of this order
+     * @return the sales tax
+     */
+    public double getSalesTax() {
+        final double TAX_RATE = 0.06625d;
+
+        return getTotalPrice() * TAX_RATE;
     }
 
     /**

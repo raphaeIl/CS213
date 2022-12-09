@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +21,27 @@ import edu.rutgers.rupizzeria.client.recyclerviews.holders.FoodsViewHolder;
 import edu.rutgers.rupizzeria.databinding.FragmentHomeBinding;
 import edu.rutgers.rupizzeria.main.core.types.Style;
 
+/**
+ * This Fragment is part of the Main Activity
+ * that is responsible for displaying all the available foods
+ * as well as allowing the user to order food
+ * @author Michael Liu, Genfu Liu
+ */
 public class HomeFragment extends Fragment {
 
+    /**
+     * Auto generated binding object
+     */
     private FragmentHomeBinding binding;
 
+    /**
+     * Overridden method that is called when this fragment is created
+     * @param inflater Inherited param
+     * @param container Inherited param
+     * @param savedInstanceState Inherited param
+     * @return The root of this fragment
+     */
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -46,6 +62,9 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Overridden method that will be called when the view is destroyed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

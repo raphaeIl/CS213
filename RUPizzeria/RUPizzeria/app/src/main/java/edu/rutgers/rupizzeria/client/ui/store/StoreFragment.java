@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.rutgers.rupizzeria.R;
@@ -30,20 +29,62 @@ import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.utils.Logger;
 import edu.rutgers.rupizzeria.utils.Utils;
 
+/**
+ * This Fragment is part of the Main Activity
+ * that is responsible for displaying all the available foods
+ * as well as allowing the user to order food
+ * @author Michael Liu, Genfu Liu
+ */
 public class StoreFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    /**
+     * Auto generated binding object
+     */
     private FragmentStoreBinding binding;
 
+    /**
+     * Spinner for the user to choose which order they want to view in the orderhistory
+     */
     private Spinner ordersSpinner;
+
+    /**
+     * Adapter for the orders spinner
+     */
     private ArrayAdapter<Integer> ordersSpinnerAdapter;
+
+    /**
+     * List of all order numbers that the spinner will be displaying
+     */
     private List<Integer> orderIds;
 
+    /**
+     * RecyclerView to display all items that was in the current order
+     */
     private RecyclerView storeRecyclerView;
+
+    /**
+     * Adapter for the store recyclerview
+     */
     private GenericRecyclerViewAdapter<Pizza, StoreViewHolder> storeRecyclerViewAdapter;
+
+    /**
+     * All pizza items that the recycler view is displaying
+     */
     private List<Pizza> orderItems;
 
+    /**
+     * StoreManager object declared here for convince
+     */
     private StoreManager storeManager;
 
+    /**
+     * Overridden method that is called when this fragment is created
+     * @param inflater Inherited param
+     * @param container Inherited param
+     * @param savedInstanceState Inherited param
+     * @return The root of this fragment
+     */
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentStoreBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -69,12 +110,23 @@ public class StoreFragment extends Fragment implements AdapterView.OnItemSelecte
         return root;
     }
 
+    /**
+     * Overridden method that will be called when the view is destroyed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
+    /**
+     * Overridden method from AdapterView.OnItemSelectedListener to update the view
+     * when an item in the orders spinner is selected
+     * @param parent The parent
+     * @param view The current view
+     * @param position The item's position that was selected
+     * @param id the id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         orderItems.clear();
@@ -84,15 +136,24 @@ public class StoreFragment extends Fragment implements AdapterView.OnItemSelecte
         storeRecyclerViewAdapter.notifyDataSetChanged();
 
         ((TextView)binding.getRoot().findViewById(R.id.store_order_info)).setText(
-                String.format("%s items • %s total", orderItems.size(), Utils.formatCurrency(order.getTotalPrice()))
+                String.format("%s items • %s total (tax included)", orderItems.size(), Utils.formatCurrency(order.getTotalPrice() + order.getSalesTax()))
         );
     }
 
+    /**
+     * Overridden method from AdapterView.OnItemSelectedListener to update the view
+     * when nothing in the spinner is selected
+     * @param parent
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         ((TextView)binding.getRoot().findViewById(R.id.store_order_info)).setText("");
     }
 
+    /**
+     * This is called when the user clicks the cancel current order button
+     * which cancels the current order and removes it from the order history
+     */
     public void onCancelCurrentOrder() {
         if (ordersSpinner.getSelectedItem() == null) {
             Toast.makeText(getContext(), "Please select a order", Toast.LENGTH_SHORT).show();

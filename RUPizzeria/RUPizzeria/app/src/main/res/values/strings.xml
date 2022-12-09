@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RUPizzeria</string>
-    <string name="title_home">RUPizzeria</string>
+    <string name="title_home">Home</string>
     <string name="title_cart">Cart</string>
     <string name="title_store">Store</string>
     <string name="title_order_food">Order</string>
@@ -33,7 +33,7 @@
     <!--  Pizza item display    -->
     <string name="pizza_flavor_placeholder">Deluxe</string>
     <string name="pizza_style_placeholder">Chicago Style Pizza</string>
-    <string name="pizza_description_placeholder">0 min • $99.99 • $0 Delivery fee</string>
+    <string name="pizza_description_placeholder">0 min • $0 Delivery fee</string>
     <string name="pizza_short_description_placeholder">Large Deluxe Pizza • Chicago Style</string>
     <string name="pizza_crust_placeholder">Stuffed Crust</string>
 

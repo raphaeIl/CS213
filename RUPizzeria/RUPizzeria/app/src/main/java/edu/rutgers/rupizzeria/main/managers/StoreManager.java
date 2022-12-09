@@ -1,7 +1,6 @@
 package edu.rutgers.rupizzeria.main.managers;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 import edu.rutgers.rupizzeria.main.core.customizable.Order;
@@ -14,11 +13,12 @@ import edu.rutgers.rupizzeria.main.pizzafactory.ChicagoPizza;
 import edu.rutgers.rupizzeria.main.pizzafactory.NYPizza;
 import edu.rutgers.rupizzeria.main.pizzafactory.Pizza;
 import edu.rutgers.rupizzeria.main.pizzafactory.PizzaFactory;
-import edu.rutgers.rupizzeria.utils.Logger;
 
 /**
  * This singleton class stores and manages all the orders in this restaurant,
  * as well as the database for storing order history
+ * Also implements the Observer Pattern where this class is the Observable/Subject class
+ * and classes that implements ActionListener are the Observers/Subscribers
  * @author Michael Liu, Genfu Liu
  */
 public class StoreManager {
@@ -53,11 +53,22 @@ public class StoreManager {
      */
     private Order currentCart;
 
+    /**
+     * The current item/pizza the user is configuring
+     */
     private Pizza currentItem;
 
+    /**
+     * A list of all Observers/Subscribers of this class which
+     * all will be notified when any property of the current item Pizza is modified
+     */
     private List<ActionListener<Pizza>> currentItemChangedListeners;
 
-    private List<ActionListener<Pizza>> cartItemChangedListeners;
+    /**
+     * A list of all Observers/Subscribers of this class which
+     * all will be notified when the cart is modified (add/remove/clear operations)
+     */
+    private List<ActionListener<Pizza>> cartChangedListeners;
 
     /**
      * Single private constructor to initialize all the fields
@@ -67,7 +78,7 @@ public class StoreManager {
         currentCart = new Order();
 
         currentItemChangedListeners = new ArrayList<>();
-        cartItemChangedListeners = new ArrayList<>();
+        cartChangedListeners = new ArrayList<>();
     }
 
     /**
@@ -75,7 +86,6 @@ public class StoreManager {
      * @param style the style of the pizza
      * @param flavor the flavor of the pizza
      * @param size the size of the pizza
-     * @return the created pizza matching the user's choice
      */
     public void selectPizza(Style style, Flavor flavor, Size size) {
         PizzaFactory pizzaFactory = null;
@@ -112,20 +122,23 @@ public class StoreManager {
     }
 
     /**
+     * Adds the current item to the cart,
+     * used when the user finishes configuring their current item
+     * and decides to adds it to the cart
+     */
+    public void addCurrentItemToCart() {
+        this.addToCart(this.currentItem);
+    }
+
+    /**
      * Adds an item to the current cart
+     * and notifies the subscribers
      * @param item the pizza to be added
      */
     public void addToCart(Pizza item) {
         this.currentCart.add(item);
 
-        if (!this.cartItemChangedListeners.isEmpty()) {
-            for (ActionListener<Pizza> al: cartItemChangedListeners)
-                al.onAction(item, false);
-        }
-    }
-
-    public void addCurrentItemToCart() {
-        this.addToCart(this.currentItem);
+        notifyCartChanged(item, false);
     }
 
     /**
@@ -135,10 +148,7 @@ public class StoreManager {
     public void removeFromCart(Pizza item) {
         this.currentCart.remove(item);
 
-        if (!this.cartItemChangedListeners.isEmpty()) {
-            for (ActionListener<Pizza> al: cartItemChangedListeners)
-                al.onAction(item, true);
-        }
+        notifyCartChanged(item, true);
     }
 
     /**
@@ -151,6 +161,7 @@ public class StoreManager {
 
     /**
      * Places the current order which adds it to the order history
+     * and resets the current order
      */
     public void placeOrder() {
         orderHistory.add(currentCart);
@@ -160,7 +171,7 @@ public class StoreManager {
 
     /**
      * Cancels a order which removes it from the order history
-     * @param orderId
+     * @param orderId the order id to be removed
      */
     public void cancelOrder(int orderId) {
         orderHistory.remove(orderId);
@@ -168,49 +179,89 @@ public class StoreManager {
         this.currentCart = new Order();
     }
 
+    /**
+     * Set the size of the current item and notifies the subscribers
+     * @param size the size of the current item to be set
+     */
+    public void setCurrentItemSize(Size size) {
+        currentItem.setSize(size);
+
+        notifyCurrentItemChanged(currentItem);
+    }
+
+    /**
+     * Adds a topping to the current item and notifies the subscribers
+     * @param topping the topping to be added
+     * @return if it was added successfully or not
+     */
+    public boolean addToppingToCurrentItem(Topping topping) {
+        boolean result = currentItem.add(topping);
+
+        notifyCurrentItemChanged(currentItem);
+        return result;
+    }
+
+    /**
+     * Removes a topping to the current item and notifies the subscribers
+     * @param topping the topping to be removed
+     * @return if it was removed successfully or not
+     */
+    public boolean removeToppingFromCurrentItem(Topping topping) {
+        boolean result = currentItem.remove(topping);
+
+        notifyCurrentItemChanged(currentItem);
+        return result;
+    }
+
+    /**
+     * Adds an ActionListener subscriber to the event listener who
+     * will be notified when the current item is modified
+     * @param onCurrentItemChanged the subscriber class
+     */
     public void addCurrentItemChangedListener(ActionListener<Pizza> onCurrentItemChanged) {
         this.currentItemChangedListeners.add(onCurrentItemChanged);
     }
 
-    public void addCartItemChangedListener(ActionListener<Pizza> onCartItemChanged) {
-        this.cartItemChangedListeners.add(onCartItemChanged);
+    /**
+     * Adds an ActionListener subscriber to the event listener who
+     * will be notified when the cart is changed
+     * @param onCartItemChanged the subscriber class
+     */
+    public void addCartChangedListener(ActionListener<Pizza> onCartItemChanged) {
+        this.cartChangedListeners.add(onCartItemChanged);
     }
 
+    /**
+     * Gets the subtotal for the current order
+     * @return the cost in a double
+     */
+    public double getSubtotal() {
+        return currentCart.getTotalPrice();
+    }
+
+    /**
+     * Calculates the sales tax for this order
+     * @return the sales tax in a double
+     */
+    public double getSalesTax() {
+        return currentCart.getSalesTax();
+    }
+
+    /**
+     * Gets the total cost of this order including tax
+     * @return the total cost in a double
+     */
+    public double getTotal() {
+        return getSubtotal() + getSalesTax();
+    }
+
+    /**
+     * Getter for the current item
+     * @return the current item
+     */
     public Pizza getCurrentItem() {
         return currentItem;
     }
-
-    public void setCurrentItemSize(Size size) {
-        currentItem.setSize(size);
-
-        if (!this.currentItemChangedListeners.isEmpty()) {
-            for (ActionListener<Pizza> al: currentItemChangedListeners)
-                al.onAction(currentItem, false);
-        }
-    }
-
-    public boolean addToppingToCurrentItem(Topping topping) {
-        boolean result = currentItem.add(topping);
-
-        if (!this.currentItemChangedListeners.isEmpty()) {
-            for (ActionListener<Pizza> al: currentItemChangedListeners)
-                al.onAction(currentItem, false);
-        }
-
-        return result;
-    }
-
-    public boolean removeToppingFromCurrentItem(Topping topping) {
-        boolean result = currentItem.remove(topping);
-
-        if (!this.currentItemChangedListeners.isEmpty()) {
-            for (ActionListener<Pizza> al: currentItemChangedListeners)
-                al.onAction(currentItem, false);
-        }
-
-        return result;
-    }
-
 
     /**
      * Getter for the current order
@@ -229,28 +280,25 @@ public class StoreManager {
     }
 
     /**
-     * Gets the subtotal for the current order
-     * @return the cost in a double
+     * Notifies all cartChangedListener Subscribers when the cart is changed
+     * @param itemChanged the item in the cart that was changed
+     * @param isRemoved if the item was removed from the cart or added
      */
-    public double getSubtotal() {
-        return currentCart.getTotalPrice();
+    private void notifyCartChanged(Pizza itemChanged, boolean isRemoved) {
+        if (!this.cartChangedListeners.isEmpty()) {
+            for (ActionListener<Pizza> al: cartChangedListeners)
+                al.onAction(itemChanged, isRemoved);
+        }
     }
 
     /**
-     * Calculates the sales tax for this order
-     * @return the sales tax in a double
+     * Notifies all currentItemChangedListener Subscribers when the current item is changed
+     * @param itemChanged the the after it was changed
      */
-    public double getSalesTax() {
-        final double TAX_RATE = 0.06625d;
-
-        return getSubtotal() * TAX_RATE;
-    }
-
-    /**
-     * Gets the total cost of this order including tax
-     * @return the total cost in a double
-     */
-    public double getTotal() {
-        return getSubtotal() + getSalesTax();
+    private void notifyCurrentItemChanged(Pizza itemChanged) {
+        if (!this.currentItemChangedListeners.isEmpty()) {
+            for (ActionListener<Pizza> al: currentItemChangedListeners)
+                al.onAction(itemChanged, false);
+        }
     }
 }

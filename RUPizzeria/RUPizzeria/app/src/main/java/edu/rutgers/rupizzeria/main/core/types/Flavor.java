@@ -12,6 +12,11 @@ public enum Flavor {
     Meatzza,
     Build_Your_Own;
 
+    /**
+     * Overridden toString method to convert the enum constant
+     * to a nice looking display string
+     * @return the formatted display string
+     */
     @NonNull
     @Override
     public String toString() {
